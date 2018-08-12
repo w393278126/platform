@@ -1,0 +1,122 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="14.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{22EF0814-FAE2-44E0-99A6-A466A4392CC6}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>Xn.Platform.Data.Redis</RootNamespace>
+    <AssemblyName>Xn.Platform.Data.Redis</AssemblyName>
+    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <SolutionDir Condition="$(SolutionDir) == '' Or $(SolutionDir) == '*Undefined*'">..\..\</SolutionDir>
+    <RestorePackages>true</RestorePackages>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>..\..\build\debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>..\..\build\release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="Logging.Client, Version=1.0.0.16, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\build\packages\Logging.Client.1.0.0.16\lib\Logging.Client.dll</HintPath>
+    </Reference>
+    <Reference Include="Newtonsoft.Json, Version=10.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <HintPath>..\..\build\packages\Newtonsoft.Json.10.0.3\lib\net45\Newtonsoft.Json.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="ServiceStack.Interfaces, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\build\packages\ServiceStack.Common.3.9.70\lib\net35\ServiceStack.Interfaces.dll</HintPath>
+    </Reference>
+    <Reference Include="ServiceStack.Redis, Version=3.9.71.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\build\packages\ServiceStack.Redis.3.9.71\lib\net35\ServiceStack.Redis.dll</HintPath>
+    </Reference>
+    <Reference Include="ServiceStack.Text, Version=3.9.71.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\build\packages\ServiceStack.Text.3.9.71\lib\net35\ServiceStack.Text.dll</HintPath>
+    </Reference>
+    <Reference Include="StackExchange.Redis, Version=1.2.1.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\..\build\packages\StackExchange.Redis.1.2.1\lib\net45\StackExchange.Redis.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Configuration" />
+    <Reference Include="System.IO.Compression" />
+    <Reference Include="System.Web" />
+    <Reference Include="System.Web.Extensions" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Cache\AnnouncementHandler.cs" />
+    <Compile Include="Cache\BatchTimeStampHandler.cs" />
+    <Compile Include="Cache\BroadcastProgramHandler.cs" />
+    <Compile Include="Cache\CaptchaHandler.cs" />
+    <Compile Include="Cache\CertificationHashHandler.cs" />
+    <Compile Include="Cache\CertificationSetHandler.cs" />
+    <Compile Include="Cache\CouponHandler.cs" />
+    <Compile Include="Cache\LimitGiftUserTimesHandler.cs" />
+    <Compile Include="Cache\ListHandler.cs" />
+    <Compile Include="Cache\ListVideoHLSTransferHandler.cs" />
+    <Compile Include="Cache\LiveAppJoinSetHandler.cs" />
+    <Compile Include="Cache\MediaScoreHandler.cs" />
+    <Compile Include="Cache\MessageWriteReadTimeHandler.cs" />
+    <Compile Include="Cache\NoticeTgpRedisHandler.cs" />
+    <Compile Include="Cache\RoomJoinUserHandler.cs" />
+    <Compile Include="Cache\RoomRecentViewHandler.cs" />
+    <Compile Include="Cache\RoomStatisticsDataHandler.cs" />
+    <Compile Include="Cache\SouHotHashLastUpdateUserInfoHandler.cs" />
+    <Compile Include="Cache\UserInfoUpdateHandler.cs" />
+    <Compile Include="Cache\WxOfficialStringHandler.cs" />
+    <Compile Include="Cache\XcoinExchangeHandler.cs" />
+    <Compile Include="Login\PluAuthenticationHandler.cs" />
+    <Compile Include="Sports\SportSubscribeHandler.cs" />
+    <Compile Include="Sports\SportMatchProportionHandler.cs" />
+    <Compile Include="Sports\ZcryHandler.cs" />
+    <Compile Include="Sports\SportLivePermissionsHandler.cs" />
+    <Compile Include="Sports\VipInfoSportHandler.cs" />
+    <Compile Include="Sports\SportStarRecommendHandler.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\..\domain\Xn.Platform.Domain\Xn.Platform.Domain.csproj">
+      <Project>{30cada35-527b-4754-943f-84834d65ed27}</Project>
+      <Name>Xn.Platform.Domain</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\infrastructure\Xn.Platform.Abstractions.Redis\Xn.Platform.Abstractions.Redis.csproj">
+      <Project>{c6ce27dd-e474-40ff-8e51-e55cc45edadf}</Project>
+      <Name>Xn.Platform.Abstractions.Redis</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\infrastructure\Xn.Platform.Extensions\Xn.Platform.Extensions.csproj">
+      <Project>{509a4f19-3e85-4712-a801-f5c86a7581f9}</Project>
+      <Name>Xn.Platform.Extensions</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup />
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it.
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

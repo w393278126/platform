@@ -1,0 +1,301 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="14.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{F596BF11-5090-4DFE-855E-F67F59542138}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>Xn.Platform.Infrastructure.Web</RootNamespace>
+    <AssemblyName>Xn.Platform.Infrastructure.Web</AssemblyName>
+    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <SolutionDir Condition="$(SolutionDir) == '' Or $(SolutionDir) == '*Undefined*'">..\..\</SolutionDir>
+    <RestorePackages>true</RestorePackages>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>..\..\build\debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>..\..\build\release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Compile Include="DependencyInjectionConfig.cs" />
+    <Compile Include="Error.cs" />
+    <Compile Include="Events\Handlers\KafkaTopicHandler.cs" />
+    <Compile Include="Events\KafkaTopicEventData.cs" />
+    <Compile Include="Events\ZeroPubEventData.cs" />
+    <Compile Include="Events\Handlers\ZeroPubEventHandler.cs" />
+    <Compile Include="Events\ZeroPushEventData.cs" />
+    <Compile Include="Events\EventBus.cs" />
+    <Compile Include="Events\EventData.cs" />
+    <Compile Include="Events\Factory\FactoryUnregistrar.cs" />
+    <Compile Include="Events\Factory\TransientEventHandlerFactory.cs" />
+    <Compile Include="Events\Factory\IEventHandlerFactory.cs" />
+    <Compile Include="Events\Factory\SingleInstanceHandlerFactory.cs" />
+    <Compile Include="Events\Handlers\ActionEventHandler.cs" />
+    <Compile Include="Events\Handlers\IEventHandler.cs" />
+    <Compile Include="Events\Handlers\IEventHandlerOfTEventData.cs" />
+    <Compile Include="Events\Handlers\ZeroPushEventHandler.cs" />
+    <Compile Include="Events\IEventBus.cs" />
+    <Compile Include="Events\IEventData.cs" />
+    <Compile Include="Events\NullEventBus.cs" />
+    <Compile Include="Filters\GeetestConfig.cs" />
+    <Compile Include="Filters\GeetestLib.cs" />
+    <Compile Include="Filters\RedirectLiveAttribute.cs" />
+    <Compile Include="Filters\RedirectVideoAttribute.cs" />
+    <Compile Include="Hadoop\WebHDFS\DirectoryEntry.cs" />
+    <Compile Include="Hadoop\WebHDFS\IWebHdfsHttpClient.cs" />
+    <Compile Include="Hadoop\WebHDFS\WebHdfsConfig.cs" />
+    <Compile Include="Hadoop\WebHDFS\WebHdfsHttpClient.cs" />
+    <Compile Include="Hadoop\WebHDFS\WebHdfsHttpClientDemo.cs" />
+    <Compile Include="Hadoop\WebHDFS\WebHdfsOperation.cs" />
+    <Compile Include="HttpHelper.cs" />
+    <Compile Include="JsonpStreamResult.cs" />
+    <Compile Include="Kafka\BalancedConsumer.cs" />
+    <Compile Include="Kafka\ConsumedMessage.cs" />
+    <Compile Include="Kafka\ConsumerConnector.cs" />
+    <Compile Include="Kafka\ConsumerOptions.cs" />
+    <Compile Include="Kafka\CustomStringPartitioner.cs" />
+    <Compile Include="Kafka\IConsumer.cs" />
+    <Compile Include="Kafka\KafkaClient.cs" />
+    <Compile Include="Kafka\KafkaConfig.cs" />
+    <Compile Include="Kafka\KafkaConsumer.cs" />
+    <Compile Include="Kafka\KafkaConsumerInstance.cs" />
+    <Compile Include="Kafka\KafkaConsumerStream.cs" />
+    <Compile Include="Kafka\KafkaSimpleConsumer.cs" />
+    <Compile Include="Kafka\KafkaSimpleConsumerStream.cs" />
+    <Compile Include="Kafka\MessageExtensions.cs" />
+    <Compile Include="Kafka\ProducerConfig.cs" />
+    <Compile Include="Kafka\SimpleConsumer.cs" />
+    <Compile Include="Kafka\ZookeeperClient.cs" />
+    <Compile Include="Kafka\ZookeeperConnection.cs" />
+    <Compile Include="Kafka\IZookeeperConnection.cs" />
+    <Compile Include="Kafka\IZookeeperClient.cs" />
+    <Compile Include="Kafka\KafkaTopic.cs" />
+    <Compile Include="Kafka\Message.cs" />
+    <Compile Include="Kafka\IKafkaTopic.cs" />
+    <Compile Include="Kafka\IKafkaClient.cs" />
+    <Compile Include="Kafka\Compression.cs" />
+    <Compile Include="XnBaseApiController.cs" />
+    <Compile Include="XnBaseController.cs" />
+    <Compile Include="Bundle\CDNScriptBundle.cs" />
+    <Compile Include="Bundle\CDNStyleBundle.cs" />
+    <Compile Include="Bundle\MaxAgeCacheTransform.cs" />
+    <Compile Include="Bundle\PLUCDNRes.cs" />
+    <Compile Include="Filters\AnonymousForbiddenAttribute.cs" />
+    <Compile Include="HttpContextExtensions.cs" />
+    <Compile Include="HttpExtensions.cs" />
+    <Compile Include="IsDeBugExtensions.cs" />
+    <Compile Include="JsonpResult.cs" />
+    <Compile Include="Filters\NoCacheAttribute.cs" />
+    <Compile Include="Modules\RemoveUselessHeaderModule.cs" />
+    <Compile Include="PageHelper\PagerHelper.cs" />
+    <Compile Include="PageHelper\PagerHelperForDiv.cs" />
+    <Compile Include="PageHelper\PagerInfo.cs" />
+    <Compile Include="PageHelper\PagerQuery.cs" />
+    <Compile Include="PageHelper\RoomPagerHelper.cs" />
+    <Compile Include="XnControllerFactory.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="RedirectHelper.cs" />
+    <Compile Include="RequestExtensions.cs" />
+    <Compile Include="SelectListExtentions.cs" />
+    <Compile Include="Utils\NullDisposable.cs" />
+    <Compile Include="VideoParseHelper.cs" />
+    <Compile Include="WebApi\CacheExtensions\AutoInvalidateCacheOutputAttribute.cs" />
+    <Compile Include="WebApi\CacheExtensions\BaseCacheAttribute.cs" />
+    <Compile Include="WebApi\CacheExtensions\CacheOutputAttribute.cs" />
+    <Compile Include="WebApi\CacheExtensions\CacheOutputConfiguration.cs" />
+    <Compile Include="WebApi\CacheExtensions\Cache\CacheExtensions.cs" />
+    <Compile Include="WebApi\CacheExtensions\Cache\IApiOutputCache.cs" />
+    <Compile Include="WebApi\CacheExtensions\Cache\MemoryCacheDefault.cs" />
+    <Compile Include="WebApi\CacheExtensions\Constants.cs" />
+    <Compile Include="WebApi\CacheExtensions\DefaultCacheKeyGenerator.cs" />
+    <Compile Include="WebApi\CacheExtensions\HttpConfigurationExtensions.cs" />
+    <Compile Include="WebApi\CacheExtensions\ICacheKeyGenerator.cs" />
+    <Compile Include="WebApi\CacheExtensions\IgnoreCacheOutputAttribute.cs" />
+    <Compile Include="WebApi\CacheExtensions\IModelQuery.cs" />
+    <Compile Include="WebApi\CacheExtensions\InvalidateCacheOutputAttribute.cs" />
+    <Compile Include="WebApi\CacheExtensions\TimeAttributes\CacheOutputUntilCacheAttribute.cs" />
+    <Compile Include="WebApi\CacheExtensions\TimeAttributes\CacheOutputUntilThisMonthAttribute.cs" />
+    <Compile Include="WebApi\CacheExtensions\TimeAttributes\CacheOutputUntilThisYearAttribute.cs" />
+    <Compile Include="WebApi\CacheExtensions\TimeAttributes\CacheOutputUntilToday.cs" />
+    <Compile Include="WebApi\CacheExtensions\Time\CacheTime.cs" />
+    <Compile Include="WebApi\CacheExtensions\Time\ShortTime.cs" />
+    <Compile Include="WebApi\CacheExtensions\Time\SpecificTime.cs" />
+    <Compile Include="WebApi\CacheExtensions\Time\ThisDay.cs" />
+    <Compile Include="WebApi\CacheExtensions\Time\ThisMonth.cs" />
+    <Compile Include="WebApi\CacheExtensions\Time\ThisYear.cs" />
+    <Compile Include="WebApi\CustomExceptionLogger.cs" />
+    <Compile Include="WebApi\Jsonp\HttpConfigurationExtensions.cs" />
+    <Compile Include="WebApi\Jsonp\JsonpMediaTypeFormatter.cs" />
+    <Compile Include="WebApi\Jsonp\JsonpQueryStringMapping.cs" />
+    <Compile Include="WebApi\MediaTypeFormatters\PlainTextMediaTypeFormatter.cs" />
+    <Compile Include="XmlResult.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <Reference Include="Autofac, Version=3.5.0.0, Culture=neutral, PublicKeyToken=17863af14b0044da, processorArchitecture=MSIL">
+      <HintPath>..\..\build\packages\Autofac.3.5.2\lib\Autofac.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Autofac.Integration.Mvc, Version=3.3.0.0, Culture=neutral, PublicKeyToken=17863af14b0044da, processorArchitecture=MSIL">
+      <HintPath>..\..\build\packages\Autofac.Mvc5.3.3.4\lib\net45\Autofac.Integration.Mvc.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Autofac.Integration.WebApi, Version=3.4.0.0, Culture=neutral, PublicKeyToken=17863af14b0044da, processorArchitecture=MSIL">
+      <HintPath>..\..\build\packages\Autofac.WebApi2.3.4.0\lib\net45\Autofac.Integration.WebApi.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Common.Logging, Version=3.3.1.0, Culture=neutral, PublicKeyToken=af08829b84f0328e, processorArchitecture=MSIL">
+      <HintPath>..\..\build\packages\Common.Logging.3.3.1\lib\net40\Common.Logging.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Common.Logging.Core, Version=3.3.1.0, Culture=neutral, PublicKeyToken=af08829b84f0328e, processorArchitecture=MSIL">
+      <HintPath>..\..\build\packages\Common.Logging.Core.3.3.1\lib\net40\Common.Logging.Core.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="GeetestSDK">
+      <HintPath>..\..\build\packages\GeetestSDK.dll</HintPath>
+    </Reference>
+    <Reference Include="KafkaNET.Library, Version=0.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\build\packages\KafkaNet.0.1.22\lib\net45\KafkaNET.Library.dll</HintPath>
+    </Reference>
+    <Reference Include="Logging.Client, Version=1.0.0.16, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\build\packages\Logging.Client.1.0.0.16\lib\Logging.Client.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="MsgPack, Version=0.8.0.0, Culture=neutral, PublicKeyToken=a2625990d5dc0167, processorArchitecture=MSIL">
+      <HintPath>..\..\build\packages\MsgPack.Cli.0.8.0\lib\net45\MsgPack.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Newtonsoft.Json, Version=10.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <HintPath>..\..\build\packages\Newtonsoft.Json.10.0.3\lib\net45\Newtonsoft.Json.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Runtime.Caching" />
+    <Reference Include="System.Web.Entity" />
+    <Reference Include="System.Web.ApplicationServices" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Web" />
+    <Reference Include="System.Web.Abstractions" />
+    <Reference Include="System.Web.Routing" />
+    <Reference Include="System.Xml" />
+    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="Microsoft.Web.Infrastructure, Version=1.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <Private>True</Private>
+      <HintPath>..\..\build\packages\Microsoft.Web.Infrastructure.1.0.0.0\lib\net40\Microsoft.Web.Infrastructure.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Net.Http">
+    </Reference>
+    <Reference Include="System.Net.Http.Formatting, Version=5.2.3.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\..\build\packages\Microsoft.AspNet.WebApi.Client.5.2.3\lib\net45\System.Net.Http.Formatting.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Net.Http.WebRequest">
+    </Reference>
+    <Reference Include="System.Web.Helpers, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <Private>True</Private>
+      <HintPath>..\..\build\packages\Microsoft.AspNet.WebPages.3.2.3\lib\net45\System.Web.Helpers.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.Http, Version=5.2.3.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\..\build\packages\Microsoft.AspNet.WebApi.Core.5.2.3\lib\net45\System.Web.Http.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.Http.WebHost, Version=5.2.3.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\..\build\packages\Microsoft.AspNet.WebApi.WebHost.5.2.3\lib\net45\System.Web.Http.WebHost.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.Mvc, Version=5.2.3.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <Private>True</Private>
+      <HintPath>..\..\build\packages\Microsoft.AspNet.Mvc.5.2.3\lib\net45\System.Web.Mvc.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.Optimization">
+      <HintPath>..\..\build\packages\Microsoft.AspNet.Web.Optimization.1.1.3\lib\net40\System.Web.Optimization.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.Razor, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <Private>True</Private>
+      <HintPath>..\..\build\packages\Microsoft.AspNet.Razor.3.2.3\lib\net45\System.Web.Razor.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.WebPages, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <Private>True</Private>
+      <HintPath>..\..\build\packages\Microsoft.AspNet.WebPages.3.2.3\lib\net45\System.Web.WebPages.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.WebPages.Deployment, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <Private>True</Private>
+      <HintPath>..\..\build\packages\Microsoft.AspNet.WebPages.3.2.3\lib\net45\System.Web.WebPages.Deployment.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.WebPages.Razor, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <Private>True</Private>
+      <HintPath>..\..\build\packages\Microsoft.AspNet.WebPages.3.2.3\lib\net45\System.Web.WebPages.Razor.dll</HintPath>
+    </Reference>
+    <Reference Include="WebGrease">
+      <Private>True</Private>
+      <HintPath>..\..\build\packages\WebGrease.1.5.2\lib\WebGrease.dll</HintPath>
+    </Reference>
+    <Reference Include="Antlr3.Runtime">
+      <Private>True</Private>
+      <HintPath>..\..\build\packages\Antlr.3.4.1.9004\lib\Antlr3.Runtime.dll</HintPath>
+    </Reference>
+    <Reference Include="ZeroMQ, Version=4.1.0.20957, Culture=neutral, PublicKeyToken=4a9630883fd6c563, processorArchitecture=MSIL">
+      <HintPath>..\..\build\packages\ZeroMQ.4.1.0.19\lib\net40\ZeroMQ.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="ZooKeeperNet, Version=3.4.6.1, Culture=neutral, PublicKeyToken=fefd2c046da35b56, processorArchitecture=MSIL">
+      <HintPath>..\..\build\packages\ZooKeeper.Net.3.4.6.2\lib\net40\ZooKeeperNet.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="app.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\..\data\Xn.Platform.Data.Redis\Xn.Platform.Data.Redis.csproj">
+      <Project>{22ef0814-fae2-44e0-99a6-a466a4392cc6}</Project>
+      <Name>Xn.Platform.Data.Redis</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Xn.Platform.Abstractions.Redis\Xn.Platform.Abstractions.Redis.csproj">
+      <Project>{c6ce27dd-e474-40ff-8e51-e55cc45edadf}</Project>
+      <Name>Xn.Platform.Abstractions.Redis</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Xn.Platform.Application.Core\Xn.Platform.Application.Core.csproj">
+      <Project>{ae4df214-5ae1-48a0-a17c-83855638c4ec}</Project>
+      <Name>Xn.Platform.Application.Core</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Xn.Platform.Extensions\Xn.Platform.Extensions.csproj">
+      <Project>{509a4f19-3e85-4712-a801-f5c86a7581f9}</Project>
+      <Name>Xn.Platform.Extensions</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Xn.Platform.Infrastructure.Auth\Xn.Platform.Infrastructure.Auth.csproj">
+      <Project>{a2879541-ec28-4bca-988b-72518339ea18}</Project>
+      <Name>Xn.Platform.Infrastructure.Auth</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it.
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

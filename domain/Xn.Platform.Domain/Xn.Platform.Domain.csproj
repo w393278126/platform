@@ -1,0 +1,126 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="14.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{30CADA35-527B-4754-943F-84834D65ED27}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>Plu.Platform.Domain</RootNamespace>
+    <AssemblyName>Plu.Platform.Domain</AssemblyName>
+    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <SolutionDir Condition="$(SolutionDir) == '' Or $(SolutionDir) == '*Undefined*'">..\..\</SolutionDir>
+    <RestorePackages>true</RestorePackages>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>..\..\build\debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <DocumentationFile>
+    </DocumentationFile>
+    <NoWarn>1591</NoWarn>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>..\..\build\release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="MongoDB.Bson">
+      <HintPath>..\..\build\packages\mongocsharpdriver.1.10.0\lib\net35\MongoDB.Bson.dll</HintPath>
+    </Reference>
+    <Reference Include="Newtonsoft.Json, Version=10.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <HintPath>..\..\build\packages\Newtonsoft.Json.10.0.3\lib\net45\Newtonsoft.Json.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
+    <Reference Include="System.Configuration" />
+    <Reference Include="System.Runtime.Serialization" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Admin\AdminUserModel.cs" />
+    <Compile Include="Admin\AdminRoleKey.cs" />
+    <Compile Include="Admin\AdMonitorCode.cs" />
+    <Compile Include="Admin\DanmakuKeyWord.cs" />
+    <Compile Include="Admin\DanmakuLotteryDraw.cs" />
+    <Compile Include="Admin\DanmakuPool.cs" />
+    <Compile Include="Admin\ExtendCreativeMonitorCode.cs" />
+    <Compile Include="Admin\ItemCheater.cs" />
+    <Compile Include="Admin\LoginModel.cs" />
+    <Compile Include="Admin\QueryModel\BaseQueryModel.cs" />
+    <Compile Include="Admin\QueryModel\HotVideoTagQueryModel.cs" />
+    <Compile Include="Admin\QueryModel\HotVideoTagSaveModel.cs" />
+    <Compile Include="Admin\QueryModel\RechargeQueryModel.cs" />
+    <Compile Include="Admin\VideoSheet.cs" />
+    <Compile Include="Sports\BigSisterBuff.cs" />
+    <Compile Include="Sports\SportConfig.cs" />
+    <Compile Include="Sports\SportMatch\SportMatchHiplay.cs" />
+    <Compile Include="Sports\SportMatch\SportMatchRecommend.cs" />
+    <Compile Include="Sports\SportMatch\SportMatchBasic.cs" />
+    <Compile Include="Sports\SportRecommend\SportRecommendRoom.cs" />
+    <Compile Include="Sports\SportLivePermissionsEntity.cs" />
+    <Compile Include="Sports\SportMatchProportion.cs" />
+    <Compile Include="Sports\SportRooms\SportRoomEntity.cs" />
+    <Compile Include="Sports\SportStarRecommend.cs" />
+    <Compile Include="Sports\SportSubscribe\SportSubscribeBasic.cs" />
+    <Compile Include="Sports\Zcry\ZcryGuessEntity.cs" />
+    <Compile Include="Sports\Zcry\ZcryRankEntity.cs" />
+    <Compile Include="Sports\Zcry\ZcryStageActivity.cs" />
+    <Compile Include="Sports\SportVipEntity.cs" />
+    <Compile Include="Sports\DomainRedirection.cs" />
+    <Compile Include="Sports\AppHomePageActivityEntryConfig.cs" />
+    <Compile Include="Sports\BigSisterActivity.cs" />
+    <Compile Include="Sports\BigSisterModel.cs" />
+    <Compile Include="Sports\OpEntity.cs" />
+    <Compile Include="Sports\SignupActivity.cs" />
+    <Compile Include="Sports\SportClub.cs" />
+    <Compile Include="Sports\SportGameInfo.cs" />
+    <Compile Include="Sports\SportGameModel.cs" />
+    <Compile Include="Sports\SportMatch.cs" />
+    <Compile Include="Sports\SportMatchConfig.cs" />
+    <Compile Include="Sports\SportPlayBackSchedule.cs" />
+    <Compile Include="Sports\SportPrivateRoomInfo.cs" />
+    <Compile Include="Sports\SportRoomPlayBackInfo.cs" />
+    <Compile Include="Sports\SportScheduleMatchModel.cs" />
+    <Compile Include="Sports\SportSchedule.cs" />
+    <Compile Include="Sports\SportSkin.cs" />
+    <Compile Include="Sports\SportV2MatchStartLiveLog.cs" />
+    <Compile Include="Sports\SubscribeInfo.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Sports\README-Sport.md" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\..\infrastructure\Xn.Platform.Abstractions.Domain\Xn.Platform.Abstractions.Domain.csproj">
+      <Project>{3F2E7890-97E1-4680-B0D9-3766CE846CA0}</Project>
+      <Name>Xn.Platform.Abstractions.Domain</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\infrastructure\Xn.Platform.Extensions\Xn.Platform.Extensions.csproj">
+      <Project>{509A4F19-3E85-4712-A801-F5C86A7581F9}</Project>
+      <Name>Xn.Platform.Extensions</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it.
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

@@ -1,0 +1,75 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="14.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{3F2E7890-97E1-4680-B0D9-3766CE846CA0}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>Xn.Platform.Abstractions.Domain</RootNamespace>
+    <AssemblyName>Xn.Platform.Abstractions.Domain</AssemblyName>
+    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>..\..\build\debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>..\..\build\release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Compile Include="BroadCode.cs" />
+    <Compile Include="Data\ComputedAttribute.cs" />
+    <Compile Include="Data\KeyAttribute.cs" />
+    <Compile Include="Data\TableAttribute.cs" />
+    <Compile Include="Data\WriteAttribute.cs" />
+    <Compile Include="Entity.cs" />
+    <Compile Include="IMongoRepository.cs" />
+    <Compile Include="IRepository.cs" />
+    <Compile Include="LiveStreamType.cs" />
+    <Compile Include="LiveType.cs" />
+    <Compile Include="MessageVia.cs" />
+    <Compile Include="NobleEntity.cs" />
+    <Compile Include="PageEntity.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="ReportEntity.cs" />
+    <Compile Include="ResultEntity.cs" />
+    <Compile Include="ResultWithCodeEntity.cs" />
+    <Compile Include="UserInfo.cs" />
+    <Compile Include="UserMedalCheckinInfo.cs" />
+    <Compile Include="UserMedalInfo.cs" />
+    <Compile Include="UserPrettyNumber.cs" />
+    <Compile Include="VehicleMessageInfo.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <Reference Include="System" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
+    <Reference Include="System.Runtime.Serialization" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Xn.Platform.Extensions\Xn.Platform.Extensions.csproj">
+      <Project>{509A4F19-3E85-4712-A801-F5C86A7581F9}</Project>
+      <Name>Xn.Platform.Extensions</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it.
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

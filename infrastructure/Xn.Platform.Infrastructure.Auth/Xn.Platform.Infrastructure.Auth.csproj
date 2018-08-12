@@ -1,0 +1,94 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="14.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{A2879541-EC28-4BCA-988B-72518339EA18}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>Xn.Platform.Infrastructure.Auth</RootNamespace>
+    <AssemblyName>Xn.Platform.Infrastructure.Auth</AssemblyName>
+    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>..\..\build\debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>..\..\build\release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Compile Include="XnAuthentication.cs" />
+    <Compile Include="XnAuthModule.cs" />
+    <Compile Include="XnUserPrincipal.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\..\data\Xn.Platform.Data.MySql\Xn.Platform.Data.MySql.csproj">
+      <Project>{74228698-4cb6-4446-ad81-c6e46e6a5d8d}</Project>
+      <Name>Xn.Platform.Data.MySql</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\data\Xn.Platform.Data.Redis\Xn.Platform.Data.Redis.csproj">
+      <Project>{22ef0814-fae2-44e0-99a6-a466a4392cc6}</Project>
+      <Name>Xn.Platform.Data.Redis</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\domain\Xn.Platform.Domain\Xn.Platform.Domain.csproj">
+      <Project>{30CADA35-527B-4754-943F-84834D65ED27}</Project>
+      <Name>Xn.Platform.Domain</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Xn.Platform.Abstractions.Domain\Xn.Platform.Abstractions.Domain.csproj">
+      <Project>{3f2e7890-97e1-4680-b0d9-3766ce846ca0}</Project>
+      <Name>Xn.Platform.Abstractions.Domain</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Xn.Platform.Abstractions.Redis\Xn.Platform.Abstractions.Redis.csproj">
+      <Project>{c6ce27dd-e474-40ff-8e51-e55cc45edadf}</Project>
+      <Name>Xn.Platform.Abstractions.Redis</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Xn.Platform.Application.Core\Xn.Platform.Application.Core.csproj">
+      <Project>{ae4df214-5ae1-48a0-a17c-83855638c4ec}</Project>
+      <Name>Xn.Platform.Application.Core</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Xn.Platform.Extensions\Xn.Platform.Extensions.csproj">
+      <Project>{509A4F19-3E85-4712-A801-F5C86A7581F9}</Project>
+      <Name>Xn.Platform.Extensions</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Reference Include="Google.Protobuf, Version=3.3.0.0, Culture=neutral, PublicKeyToken=a7d26565bac4d604, processorArchitecture=MSIL">
+      <HintPath>..\..\build\packages\Google.Protobuf.3.3.0\lib\net45\Google.Protobuf.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="kafka-net, Version=0.9.0.65, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\build\packages\kafka-net.0.9.0.65\lib\net45\kafka-net.dll</HintPath>
+    </Reference>
+    <Reference Include="PluSso.Net">
+      <HintPath>..\..\build\packages\PluSso.Net.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Web" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="packages.config" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

@@ -1,0 +1,124 @@
+﻿@{
+    Layout = "";
+    ViewBag.Title = "login";
+}
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+    <title>后台登录</title>
+    <link rel="stylesheet" type="text/css" href="../../Plugins/layui/css/layui.css" />
+    <link rel="stylesheet" type="text/css" href="../../Plugins/css/login.css" />
+</head>
+
+<body>
+    <div class="m-login-bg">
+        <div class="m-login">
+            <h3>后台系统登录</h3>
+            <div class="m-login-warp">
+                <form class="layui-form">
+                    <div class="layui-form-item">
+                        <input type="text" name="title" required lay-verify="required" placeholder="用户名" autocomplete="off" class="layui-input">
+                    </div>
+                    <div class="layui-form-item">
+                        <input type="text" name="password" required lay-verify="required" placeholder="密码" autocomplete="off" class="layui-input">
+                    </div>
+                    <div class="layui-form-item">
+                        <div class="layui-inline">
+                            <input type="text" name="verity" required lay-verify="required" placeholder="验证码" autocomplete="off" class="layui-input">
+                        </div>
+                        <div class="layui-inline">
+                            <img class="verifyImg" onclick="this.src=this.src+'?c='+Math.random();" src="../../Plugins/images/login/yzm.jpg" />
+                        </div>
+                    </div>
+                    <div class="layui-form-item m-login-btn">
+                        <div class="layui-inline">
+                            <button class="layui-btn layui-btn-normal" lay-submit lay-filter="login">登录</button>
+                        </div>
+                        <div class="layui-inline">
+                            <button type="reset" class="layui-btn layui-btn-primary">取消</button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+            <p class="copyright">Copyright 2015-2016 by XIAODU</p>
+        </div>
+    </div>
+    <script src="../../Plugins/layui/layui.js" type="text/javascript" charset="utf-8"></script>
+    <script>
+        layui.use(['form', 'layedit', 'laydate', 'jquery'], function () {
+            var form = layui.form(),
+                layer = layui.layer,
+                $ = layui.jquery;
+
+
+            //自定义验证规则
+            form.verify({
+                title: function (value) {
+                    if (value.length < 5) {
+                        return '标题至少得5个字符啊';
+                    }
+                },
+                password: [/(.+){6,12}$/, '密码必须6到12位'],
+                verity: [/(.+){6}$/, '验证码必须是6位'],
+
+            });
+            var post_adduser = false;
+            //监听提交
+            form.on('submit(login)', function (data) {
+                if (post_adduser) return;
+                post_adduser = true;
+                var UserName = data.field.title;
+                var Password = data.field.password;
+                var loading = layer.load(1);
+                form.submit();
+
+                var user = "{\"UserName\":\"" + UserName + "\",\"Password\":\"" + Password + "\"}";
+
+
+                //$.post("/login/check", user, function (data) {
+                //    post_adduser = false;
+                //    layer.close(loading);
+                //})
+
+
+                
+                $.ajax({
+                    url: "/login/check",
+                    //dataType: 'text',
+                    contentType: "application/json",
+                    data: user, //请求的附加参数，用json对象
+                    method: 'POST',
+                    success: function (res) {
+                        post_adduser = false;
+                        layer.close(loading);
+                        if (res != null && res.State == true) {
+                            // 获得frame索引
+                            parent.location.reload();
+                            var index = parent.layer.getFrameIndex(window.name);
+                            //关闭当前frame
+                            parent.layer.close(index);
+                            window.location.href = res.Url;
+                        }
+                        else {
+                            layer.msg("添加失败", { icon: 5 });
+                        }
+
+                    },
+                    error: function () {
+                        post_adduser = false; //AJAX失败也需要将标志标记为可提交状态
+                        layer.close(loading);
+                        layer.msg("添加失败", { icon: 5 });
+                    }
+                });
+                return true;//只此一句
+            });
+
+        });
+
+    </script>
+</body>
+
+</html>
