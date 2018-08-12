@@ -1,0 +1,77 @@
+before_script:
+  - set PATH=%PATH%;C:\Program Files\Git\cmd;C:\Program Files (x86)\MSBuild\14.0\Bin;
+stages:
+  - build
+
+build_job:
+  stage: build
+  only:
+  - master
+  - feature/citest
+  script:
+  - echo "Restoring NuGet Packages..."
+  - '"c:\nuget\nuget.exe" restore "build/Plu.Platform.Everything.sln"'
+  - ''
+  - echo "Release build..."
+  - set config=Release
+  - set basepath=%cd%\build\publish\
+  - set webapiapppath=%basepath%webapiapp
+  - set webapicommentpath=%basepath%webapicomment
+  - set webapiconfigpath=%basepath%webapiconfig
+  - set webapieventpath=%basepath%webapievent
+  - set webapifeedpath=%basepath%webapifeed
+  - set webapigiftpath=%basepath%webapigift
+  - set webapihttppath=%basepath%webapihttp
+  - set webapispampath=%basepath%webapispam
+  - set webapitaskpath=%basepath%webapitask
+  - set webapimusicpath=%basepath%webapimusic
+  - set webapiprivatepath=%basepath%webapiprivate
+  - set webapiroompath=%basepath%webapiroom
+  - set webapistreampath=%basepath%webapistream
+  - set webapimbpath=%basepath%webapimb
+  - set webapisearchpath=%basepath%webapisearch
+  - set webapiuserpath=%basepath%webapiuser
+  - set webapipath=%basepath%webapi
+  - set webadminpath=%basepath%webadmin
+  - set weblivepath=%basepath%weblive
+  - set webpaymentpath=%basepath%webpayment
+  - set websettingpath=%basepath%websetting
+  - set webuserpath=%basepath%webuser
+  - set webvideopath=%basepath%webvideo
+  - set webapitagpath=%basepath%webapitag
+  
+  - echo %cd%
+  - cd %cd%\build
+
+  - MSBuild.exe ..\app\Xn.Platform.Presentation.webapiapp\Xn.Platform.Presentation.webapiapp.csproj /consoleloggerparameters:ErrorsOnly /maxcpucount /nologo /verbosity:quiet /p:VisualStudioVersion=14.0 /p:SolutionDir=%cd% /t:WebPublish /p:Configuration=%config% /p:WebPublishMethod=FileSystem /p:publishUrl=%webapiapppath%
+  - MSBuild.exe ..\comment\Xn.Platform.Presentation.webapicomment\Xn.Platform.Presentation.webapicomment.csproj /consoleloggerparameters:ErrorsOnly /maxcpucount /nologo /verbosity:quiet /p:VisualStudioVersion=14.0 /p:SolutionDir=%cd% /t:WebPublish /p:Configuration=%config% /p:WebPublishMethod=FileSystem /p:publishUrl=%webapicommentpath%
+  - MSBuild.exe ..\config\Xn.Platform.Presentation.webapiconfig\Xn.Platform.Presentation.webapiconfig.csproj /consoleloggerparameters:ErrorsOnly /maxcpucount /nologo /verbosity:quiet /p:VisualStudioVersion=14.0 /p:SolutionDir=%cd% /t:WebPublish /p:Configuration=%config% /p:WebPublishMethod=FileSystem /p:publishUrl=%webapiconfigpath%
+  - MSBuild.exe ..\interaction\Xn.Platform.Presentation.webapievent\Xn.Platform.Presentation.webapievent.csproj /consoleloggerparameters:ErrorsOnly /maxcpucount /nologo /verbosity:quiet /p:VisualStudioVersion=14.0 /p:SolutionDir=%cd% /t:WebPublish /p:Configuration=%config% /p:WebPublishMethod=FileSystem /p:publishUrl=%webapieventpath%
+  - MSBuild.exe ..\interaction\Xn.Platform.Presentation.webapifeed\Xn.Platform.Presentation.webapifeed.csproj /consoleloggerparameters:ErrorsOnly /maxcpucount /nologo /verbosity:quiet /p:VisualStudioVersion=14.0 /p:SolutionDir=%cd% /t:WebPublish /p:Configuration=%config% /p:WebPublishMethod=FileSystem /p:publishUrl=%webapifeedpath%
+  - MSBuild.exe ..\interaction\Xn.Platform.Presentation.webapigift\Xn.Platform.Presentation.webapigift.csproj /consoleloggerparameters:ErrorsOnly /maxcpucount /nologo /verbosity:quiet /p:VisualStudioVersion=14.0 /p:SolutionDir=%cd% /t:WebPublish /p:Configuration=%config% /p:WebPublishMethod=FileSystem /p:publishUrl=%webapigiftpath%
+  - MSBuild.exe ..\interaction\Xn.Platform.Presentation.webapihttp\Xn.Platform.Presentation.webapihttp.csproj /consoleloggerparameters:ErrorsOnly /maxcpucount /nologo /verbosity:quiet /p:VisualStudioVersion=14.0 /p:SolutionDir=%cd% /t:WebPublish /p:Configuration=%config% /p:WebPublishMethod=FileSystem /p:publishUrl=%webapihttppath%
+  - MSBuild.exe ..\interaction\Xn.Platform.Presentation.webapispam\Xn.Platform.Presentation.webapispam.csproj /consoleloggerparameters:ErrorsOnly /maxcpucount /nologo /verbosity:quiet /p:VisualStudioVersion=14.0 /p:SolutionDir=%cd% /t:WebPublish /p:Configuration=%config% /p:WebPublishMethod=FileSystem /p:publishUrl=%webapispampath%
+  - MSBuild.exe ..\interaction\Xn.Platform.Presentation.webapitask\Xn.Platform.Presentation.webapitask.csproj /consoleloggerparameters:ErrorsOnly /maxcpucount /nologo /verbosity:quiet /p:VisualStudioVersion=14.0 /p:SolutionDir=%cd% /t:WebPublish /p:Configuration=%config% /p:WebPublishMethod=FileSystem /p:publishUrl=%webapitaskpath%
+  - MSBuild.exe ..\live\Xn.Platform.Presentation.webapimusic\Xn.Platform.Presentation.webapimusic.csproj /consoleloggerparameters:ErrorsOnly /maxcpucount /nologo /verbosity:quiet /p:VisualStudioVersion=14.0 /p:SolutionDir=%cd% /t:WebPublish /p:Configuration=%config% /p:WebPublishMethod=FileSystem /p:publishUrl=%webapimusicpath%
+  - MSBuild.exe ..\live\Xn.Platform.Presentation.webapiprivate\Xn.Platform.Presentation.webapiprivate.csproj /consoleloggerparameters:ErrorsOnly /maxcpucount /nologo /verbosity:quiet /p:VisualStudioVersion=14.0 /p:SolutionDir=%cd% /t:WebPublish /p:Configuration=%config% /p:WebPublishMethod=FileSystem /p:publishUrl=%webapiprivatepath%
+  - MSBuild.exe ..\live\Xn.Platform.Presentation.webapiroom\Xn.Platform.Presentation.webapiroom.csproj /consoleloggerparameters:ErrorsOnly /maxcpucount /nologo /verbosity:quiet /p:VisualStudioVersion=14.0 /p:SolutionDir=%cd% /t:WebPublish /p:Configuration=%config% /p:WebPublishMethod=FileSystem /p:publishUrl=%webapiroompath%
+  - MSBuild.exe ..\live\Xn.Platform.Presentation.webapistream\Xn.Platform.Presentation.webapistream.csproj /consoleloggerparameters:ErrorsOnly /maxcpucount /nologo /verbosity:quiet /p:VisualStudioVersion=14.0 /p:SolutionDir=%cd% /t:WebPublish /p:Configuration=%config% /p:WebPublishMethod=FileSystem /p:publishUrl=%webapistreampath%
+  - MSBuild.exe ..\messagebus\Xn.Platform.Presentation.webapimb\Xn.Platform.Presentation.webapimb.csproj /consoleloggerparameters:ErrorsOnly /maxcpucount /nologo /verbosity:quiet /p:VisualStudioVersion=14.0 /p:SolutionDir=%cd% /t:WebPublish /p:Configuration=%config% /p:WebPublishMethod=FileSystem /p:publishUrl=%webapimbpath%
+  - MSBuild.exe ..\search\Xn.Platform.Presentation.webapisearch\Xn.Platform.Presentation.webapisearch.csproj /consoleloggerparameters:ErrorsOnly /maxcpucount /nologo /verbosity:quiet /p:VisualStudioVersion=14.0 /p:SolutionDir=%cd% /t:WebPublish /p:Configuration=%config% /p:WebPublishMethod=FileSystem /p:publishUrl=%webapisearchpath%
+  - MSBuild.exe ..\user\Xn.Platform.Presentation.webapiuser\Xn.Platform.Presentation.webapiuser.csproj /consoleloggerparameters:ErrorsOnly /maxcpucount /nologo /verbosity:quiet /p:VisualStudioVersion=14.0 /p:SolutionDir=%cd% /t:WebPublish /p:Configuration=%config% /p:WebPublishMethod=FileSystem /p:publishUrl=%webapiuserpath%
+  - MSBuild.exe ..\live\Xn.Platform.Presentation.webapi\Xn.Platform.Presentation.webapi.csproj /consoleloggerparameters:ErrorsOnly /maxcpucount /nologo /verbosity:quiet /p:VisualStudioVersion=14.0 /p:SolutionDir=%cd% /t:WebPublish /p:Configuration=%config% /p:WebPublishMethod=FileSystem /p:publishUrl=%webapipath%
+  - MSBuild.exe ..\houtai\Xn.Platform.Presentation.admin\Xn.Platform.Presentation.admin.csproj /consoleloggerparameters:ErrorsOnly /maxcpucount /nologo /verbosity:quiet /p:VisualStudioVersion=14.0 /p:SolutionDir=%cd% /t:WebPublish /p:Configuration=%config% /p:WebPublishMethod=FileSystem /p:publishUrl=%webadminpath%
+  - MSBuild.exe ..\live\Xn.Platform.Presentation.weblive\Xn.Platform.Presentation.weblive.csproj /consoleloggerparameters:ErrorsOnly /maxcpucount /nologo /verbosity:quiet /p:VisualStudioVersion=14.0 /p:SolutionDir=%cd% /t:WebPublish /p:Configuration=%config% /p:WebPublishMethod=FileSystem /p:publishUrl=%weblivepath%
+  - MSBuild.exe ..\payment\Xn.Platform.Presentation.webpayment\Xn.Platform.Presentation.webpayment.csproj /consoleloggerparameters:ErrorsOnly /maxcpucount /nologo /verbosity:quiet /p:VisualStudioVersion=14.0 /p:SolutionDir=%cd% /t:WebPublish /p:Configuration=%config% /p:WebPublishMethod=FileSystem /p:publishUrl=%webpaymentpath%
+  - MSBuild.exe ..\setting\Xn.Platform.Presentation.websetting\Xn.Platform.Presentation.websetting.csproj /consoleloggerparameters:ErrorsOnly /maxcpucount /nologo /verbosity:quiet /p:VisualStudioVersion=14.0 /p:SolutionDir=%cd% /t:WebPublish /p:Configuration=%config% /p:WebPublishMethod=FileSystem /p:publishUrl=%websettingpath%
+  - MSBuild.exe ..\user\Xn.Platform.Presentation.webuser\Xn.Platform.Presentation.webuser.csproj /consoleloggerparameters:ErrorsOnly /maxcpucount /nologo /verbosity:quiet /p:VisualStudioVersion=14.0 /p:SolutionDir=%cd% /t:WebPublish /p:Configuration=%config% /p:WebPublishMethod=FileSystem /p:publishUrl=%webuserpath%
+  - MSBuild.exe ..\video\Xn.Platform.Presentation.webvideo\Xn.Platform.Presentation.webvideo.csproj /consoleloggerparameters:ErrorsOnly /maxcpucount /nologo /verbosity:quiet /p:VisualStudioVersion=14.0 /p:SolutionDir=%cd% /t:WebPublish /p:Configuration=%config% /p:WebPublishMethod=FileSystem /p:publishUrl=%webvideopath%
+  - MSBuild.exe ..\tag\Xn.Platform.Presentation.webapitags\Xn.Platform.Presentation.webapitags.csproj /consoleloggerparameters:ErrorsOnly /maxcpucount /nologo /verbosity:quiet /p:VisualStudioVersion=14.0 /p:SolutionDir=%cd% /t:WebPublish /p:Configuration=%config% /p:WebPublishMethod=FileSystem /p:publishUrl=%webapitagpath%
+  tags: 
+  except:
+  - tags
+  artifacts:
+    name: "%CI_BUILD_NAME%_%CI_BUILD_ID%_%CI_BUILD_REF_NAME%_%CI_BUILD_REF%"
+    paths: 
+      - build/publish/
+    expire_in: 1 week
