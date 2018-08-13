@@ -7,7 +7,7 @@ using Xn.Platform.Presentation.Admin.Models;
 
 namespace Xn.Platform.Admin.Controllers
 {
-    [AdministratorActionFilterAttribute]
+   // [AdministratorActionFilterAttribute]
     public class HomeController : Controller
     {
         // GET: Home
