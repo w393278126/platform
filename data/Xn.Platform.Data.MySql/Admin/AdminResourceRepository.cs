@@ -4,12 +4,13 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Xn.Platform.Core;
 
 namespace Xn.Platform.Data.MySql.Admin
 {
     public class AdminResourceRepository : AbstractRepository<AdminResourceModel>
     {
-        public AdminRoleResourceRepository()
+        public AdminResourceRepository()
         {
             ConnectionString = ConfigSetting.ConnectionLongzhuSportsEntities;
             SlaveConnectionString = ConfigSetting.ConnectionLongzhuSportsEntitiesReadOnly;

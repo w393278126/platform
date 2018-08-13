@@ -64,7 +64,6 @@
     <Compile Include="Admin\AdminResourceRepository.cs" />
     <Compile Include="Admin\AdminRoleRepository.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="TourUser\TourUserRepository.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\..\domain\Xn.Platform.Domain\Xn.Platform.Domain.csproj">
@@ -78,6 +77,10 @@
     <ProjectReference Include="..\..\infrastructure\Xn.Platform.Abstractions.MySql\Xn.Platform.Abstractions.MySql.csproj">
       <Project>{6FCC70B7-F381-489A-A2E7-82133B83D46A}</Project>
       <Name>Xn.Platform.Abstractions.MySql</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\infrastructure\Xn.Platform.Extensions\Xn.Platform.Extensions.csproj">
+      <Project>{509A4F19-3E85-4712-A801-F5C86A7581F9}</Project>
+      <Name>Xn.Platform.Extensions</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
