@@ -58,3 +58,4 @@ sh.exe.stackdump
 /build/packages/Newtonsoft.Json.10.0.3/lib/portable-net45+win8+wp8+wpa81/*.dll
 /build/packages/Newtonsoft.Json.10.0.3/lib/portable-net45+win8+wp8+wpa81/*.xml
 /build/packages/Newtonsoft.Json.10.0.3/tools/*.ps1
+/build/packages

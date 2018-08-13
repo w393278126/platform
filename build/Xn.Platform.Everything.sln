@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 14
-VisualStudioVersion = 14.0.25420.1
+# Visual Studio 15
+VisualStudioVersion = 15.0.27428.2043
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "infrastructure", "infrastructure", "{1EF28F54-3C31-464F-A6A0-5F737CAAEABD}"
 EndProject
@@ -37,7 +37,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "admin", "admin", "{8162683C
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Xn.Platform.Admin", "..\admin\Xn.Platform.Admin\Xn.Platform.Admin.csproj", "{3D1B21D1-283E-4CED-ABA2-6E9A906CD244}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Xn.Platform.Interface", "..\domain\Xn.Platform.Interface\Xn.Platform.Interface\Xn.Platform.Interface.csproj", "{D11D9BDD-FF43-4668-BCC2-3F1C66FD56CB}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Xn.Platform.Interface", "..\domain\Xn.Platform.Interface\Xn.Platform.Interface.csproj", "{D11D9BDD-FF43-4668-BCC2-3F1C66FD56CB}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -122,8 +122,8 @@ Global
 		{D11D9BDD-FF43-4668-BCC2-3F1C66FD56CB} = {9E172054-2505-4BB8-AADC-3A7B2FD527AF}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
-		SolutionGuid = {6DB6E407-73B4-4B2D-B0B3-4A11830CFA56}
 		{3D2AD234-58A6-4175-BD4E-5A3BFBB3B2E0} = {7DAA5B00-AC7F-4E75-A34A-F78BEBF0C8D5}
+		SolutionGuid = {6DB6E407-73B4-4B2D-B0B3-4A11830CFA56}
 	EndGlobalSection
 	GlobalSection(SubversionScc) = preSolution
 		Svn-Managed = True
