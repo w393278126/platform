@@ -814,7 +814,7 @@ namespace Xn.Platform.Core
             {
                 if (!string.IsNullOrEmpty(_authCookieName))
                     return _authCookieName;
-                _authCookieName = "p1u_id";
+                _authCookieName = "xn_id";
                 if (AppSettingItems.AllKeys.Contains("AuthCookieName"))
                 {
                     var content = AppSettingItems["AuthCookieName"];

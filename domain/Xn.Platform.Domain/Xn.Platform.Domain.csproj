@@ -49,6 +49,7 @@
     <Reference Include="System.Runtime.Serialization" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Admin\AdminModel.cs" />
     <Compile Include="Admin\AdminUserModel.cs" />
     <Compile Include="Admin\AdminRoleKey.cs" />
     <Compile Include="Admin\AdMonitorCode.cs" />

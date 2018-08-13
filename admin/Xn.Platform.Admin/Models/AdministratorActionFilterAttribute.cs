@@ -38,15 +38,8 @@ namespace Xn.Platform.Presentation.Admin.Models
                 .Where(c => c.Controller.ToLower() == controller.ToLower() && c.Action.ToLower() == action.ToLower()).FirstOrDefault();
 
             var isAuthorized = false;
-            //foreach (var adminRole in user.AdminRoles)
-            //{
-            //    if (config != null && config.IsAuthorized(adminRole))
-            //    {
-            //        isAuthorized = true;
-            //        break;
-            //    }
 
-            //}
+            isAuthorized = true;
             if (!isAuthorized)
                 UnauthorizeHandler(ctx);
 

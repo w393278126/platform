@@ -7,7 +7,7 @@ namespace Xn.Home.Auth
 {
     /// <summary>
     /// 配置写死命名空间
-    /// <add name="PluAuthModule" type="Xn.Home.Auth.PluAuthModule" preCondition="managedHandler" />
+    /// <add name="XnAuthModule" type="Xn.Home.Auth.PluAuthModule" preCondition="managedHandler" />
     /// </summary>
     public class XnAuthModule : IHttpModule
     {

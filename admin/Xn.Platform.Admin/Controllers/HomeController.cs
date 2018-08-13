@@ -3,9 +3,11 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using Xn.Platform.Presentation.Admin.Models;
 
 namespace Xn.Platform.Admin.Controllers
 {
+    [AdministratorActionFilterAttribute]
     public class HomeController : Controller
     {
         // GET: Home

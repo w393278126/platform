@@ -15,7 +15,7 @@ namespace Xn.Platform.Infrastructure.Auth
 
         public XnUserPrincipal()
         {
-            Identity = new PluUserIdentity();
+            Identity = new XnUserIdentity();
         }
 
         public XnUserPrincipal(IIdentity identity)
@@ -39,51 +39,20 @@ namespace Xn.Platform.Infrastructure.Auth
             }
             return false;
         }
-
-
-
-        #region 后台用户
-        public List<AdminRoleKey> AdminRoles
-        {
-            get
-            {
-                LoadCurrentAdminUserRoles();
-                return _adminRoles;
-            }
-        }
-        List<AdminRoleKey> _adminRoles = new List<AdminRoleKey>();
-        bool _adminRoleLoaded = false;
-
-        private void LoadCurrentAdminUserRoles()
-        {
-            if (!_adminRoleLoaded)
-            {
-                int userId = 0;
-                List<AdminRoleKey> rs = new List<AdminRoleKey>();
-                if (int.TryParse(Identity.Name, out userId))
-                {
-                   // rs = UserRoleJudge.Instance.CheckAdminRole(userId);
-                }
-                _adminRoles = rs;
-            }
-
-            _adminRoleLoaded = true;
-        }
-        #endregion
     }
 
-    public class PluUserIdentity : IIdentity
+    public class XnUserIdentity : IIdentity
     {
-        const string AuthType = "PluAuthentication";
+        const string AuthType = "XnAuthentication";
         bool _isAuthenticated = false;
         string _name = null;
         bool _initialized = false;
 
-        public PluUserIdentity()
+        public XnUserIdentity()
         {
             _initialized = false;
         }
-        public PluUserIdentity(string name)
+        public XnUserIdentity(string name)
         {
             _name = name;
             _isAuthenticated = true;

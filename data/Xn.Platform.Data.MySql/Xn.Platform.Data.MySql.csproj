@@ -60,6 +60,9 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Admin\AdminRepository.cs" />
+    <Compile Include="Admin\AdminRoleResourceRepository.cs" />
+    <Compile Include="Admin\AdminResourceRepository.cs" />
+    <Compile Include="Admin\AdminRoleRepository.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

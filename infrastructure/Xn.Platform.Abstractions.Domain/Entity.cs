@@ -27,5 +27,6 @@ namespace Xn.Platform.Domain
         public DateTime CreateTime { set; get; }
         public int LastAuthorId { set; get; }
         public DateTime LastTime { set; get; }
+        public int Status { get; set; }
     }
 }
