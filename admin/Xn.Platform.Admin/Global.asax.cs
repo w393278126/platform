@@ -19,7 +19,7 @@ namespace Xn.Platform.Admin
             RouteConfig.RegisterRoutes(RouteTable.Routes);
             BundleConfig.RegisterBundles(BundleTable.Bundles);
 
-            DependencyInjectionConfig.Register(Assembly.GetExecutingAssembly());
+            //DependencyInjectionConfig.Register(Assembly.GetExecutingAssembly());
         }
     }
 }
