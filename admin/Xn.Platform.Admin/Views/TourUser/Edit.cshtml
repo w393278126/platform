@@ -1,0 +1,138 @@
+﻿@{
+    ViewBag.Title = "用户列表";
+    Layout = "~/Views/Shared/_LayoutPage.cshtml";
+}
+<body>
+    <form class="layui-form column-content-detail"> 
+        <!--用户名-->
+        <div class="layui-form-item">
+            <label class="layui-form-label">用户名：</label>
+            <div class="layui-input-block">
+                <input type="text" name="name" required lay-verify="required" placeholder="请输入用户名称" autocomplete="off" class="layui-input">
+            </div>
+        </div>
+        <!--密码-->
+        <div class="layui-form-item">
+            <label class="layui-form-label">密码：</label>
+            <div class="layui-input-block">
+                <input type="password" name="pwd" required lay-verify="required" placeholder="请输入密码" autocomplete="off" class="layui-input">
+            </div>
+        </div>
+        <!--昵称-->
+        <div class="layui-form-item">
+            <label class="layui-form-label">昵称：</label>
+            <div class="layui-input-block">
+                <input type="text" name="nickname" required lay-verify="required" placeholder="请输入用户昵称" autocomplete="off" class="layui-input">
+            </div>
+        </div>
+        <!--性别-->
+        <div class="layui-form-item">
+            <label class="layui-form-label">性别：</label>
+            <div class="layui-input-block">
+                <input type="radio" name="sex" value="1" title="男">
+                <input type="radio" name="sex" value="0" title="女">
+            </div>
+        </div>
+        <!--真实姓名-->
+        <div class="layui-form-item">
+            <label class="layui-form-label">真实姓名：</label>
+            <div class="layui-input-block">
+                <input type="text" name="readname" required lay-verify="required" placeholder="请输入用户真实姓名" autocomplete="off" class="layui-input">
+            </div>
+        </div>
+        <!--手机号码-->
+        <div class="layui-form-item layui-form-text">
+            <label class="layui-form-label">手机号码：</label>
+            <div class="layui-input-block">
+                <input type="text" name="mobile" required lay-verify="required" placeholder="请输入手机号码" autocomplete="off" class="layui-input">
+            </div>
+        </div>
+        <!--省-->
+        <div class="layui-form-item">
+            <label class="layui-form-label">省：</label>
+            <div class="layui-input-block">
+                <input type="text" name="province" required lay-verify="required" placeholder="请输入省" autocomplete="off" class="layui-input">
+            </div>
+        </div>
+        <!--市-->
+        <div class="layui-form-item">
+            <label class="layui-form-label">市：</label>
+            <div class="layui-input-block">
+                <input type="text" name="city" required lay-verify="required" placeholder="请输入市" autocomplete="off" class="layui-input">
+            </div>
+        </div>
+        <!--区-->
+        <div class="layui-form-item">
+            <label class="layui-form-label">区：</label>
+            <div class="layui-input-block">
+                <input type="text" name="area" required lay-verify="required" placeholder="请输入区/镇" autocomplete="off" class="layui-input">
+            </div>
+        </div>
+        <!--地址-->
+        <div class="layui-form-item">
+            <label class="layui-form-label">详细地址：</label>
+            <div class="layui-input-block">
+                <input type="text" name="addres" required lay-verify="required" placeholder="请输入详细地址" autocomplete="off" class="layui-input">
+            </div>
+        </div>
+
+
+        <div class="layui-form-item" style="padding-left: 10px;">
+            <div class="layui-input-block">
+                <button class="layui-btn layui-btn-normal" lay-submit lay-filter="formDemo">立即提交</button>
+                <button type="reset" class="layui-btn layui-btn-primary">重置</button>
+            </div>
+        </div>
+    </form>
+    <script src="../../Plugins/layui/layui.js" type="text/javascript" charset="utf-8"></script>
+    <script src="../../Plugins/js/common.js" type="text/javascript" charset="utf-8"></script>
+    <script>
+        layui.use(['form', 'jquery', 'laydate', 'layer', 'laypage', 'dialog', 'common', 'tool', 'element', 'upload', 'layedit'], function () {
+            var form = layui.form(),
+                layer = layui.layer,
+                $ = layui.jquery,
+                laypage = layui.laypage,
+                laydate = layui.laydate,
+                layedit = layui.layedit,
+                common = layui.common,
+                tool = layui.tool,
+                element = layui.element(),
+                dialog = layui.dialog;
+
+            //获取当前iframe的name值
+            var iframeObj = $(window.frameElement).attr('name');
+            //创建一个编辑器
+            var editIndex = layedit.build('LAY_demo_editor', {
+                tool: ['strong' //加粗
+                    , 'italic' //斜体
+                    , 'underline' //下划线
+                    , 'del' //删除线
+                    , '|' //分割线
+                    , 'left' //左对齐
+                    , 'center' //居中对齐
+                    , 'right' //右对齐
+                    , 'link' //超链接
+                    , 'unlink' //清除链接
+                    , 'image' //插入图片
+                ],
+                height: 100
+            })
+            //全选
+            form.on('checkbox(allChoose)', function (data) {
+                var child = $(data.elem).parents('table').find('tbody input[type="checkbox"]');
+                child.each(function (index, item) {
+                    item.checked = data.elem.checked;
+                });
+                form.render('checkbox');
+            });
+            form.render();
+
+            layui.upload({
+                url: '上传接口url',
+                success: function (res) {
+                    console.log(res); //上传成功返回值，必须为json格式
+                }
+            });
+        });
+    </script>
+</body>

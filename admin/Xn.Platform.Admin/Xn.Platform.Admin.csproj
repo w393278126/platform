@@ -198,6 +198,8 @@
     <Compile Include="App_Start\Startup.Auth.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\AdminController.cs" />
+    <Compile Include="Controllers\LoginController.cs" />
+    <Compile Include="Controllers\TourUserController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -215,6 +217,9 @@
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
     <Content Include="Content\Site.css" />
+    <Content Include="Img\head\timg.jpg" />
+    <Content Include="Img\head\timg1.jpg" />
+    <Content Include="Img\head\timg2.jpg" />
     <Content Include="Plugins\css\admin.css" />
     <Content Include="Plugins\css\avatar.css" />
     <Content Include="Plugins\css\column.css" />
@@ -247,6 +252,7 @@
     <Content Include="Plugins\js\module\formate.js" />
     <Content Include="Plugins\js\module\tool.js" />
     <Content Include="Plugins\layui\css\layui.css" />
+    <Content Include="Plugins\layui\css\layui.mobile.css" />
     <Content Include="Plugins\layui\css\modules\code.css" />
     <Content Include="Plugins\layui\css\modules\laydate\icon.png" />
     <Content Include="Plugins\layui\css\modules\laydate\laydate.css" />
@@ -254,8 +260,10 @@
     <Content Include="Plugins\layui\css\modules\layer\default\icon.png" />
     <Content Include="Plugins\layui\css\modules\layer\default\layer.css" />
     <Content Include="Plugins\layui\css\modules\layer\default\loading-0.gif" />
+    <Content Include="Plugins\layui\css\modules\layer\default\loading-1-1.gif" />
     <Content Include="Plugins\layui\css\modules\layer\default\loading-1.gif" />
     <Content Include="Plugins\layui\css\modules\layer\default\loading-2.gif" />
+    <Content Include="Plugins\layui\css\modules\layer\default\loading-4.gif" />
     <Content Include="Plugins\layui\font\iconfont.svg" />
     <Content Include="Plugins\layui\images\face\0.gif" />
     <Content Include="Plugins\layui\images\face\1.gif" />
@@ -331,17 +339,17 @@
     <Content Include="Plugins\layui\images\face\9.gif" />
     <Content Include="Plugins\layui\layui.js" />
     <Content Include="Plugins\layui\lay\dest\layui.all.js" />
-    <Content Include="Plugins\layui\lay\dest\layui.mod.js" />
-    <Content Include="Plugins\layui\lay\lib\jquery.js" />
     <Content Include="Plugins\layui\lay\modules\code.js" />
     <Content Include="Plugins\layui\lay\modules\element.js" />
     <Content Include="Plugins\layui\lay\modules\flow.js" />
     <Content Include="Plugins\layui\lay\modules\form.js" />
+    <Content Include="Plugins\layui\lay\modules\jquery.js" />
     <Content Include="Plugins\layui\lay\modules\laydate.js" />
     <Content Include="Plugins\layui\lay\modules\layedit.js" />
     <Content Include="Plugins\layui\lay\modules\layer.js" />
     <Content Include="Plugins\layui\lay\modules\laypage.js" />
     <Content Include="Plugins\layui\lay\modules\laytpl.js" />
+    <Content Include="Plugins\layui\lay\modules\mobile.js" />
     <Content Include="Plugins\layui\lay\modules\tree.js" />
     <Content Include="Plugins\layui\lay\modules\upload.js" />
     <Content Include="Plugins\layui\lay\modules\util.js" />
@@ -526,6 +534,11 @@
     <Content Include="Plugins\lib\ueditor\lang\zh-cn\images\music.png" />
     <Content Include="Plugins\lib\ueditor\lang\zh-cn\images\upload.png" />
     <Content Include="Plugins\lib\ueditor\lang\zh-cn\zh-cn.js" />
+    <Content Include="Plugins\lib\ueditor\php\action_crawler.php" />
+    <Content Include="Plugins\lib\ueditor\php\action_list.php" />
+    <Content Include="Plugins\lib\ueditor\php\action_upload.php" />
+    <Content Include="Plugins\lib\ueditor\php\controller.php" />
+    <Content Include="Plugins\lib\ueditor\php\Uploader.class.php" />
     <Content Include="Plugins\lib\ueditor\themes\default\css\ueditor.css" />
     <Content Include="Plugins\lib\ueditor\themes\default\css\ueditor.min.css" />
     <Content Include="Plugins\lib\ueditor\themes\default\dialogbase.css" />
@@ -637,9 +650,6 @@
     <Content Include="ApplicationInsights.config">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="Plugins\layui\font\iconfont.eot" />
-    <Content Include="Plugins\layui\font\iconfont.ttf" />
-    <Content Include="Plugins\layui\font\iconfont.woff" />
     <Content Include="Plugins\fonts\iconfont.eot" />
     <Content Include="Plugins\fonts\iconfont.ttf" />
     <Content Include="Plugins\fonts\iconfont.woff" />
@@ -657,16 +667,14 @@
     <Content Include="Plugins\less\reset.less" />
     <Content Include="Plugins\less\var.less" />
     <Content Include="Plugins\less\welcome.less" />
-    <Content Include="Plugins\lib\ueditor\php\action_crawler.php" />
-    <Content Include="Plugins\lib\ueditor\php\action_list.php" />
-    <Content Include="Plugins\lib\ueditor\php\action_upload.php" />
     <Content Include="Plugins\lib\ueditor\php\config.json" />
-    <Content Include="Plugins\lib\ueditor\php\controller.php" />
-    <Content Include="Plugins\lib\ueditor\php\Uploader.class.php" />
     <Content Include="Plugins\lib\ueditor\third-party\jquery-1.10.2.min.map" />
     <Content Include="Plugins\lib\ueditor\third-party\video-js\font\vjs.eot" />
     <Content Include="Plugins\lib\ueditor\third-party\video-js\font\vjs.ttf" />
     <Content Include="Plugins\lib\ueditor\third-party\video-js\font\vjs.woff" />
+    <Content Include="Plugins\layui\font\iconfont.eot" />
+    <Content Include="Plugins\layui\font\iconfont.ttf" />
+    <Content Include="Plugins\layui\font\iconfont.woff" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\jquery-1.10.2.js" />
     <Content Include="Scripts\jquery-1.10.2.min.js" />
@@ -692,6 +700,10 @@
     <Content Include="Views\_ViewStart.cshtml" />
     <Content Include="Views\Shared\_Layout.cshtml" />
     <Content Include="Views\Admin\index.cshtml" />
+    <Content Include="Views\Login\index.cshtml" />
+    <Content Include="Views\TourUser\Index.cshtml" />
+    <Content Include="Views\TourUser\Edit.cshtml" />
+    <Content Include="Views\Shared\_Paging.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
