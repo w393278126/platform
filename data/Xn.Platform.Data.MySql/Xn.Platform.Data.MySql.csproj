@@ -64,6 +64,7 @@
     <Compile Include="Admin\AdminResourceRepository.cs" />
     <Compile Include="Admin\AdminRoleRepository.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="TourUser\TourUserRepository.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\..\domain\Xn.Platform.Domain\Xn.Platform.Domain.csproj">

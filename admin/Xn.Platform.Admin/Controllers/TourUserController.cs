@@ -6,7 +6,7 @@ using System.Web.Mvc;
 
 namespace Xn.Platform.Admin.Controllers
 {
-    public class TourUsersController : Controller
+    public class TourUserController : Controller
     {
         // GET: TourUsers
         public ActionResult Index()
