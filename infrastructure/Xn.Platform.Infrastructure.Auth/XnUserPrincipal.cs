@@ -1,7 +1,5 @@
 using Xn.Platform.Core;
-
 using Xn.Platform.Domain.Admin;
-using Sso;
 using System;
 using System.Collections.Generic;
 using System.Security.Principal;
