@@ -1,0 +1,2 @@
+xcopy ..\setting\Plu.Platform.Presentation.WebSetting\Content ..\video\Plu.Platform.Presentation.WebVideo\Content\ /s/e
+xcopy ..\setting\Plu.Platform.Presentation.WebSetting\Scripts ..\video\Plu.Platform.Presentation.WebVideo\Scripts\ /s/e
