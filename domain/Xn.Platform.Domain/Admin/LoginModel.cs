@@ -6,6 +6,18 @@ using System.Threading.Tasks;
 
 namespace Xn.Platform.Domain.Admin
 {
+
+    /// <summary>
+    /// 验证码
+    /// </summary>
+    public class VerifyCode
+    {
+        public string Code { get; set; }
+
+        public string CodeToken { get; set; }
+    }
+
+
     /// <summary>
     /// 登录实体对象
     /// </summary>
@@ -21,17 +33,6 @@ namespace Xn.Platform.Domain.Admin
 
         public string CodeToken { get; set; }
     }
-
-    /// <summary>
-    /// 验证码
-    /// </summary>
-    public class LoginCode
-    {
-        public string Code { get; set; }
-
-        public string CodeToken { get; set; }
-    }
-
 }
 
 

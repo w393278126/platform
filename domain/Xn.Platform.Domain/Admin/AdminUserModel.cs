@@ -8,7 +8,7 @@ using Xn.Platform.Domain;
 
 namespace Plu.Platform.Domain.Admin
 {
-    [Table("XnAdmin")]
+    [Table("XnAdminUser")]
     public class AdminUserModel : OperationEntity
     {
         public string UserName { get; set; }
@@ -20,9 +20,10 @@ namespace Plu.Platform.Domain.Admin
         public string NickName { get; set; }
 
         public int Role { get; set; }
-        public int Status { get; set; }
         public int Type { get; set; }
+
         public int SupplierID { get; set; }
+
         public string QQ { get; set; }
         public string Email { get; set; }
 

@@ -63,34 +63,8 @@
     <Reference Include="System.Web.Extensions" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Cache\AnnouncementHandler.cs" />
-    <Compile Include="Cache\BatchTimeStampHandler.cs" />
-    <Compile Include="Cache\BroadcastProgramHandler.cs" />
-    <Compile Include="Cache\CaptchaHandler.cs" />
-    <Compile Include="Cache\CertificationHashHandler.cs" />
-    <Compile Include="Cache\CertificationSetHandler.cs" />
-    <Compile Include="Cache\CouponHandler.cs" />
-    <Compile Include="Cache\LimitGiftUserTimesHandler.cs" />
     <Compile Include="Cache\ListHandler.cs" />
-    <Compile Include="Cache\ListVideoHLSTransferHandler.cs" />
-    <Compile Include="Cache\LiveAppJoinSetHandler.cs" />
-    <Compile Include="Cache\MediaScoreHandler.cs" />
-    <Compile Include="Cache\MessageWriteReadTimeHandler.cs" />
-    <Compile Include="Cache\NoticeTgpRedisHandler.cs" />
-    <Compile Include="Cache\RoomJoinUserHandler.cs" />
-    <Compile Include="Cache\RoomRecentViewHandler.cs" />
-    <Compile Include="Cache\RoomStatisticsDataHandler.cs" />
-    <Compile Include="Cache\SouHotHashLastUpdateUserInfoHandler.cs" />
-    <Compile Include="Cache\UserInfoUpdateHandler.cs" />
-    <Compile Include="Cache\WxOfficialStringHandler.cs" />
-    <Compile Include="Cache\XcoinExchangeHandler.cs" />
     <Compile Include="Login\PluAuthenticationHandler.cs" />
-    <Compile Include="Sports\SportSubscribeHandler.cs" />
-    <Compile Include="Sports\SportMatchProportionHandler.cs" />
-    <Compile Include="Sports\ZcryHandler.cs" />
-    <Compile Include="Sports\SportLivePermissionsHandler.cs" />
-    <Compile Include="Sports\VipInfoSportHandler.cs" />
-    <Compile Include="Sports\SportStarRecommendHandler.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

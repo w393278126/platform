@@ -49,62 +49,14 @@
     <Reference Include="System.Runtime.Serialization" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Admin\AdminModel.cs" />
+    <Compile Include="Admin\AdminRoleResourceModel.cs" />
     <Compile Include="Admin\AdminUserModel.cs" />
-    <Compile Include="Admin\AdminRoleKey.cs" />
-    <Compile Include="Admin\AdMonitorCode.cs" />
-    <Compile Include="Admin\DanmakuKeyWord.cs" />
-    <Compile Include="Admin\DanmakuLotteryDraw.cs" />
-    <Compile Include="Admin\DanmakuPool.cs" />
-    <Compile Include="Admin\ExtendCreativeMonitorCode.cs" />
-    <Compile Include="Admin\ItemCheater.cs" />
     <Compile Include="Admin\LoginModel.cs" />
-    <Compile Include="Admin\QueryModel\BaseQueryModel.cs" />
-    <Compile Include="Admin\QueryModel\HotVideoTagQueryModel.cs" />
-    <Compile Include="Admin\QueryModel\HotVideoTagSaveModel.cs" />
-    <Compile Include="Admin\QueryModel\RechargeQueryModel.cs" />
-    <Compile Include="Admin\VideoSheet.cs" />
-    <Compile Include="Sports\BigSisterBuff.cs" />
-    <Compile Include="Sports\SportConfig.cs" />
-    <Compile Include="Sports\SportMatch\SportMatchHiplay.cs" />
-    <Compile Include="Sports\SportMatch\SportMatchRecommend.cs" />
-    <Compile Include="Sports\SportMatch\SportMatchBasic.cs" />
-    <Compile Include="Sports\SportRecommend\SportRecommendRoom.cs" />
-    <Compile Include="Sports\SportLivePermissionsEntity.cs" />
-    <Compile Include="Sports\SportMatchProportion.cs" />
-    <Compile Include="Sports\SportRooms\SportRoomEntity.cs" />
-    <Compile Include="Sports\SportStarRecommend.cs" />
-    <Compile Include="Sports\SportSubscribe\SportSubscribeBasic.cs" />
-    <Compile Include="Sports\Zcry\ZcryGuessEntity.cs" />
-    <Compile Include="Sports\Zcry\ZcryRankEntity.cs" />
-    <Compile Include="Sports\Zcry\ZcryStageActivity.cs" />
-    <Compile Include="Sports\SportVipEntity.cs" />
-    <Compile Include="Sports\DomainRedirection.cs" />
-    <Compile Include="Sports\AppHomePageActivityEntryConfig.cs" />
-    <Compile Include="Sports\BigSisterActivity.cs" />
-    <Compile Include="Sports\BigSisterModel.cs" />
-    <Compile Include="Sports\OpEntity.cs" />
-    <Compile Include="Sports\SignupActivity.cs" />
-    <Compile Include="Sports\SportClub.cs" />
-    <Compile Include="Sports\SportGameInfo.cs" />
-    <Compile Include="Sports\SportGameModel.cs" />
-    <Compile Include="Sports\SportMatch.cs" />
-    <Compile Include="Sports\SportMatchConfig.cs" />
-    <Compile Include="Sports\SportPlayBackSchedule.cs" />
-    <Compile Include="Sports\SportPrivateRoomInfo.cs" />
-    <Compile Include="Sports\SportRoomPlayBackInfo.cs" />
-    <Compile Include="Sports\SportScheduleMatchModel.cs" />
-    <Compile Include="Sports\SportSchedule.cs" />
-    <Compile Include="Sports\SportSkin.cs" />
-    <Compile Include="Sports\SportV2MatchStartLiveLog.cs" />
-    <Compile Include="Sports\SubscribeInfo.cs" />
+    <Compile Include="QueryModel\BaseQueryModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="packages.config" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Sports\README-Sport.md" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\..\infrastructure\Xn.Platform.Abstractions.Domain\Xn.Platform.Abstractions.Domain.csproj">

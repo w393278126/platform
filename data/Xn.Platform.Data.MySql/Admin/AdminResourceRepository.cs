@@ -9,5 +9,10 @@ namespace Xn.Platform.Data.MySql.Admin
 {
     public class AdminResourceRepository : AbstractRepository<AdminResourceModel>
     {
+        public AdminRoleResourceRepository()
+        {
+            ConnectionString = ConfigSetting.ConnectionLongzhuSportsEntities;
+            SlaveConnectionString = ConfigSetting.ConnectionLongzhuSportsEntitiesReadOnly;
+        }
     }
 }

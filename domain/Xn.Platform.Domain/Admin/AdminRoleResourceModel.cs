@@ -9,14 +9,16 @@ using Xn.Platform.Domain;
 namespace Plu.Platform.Domain.Admin
 {
     [Table("XnAdminRole")]
-    public class AdminRoleModel: OperationEntity
+    public class AdminRoleModel : OperationEntity
     {
         public string Name { get; set; }
-
-        public int Type { get; set; }
+        /// <summary>
+        /// 管理员类型
+        /// </summary>
+        public AdminType Type { get; set; }
     }
 
-    [Table("XnAdminSystem")]
+    [Table("XnAdminResource")]
     public class AdminResourceModel : OperationEntity
     {
         public string ModelName { get; set; }
@@ -28,11 +30,37 @@ namespace Plu.Platform.Domain.Admin
         public int ParentId { get; set; }
     }
 
-    [Table("XnAdminRoleSystemModel")]
+    [Table("XnAdminRoleResourceModel")]
     public class AdminRoleResourceModel : OperationEntity
     {
         public int RoleId { get; set; }
         public int ModelId { get; set; }
     }
 
+    public enum AdminType
+    {
+        /// <summary>
+        /// 超级管理员
+        /// </summary>
+        SuperAdmin = 1,
+        /// <summary>
+        /// 模块管理员
+        /// </summary>
+        //ModelAdmin = 2,
+        /// <summary>
+        /// 功能管理员
+        /// </summary>
+        FunctionAdmin = 3,
+    }
+
+    public class AdminRoleAuth
+    {
+        public int UserId { get; set; }
+
+        public int RoleId { get; set; }
+
+        public AdminType Type { get; set; }
+
+        public List<AdminResourceModel> Resource { get; set; }
+    }
 }
