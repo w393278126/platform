@@ -8,6 +8,17 @@ namespace Xn.Platform.Domain
 {
     public class BaseQueryModel
     {
+        /// <summary>
+        /// 设置默认值
+        /// </summary>
+        public BaseQueryModel()
+        {
+            PageSize = 10;
+            PageIndex = 1;
+            OrderBy = "Id";
+            ToSort = true;
+
+        }
         public int PageIndex { get; set; }
 
         public int PageSize { get; set; }
@@ -18,10 +29,10 @@ namespace Xn.Platform.Domain
         /// <summary>
         /// true:降序 false:升序
         /// </summary>
-        public bool ToSort { get; set;}
+        public bool ToSort { get; set; }
     }
-    
-    public class DataTablesPageRequest: BaseQueryModel
+
+    public class DataTablesPageRequest : BaseQueryModel
     {
         public int PageNumber
         {

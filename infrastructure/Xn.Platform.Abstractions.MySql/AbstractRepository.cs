@@ -457,7 +457,6 @@ namespace Xn.Platform.Data.MySql
             });
             return entities;
         }
-       
 
         /// <summary>
         /// 分页-同PagedEntity<T2> GetPagedEntity

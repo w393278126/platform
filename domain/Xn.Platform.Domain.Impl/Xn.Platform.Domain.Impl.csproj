@@ -41,6 +41,7 @@
     <Compile Include="Admin\VerifyCodeService.cs" />
     <Compile Include="BaseService.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="TourUser\TourUserService.cs" />
     <Compile Include="XnBaseService.cs" />
   </ItemGroup>
   <ItemGroup>

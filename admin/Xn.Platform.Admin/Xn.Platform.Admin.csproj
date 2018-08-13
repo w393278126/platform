@@ -210,6 +210,13 @@
     <Compile Include="Startup.cs" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="App_Data\t_order_orderhotel.sql" />
+    <Content Include="App_Data\t_order_ordermain.sql" />
+    <Content Include="App_Data\t_order_orderplane.sql" />
+    <Content Include="App_Data\t_order_orderticket.sql" />
+    <Content Include="App_Data\t_tour_user.sql" />
+    <Content Include="App_Data\t_user_address.sql" />
+    <Content Include="App_Data\t_user_invoicetitle.sql" />
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
     <Content Include="favicon.ico" />
@@ -703,9 +710,7 @@
     <Content Include="Views\TourUser\Edit.cshtml" />
     <Content Include="Views\Shared\_Paging.cshtml" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="App_Data\" />
-  </ItemGroup>
+  <ItemGroup />
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff" />
     <Content Include="fonts\glyphicons-halflings-regular.ttf" />

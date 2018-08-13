@@ -15,18 +15,47 @@ namespace Xn.Platform.Data.MySql.TourUser
         /// </summary>
         /// <param name="Id"></param>
         /// <returns></returns>
-        public TourUserModel GetInfo(int Id)
+        public TourUserModel GetInfo(string Id)
         {
             var parameter = new List<Tuple<string, string, object>>();
             parameter.Add(new Tuple<string, string, object>("Id", "=", Id));
             var info = GetList<TourUserModel>(0, 1, "id desc", parameter).FirstOrDefault();
             return info;
         }
-        public PagedEntity<TourUserModel> PageList(int pageIndex,int pageSize)
+        /// <summary>
+        /// 分页
+        /// </summary>
+        /// <param name="request"></param>
+        /// <returns></returns>
+        public PagedEntity<TourUserModel> PageList(TourUserRequest.PageResult request)
         {
-            var parameter=new List<Tuple<string, string, object>>();
-            var entity = GetPagedEntity<TourUserModel>(pageIndex, pageSize, "Id",parameter);
+            var parameter = new List<Tuple<string, string, object>>();
+            parameter.Add(new Tuple<string, string, object>("IsDelete", "=", 0));
+            if (request.ToSort)
+                request.OrderBy += " desc";
+            var entity = GetPagedEntity<TourUserModel>(request.PageIndex, request.PageSize, request.OrderBy, parameter);
             return entity;
+        }
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="entity"></param>
+        /// <returns></returns>
+        public TourUserModel AddOrUpdate(TourUserModel entity)
+        {
+            // var parameter = new List<Tuple<string, string, object>>();
+            return MakePersistent(entity);
+        }
+        /// <summary>
+        /// 逻辑删除
+        /// </summary>
+        /// <param name="Id"></param>
+        /// <returns></returns>
+        public int Delete(string Id)
+        {
+            var parameter = new List<Tuple<string, string, object>>();
+            parameter.Add(new Tuple<string, string, object>("Id", "=", Id));
+            return DeleteAnyStatus(parameter, true);
         }
     }
 }
