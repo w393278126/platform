@@ -1420,5 +1420,31 @@ namespace Xn.Platform.Core
 
 
         #endregion
+
+        #region 本地MySQL测试
+        private static string _connectionMySqlSportsEntitiesReadOnly;
+        public static string ConnectionMySqlSportsEntitiesReadOnly
+        {
+            get
+            {
+                if (string.IsNullOrEmpty(_connectionMySqlSportsEntitiesReadOnly))
+                {
+                    _connectionMySqlSportsEntitiesReadOnly = ConnSettingItems["MySqlSportsEntitiesReadOnly"].ConnectionString;
+                }
+                return _connectionMySqlSportsEntitiesReadOnly;
+            }
+
+        }
+        private static string _connectionMySqlSportsEntities;
+        public static string ConnectionMySqlSportsEntities
+        {
+            get
+            {
+                if (string.IsNullOrEmpty(_connectionMySqlSportsEntities))
+                    _connectionMySqlSportsEntities = ConnSettingItems["MySqlSportsEntities"].ConnectionString;
+                return _connectionMySqlSportsEntities;
+            }
+        }
+        #endregion
     }
 }
