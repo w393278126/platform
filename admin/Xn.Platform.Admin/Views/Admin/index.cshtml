@@ -30,7 +30,7 @@
                             <input type="text" name="code" required lay-verify="required" placeholder="验证码" autocomplete="off" class="layui-input">
                         </div>
                         <div class="layui-inline">
-                            <img class="verifyImg" onclick="this.src=this.src+'?c='+Math.random();" src="~/admin/GetValidateCode" />
+                            <img class="verifyImg" id="codeimg"  onclick="this.src=this.src+'?c='+Math.random();" src="~/admin/GetValidateCode" />
                         </div>
                     </div>
                     <div class="layui-form-item m-login-btn">
@@ -47,8 +47,6 @@
         </div>
     </div>
     <script src="../../Plugins/layui/layui.js" type="text/javascript" charset="utf-8"></script>
-    @*<script src="https://cdn.bootcss.com/jquery/2.2.3/jquery.slim.min.js"></script>*@
-    @*<script type="text/javascript" src="../Scripts/jquery.md5.js" charset="utf-8"></script>*@
     <script>
         layui.use(['form', 'layedit', 'laydate', 'jquery'], function () {
             var form = layui.form(),
@@ -67,6 +65,7 @@
                 verity: [/(.+){4}$/, '验证码必须是4位'],
 
             });
+
             var post_adduser = false;
             //监听提交
             form.on('submit(login)', function (data) {
@@ -92,6 +91,8 @@
                         }
                         else {
                             layer.msg("登陆失败", { icon: 5 });
+                            $('#codeimg').click();
+
                         }
 
                     },
@@ -99,6 +100,7 @@
                         post_adduser = false; //AJAX失败也需要将标志标记为可提交状态
                         layer.close(loading);
                         layer.msg("登陆出错", { icon: 5 });
+                        $('#codeimg').click();
                     }
                 });
                 return false;//只此一句
