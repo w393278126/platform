@@ -1,4 +1,4 @@
-﻿using Plu.Platform.Domain.TourUser;
+﻿using Xn.Platform.Domain.TourUser;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -7,6 +7,7 @@ using System.Threading.Tasks;
 using Xn.Platform.Abstractions.Domain;
 using Xn.Platform.Data.MySql.TourUser;
 using Xn.Platform.Domain;
+using Xn.Platform.Domain.TourUser;
 
 namespace Plu.Platform.Domain.Impl.TourUser
 {

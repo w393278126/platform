@@ -1,11 +1,11 @@
-﻿using Plu.Platform.Domain.Impl.TourUser;
-using Plu.Platform.Domain.TourUser;
+﻿using Xn.Platform.Domain.TourUser;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using Xn.Platform.Abstractions.Domain;
+using Plu.Platform.Domain.Impl.TourUser;
 
 namespace Xn.Platform.Admin.Controllers
 {

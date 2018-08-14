@@ -39,11 +39,10 @@
     <Compile Include="Admin\LoginService.cs" />
     <Compile Include="Admin\RoleResourceService.cs" />
     <Compile Include="Admin\ValidateCodeService.cs" />
-    <Compile Include="Admin\VerifyCodeService.cs" />
     <Compile Include="BaseService.cs" />
     <Compile Include="Order\OrderMainService.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="BaseService.cs" />
+    <Compile Include="TourUser\TourUserService.cs" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="Autofac, Version=3.5.0.0, Culture=neutral, PublicKeyToken=17863af14b0044da, processorArchitecture=MSIL">
