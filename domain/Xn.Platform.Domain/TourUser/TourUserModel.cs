@@ -161,7 +161,7 @@ namespace Xn.Platform.Domain.TourUser
     {
         public class PageResult: BaseQueryModel
         {
-           
+           public string username { get; set; }
         }
         
 

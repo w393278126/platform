@@ -14,7 +14,7 @@ namespace Xn.Platform.Domain
         public BaseQueryModel()
         {
             PageSize = 10;
-            PageIndex = 1;
+            PageIndex = 1; //当前页从0开始
             OrderBy = "Id";
             ToSort = true;
 
