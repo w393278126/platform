@@ -6,9 +6,11 @@ using System.Web;
 using System.Web.Mvc;
 using Xn.Platform.Abstractions.Domain;
 using Plu.Platform.Domain.Impl.TourUser;
+using Xn.Platform.Presentation.Admin.Models;
 
 namespace Xn.Platform.Admin.Controllers
 {
+    [AdministratorActionFilterAttribute]
     public class TourUserController : Controller
     {
         private static TourUserService tourUserService = new TourUserService();

@@ -32,33 +32,38 @@
                     <a href="javascript:;"><i class="iconfont">&#xe608;</i>用户管理</a>
                     <dl class="layui-nav-child">
                         <dd><a href="/touruser/Index"><span class="l-line"></span>用户列表</a></dd>
-                        <dd><a href="../Test/Index" data-url="article-list.html" data-id='3' data-text="权限管理"><span class="l-line"></span>权限管理</a></dd>
-                        <dd><a href="javascript:;" data-url="danye-list.html" data-id='9' data-text="身份信息"><span class="l-line"></span>身份信息</a></dd>
+                        @*<dd><a href="../Test/Index" data-url="article-list.html" data-id='3' data-text="权限管理"><span class="l-line"></span>权限管理</a></dd>
+                            <dd><a href="javascript:;" data-url="danye-list.html" data-id='9' data-text="身份信息"><span class="l-line"></span>身份信息</a></dd>*@
                     </dl>
                 </li>
                 <li class="layui-nav-item">
                     <a href="javascript:;"><i class="iconfont">&#xe604;</i>订单管理</a>
                 </li>
                 @*<li class="layui-nav-item">
-                    <a href="javascript:;"><i class="iconfont">&#xe60c;</i>订单管理</a>
-                </li>*@
+                        <a href="javascript:;"><i class="iconfont">&#xe60c;</i>订单管理</a>
+                    </li>*@
                 <li class="layui-nav-item">
                     <a href="javascript:;"><i class="iconfont">&#xe60a;</i>活动管理</a>
                 </li>
-                <li class="layui-nav-item">
-                    <a href="javascript:;" data-url="email.html" data-id='4' data-text="邮件系统"><i class="iconfont">&#xe603;</i>邮件系统</a>
-                </li>
                 @*<li class="layui-nav-item">
-                    <a href="javascript:;"><i class="iconfont">&#xe60d;</i>生成静态</a>
-                </li>
-                <li class="layui-nav-item">
-                    <a href="javascript:;"><i class="iconfont">&#xe600;</i>备份管理</a>
-                </li>*@
-                <li class="layui-nav-item">
-                    <a href="javascript:;" data-url="admin-info.html" data-id='5' data-text="个人信息"><i class="iconfont">&#xe606;</i>个人信息</a>
-                </li>
+                        <a href="javascript:;" data-url="email.html" data-id='4' data-text="邮件系统"><i class="iconfont">&#xe603;</i>邮件系统</a>
+                    </li>
+                    <li class="layui-nav-item">
+                        <a href="javascript:;"><i class="iconfont">&#xe60d;</i>生成静态</a>
+                    </li>
+                    <li class="layui-nav-item">
+                        <a href="javascript:;"><i class="iconfont">&#xe600;</i>备份管理</a>
+                    </li>
+                                <li class="layui-nav-item">
+                                    <a href="javascript:;" data-url="admin-info.html" data-id='5' data-text="个人信息"><i class="iconfont">&#xe606;</i>个人信息</a>
+                                </li>*@
                 <li class="layui-nav-item">
                     <a href="javascript:;" data-url="system.html" data-id='6' data-text="系统设置"><i class="iconfont">&#xe60b;</i>系统设置</a>
+                    <dl class="layui-nav-child">
+                        <dd><a href="javascript:;" data-url="article-list.html" data-id='3' data-text="权限管理"><span class="l-line"></span>权限管理</a></dd>
+                        <dd><a href="javascript:;" data-url="danye-list.html" data-id='9' data-text="角色管理"><span class="l-line"></span>角色管理</a></dd>
+                        <dd><a href="javascript:;" data-url="danye-list.html" data-id='9' data-text="模块管理"><span class="l-line"></span>模块管理</a></dd>
+                    </dl>
                 </li>
             </ul>
         </div>
@@ -98,10 +103,10 @@
         </div>
     </div>
     <script type="text/javascript">
-			var scope={
-				link:'./welcome.html'
-			}
+        var scope = {
+            link: './welcome.html'
+        }
     </script>
-  
+
 </body>
 </html>
