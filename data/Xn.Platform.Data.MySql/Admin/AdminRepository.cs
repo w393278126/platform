@@ -1,4 +1,4 @@
-﻿using Plu.Platform.Domain.Admin;
+﻿using Xn.Platform.Domain.Admin;
 using System;
 using System.Collections.Generic;
 using System.Linq;

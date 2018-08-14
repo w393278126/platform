@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 using Xn.Platform.Core.Data;
 using Xn.Platform.Domain;
 
-namespace Plu.Platform.Domain.Admin
+namespace Xn.Platform.Domain.Admin
 {
     [Table("XnAdminRole")]
     public class AdminRoleModel : OperationEntity
@@ -30,7 +30,7 @@ namespace Plu.Platform.Domain.Admin
         public int ParentId { get; set; }
     }
 
-    [Table("XnAdminRoleResourceModel")]
+    [Table("XnAdminRoleResource")]
     public class AdminRoleResourceModel : OperationEntity
     {
         public int RoleId { get; set; }

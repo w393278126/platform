@@ -4,7 +4,8 @@ using System.Web.Mvc;
 using Xn.Platform.Infrastructure.Auth;
 using Xn.Home.Auth;
 using Xn.Platform.Core.Extensions;
-using Plu.Platform.Domain.Impl.Admin;
+using Xn.Platform.Domain.Impl.Admin;
+using System.Web.Routing;
 
 namespace Xn.Platform.Presentation.Admin.Models
 {
@@ -21,12 +22,19 @@ namespace Xn.Platform.Presentation.Admin.Models
             XnUserPrincipal user = ctx.HttpContext.User as XnUserPrincipal;
             if (user == null)
             {
-                throw new ArgumentException("HttpContext.User is not PluUserPrincipal.");
+                throw new ArgumentException("HttpContext.User is not XnUserPrincipal.");
             }
 
             if (!user.Identity.IsAuthenticated)
             {
-                UnauthorizeHandler(ctx);
+                ctx.Result = new RedirectToRouteResult(
+                    new RouteValueDictionary
+                    {
+                    { "client", filterContext.RouteData.Values[ "client" ] },
+                    { "controller", "admin" },
+                    { "action", "index" },
+                    { "ReturnUrl", filterContext.HttpContext.Request.RawUrl }
+                    });
                 return;
             }
             var isAuthorized = false;

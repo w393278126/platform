@@ -9,14 +9,14 @@ using Xn.Platform.Core.Extensions;
 using Xn.Platform.Infrastructure.Web;
 using Xn.Platform.Domain.Admin;
 using Xn.Platform.Abstractions.Domain;
-using Plu.Platform.Domain.Impl.Admin;
+using Xn.Platform.Domain.Impl.Admin;
 
 namespace Xn.Platform.Admin.Controllers
 {
     public class AdminController : XnBaseController
     {
         private static LoginService loginService = new LoginService();
-
+        private static ValidateCodeService validateCodeService = new ValidateCodeService();
         // GET: Login
         public ActionResult Index()
         {
@@ -28,7 +28,7 @@ namespace Xn.Platform.Admin.Controllers
         {
             try
             {
-                if (string.IsNullOrEmpty(admin.UserName) || string.IsNullOrEmpty(admin.Password))
+                if (string.IsNullOrEmpty(admin.UserName) || string.IsNullOrEmpty(admin.Password)|| string.IsNullOrEmpty(admin.Code))
                 {
                     return Json(Result.Error(ResultCode.ParameterError));
                 }
@@ -38,6 +38,13 @@ namespace Xn.Platform.Admin.Controllers
             {
                 return Json(Result.Error(ResultCode.DefaultError));
             }
+        }
+
+        [AllowAnonymous]
+        public ActionResult GetValidateCode()
+        {
+            var bytes = validateCodeService.GetValidateCode();
+            return File(bytes, @"image/jpeg");
         }
     }
 

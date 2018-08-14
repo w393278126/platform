@@ -1,4 +1,4 @@
-﻿using Plu.Platform.Domain.TourUser;
+﻿using Xn.Platform.Domain.TourUser;
 using System;
 using System.Collections.Generic;
 using System.Linq;

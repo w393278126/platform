@@ -15,7 +15,7 @@ namespace Xn.Platform.Infrastructure.Auth
         static string _validationKey = ConfigSetting.ValidationKey;
         static string _encryptionKey = ConfigSetting.EncryptionKey;
 
-        static readonly PluAuthenticationHandler PluAuthenticationHandler = new PluAuthenticationHandler();
+        static readonly XnAuthenticationHandler PluAuthenticationHandler = new XnAuthenticationHandler();
 
         static long _lastUpdate = DateTime.MinValue.Ticks;
 
@@ -233,6 +233,33 @@ namespace Xn.Platform.Infrastructure.Auth
                 authCookieValue = cookie.Value;
             }
             return authCookieValue;
+        }
+
+        public static void SetValidateCookie(string token)
+        {
+            var cookie = new HttpCookie("ValidateCookieName", token)
+            {
+                HttpOnly = true,
+                Shareable = false
+            };
+            var host = HttpContext.Current.Request.Url.Host;
+            var domainParts = host.Split('.');
+            if (domainParts.Length > 2)
+            {
+                var domain = domainParts[domainParts.Length - 2] + "." + domainParts[domainParts.Length - 1];
+                cookie.Domain = domain;
+            }
+            HttpContext.Current.Response.SetCookie(cookie);
+        }
+
+        public static string GetValidateCookie()
+        {
+            var cookie = HttpContext.Current.Request.Cookies.Get("ValidateCookieName");
+            if (cookie == null || string.IsNullOrEmpty(cookie.Value))
+            {
+                return "";
+            }
+            return cookie.Value;
         }
     }
 }

@@ -651,6 +651,7 @@
     <Content Include="Plugins\lib\ueditor\ueditor.parse.min.js" />
     <Content Include="Scripts\ai.0.22.9-build00167.js" />
     <Content Include="Scripts\ai.0.22.9-build00167.min.js" />
+    <Content Include="Scripts\jquery.md5.js" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
     <Content Include="ApplicationInsights.config">
@@ -681,6 +682,10 @@
     <Content Include="Plugins\layui\font\iconfont.eot" />
     <Content Include="Plugins\layui\font\iconfont.ttf" />
     <Content Include="Plugins\layui\font\iconfont.woff" />
+    <Content Include="appSettings.dev.config" />
+    <Content Include="connectionStrings.dev.config" />
+    <Content Include="mongoSettings.dev.config" />
+    <Content Include="redisSettings.dev.config" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\jquery-1.10.2.js" />
     <Content Include="Scripts\jquery-1.10.2.min.js" />
@@ -721,11 +726,11 @@
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\..\domain\Xn.Platform.Domain.Impl\Xn.Platform.Domain.Impl.csproj">
-      <Project>{BC4B3FCB-6BCC-4396-9015-0D6A748B0551}</Project>
+      <Project>{bc4b3fcb-6bcc-4396-9015-0d6a748b0551}</Project>
       <Name>Xn.Platform.Domain.Impl</Name>
     </ProjectReference>
     <ProjectReference Include="..\..\domain\Xn.Platform.Domain\Xn.Platform.Domain.csproj">
-      <Project>{30CADA35-527B-4754-943F-84834D65ED27}</Project>
+      <Project>{30cada35-527b-4754-943f-84834d65ed27}</Project>
       <Name>Xn.Platform.Domain</Name>
     </ProjectReference>
     <ProjectReference Include="..\..\infrastructure\Xn.Platform.Abstractions.Domain\Xn.Platform.Abstractions.Domain.csproj">

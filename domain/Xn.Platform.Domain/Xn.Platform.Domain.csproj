@@ -7,8 +7,8 @@
     <ProjectGuid>{30CADA35-527B-4754-943F-84834D65ED27}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>Plu.Platform.Domain</RootNamespace>
-    <AssemblyName>Plu.Platform.Domain</AssemblyName>
+    <RootNamespace>Xn.Platform.Domain</RootNamespace>
+    <AssemblyName>Xn.Platform.Domain</AssemblyName>
     <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <SolutionDir Condition="$(SolutionDir) == '' Or $(SolutionDir) == '*Undefined*'">..\..\</SolutionDir>
@@ -51,7 +51,6 @@
   <ItemGroup>
     <Compile Include="Admin\AdminRoleResourceModel.cs" />
     <Compile Include="Admin\AdminUserModel.cs" />
-    <Compile Include="Admin\LoginModel.cs" />
     <Compile Include="QueryModel\BaseQueryModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="TourUser\TourUserModel.cs" />

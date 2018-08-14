@@ -64,7 +64,8 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Cache\ListHandler.cs" />
-    <Compile Include="Login\PluAuthenticationHandler.cs" />
+    <Compile Include="Login\XnValidateCodeHandler.cs" />
+    <Compile Include="Login\XnAuthenticationHandler.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

@@ -11,6 +11,7 @@ namespace Xn.Platform.Abstractions.Domain
         UserNotExist = 11,
         ParameterError = 12,
         ExceptionError = 13,
+        ValidateCodeError = 13,
         DefaultError = 100000,
 
         // 用户模块相关错误 100001-199999 

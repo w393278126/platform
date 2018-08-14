@@ -1,14 +1,16 @@
-﻿using System.Web.Mvc;
+using Autofac.Integration.Mvc;
+using Logging.Client;
+using Xn.Platform.Domain.Impl;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Autofac.Integration.Mvc;
+using System.Web;
+using System.Web.Mvc;
+using System.Web.Routing;
 
-namespace Plu.Platform.Domain.Impl
+namespace Xn.Platform.Domain.Impl
 {
-    public class BaseService
+    public class BaseService 
     {
         protected T GetService<T>()
         {

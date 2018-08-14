@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 using Xn.Platform.Core.Data;
 using Xn.Platform.Domain;
 
-namespace Plu.Platform.Domain.Admin
+namespace Xn.Platform.Domain.Admin
 {
     [Table("XnAdminUser")]
     public class AdminUserModel : OperationEntity
@@ -15,7 +15,7 @@ namespace Plu.Platform.Domain.Admin
         public string PassWord { get; set; }
 
         public string Phone { get; set; }
-        public string RealNamev { get; set; }
+        public string RealName { get; set; }
 
         public string NickName { get; set; }
 
@@ -33,5 +33,19 @@ namespace Plu.Platform.Domain.Admin
 
         public string IpAddress { get; set; }
         public string ICon { get; set; }
+    }
+
+    /// <summary>
+    /// 登录实体对象
+    /// </summary>
+    public class LoginModel
+    {
+        public string UserName { get; set; }
+
+        public string Password { get; set; }
+
+        public string ReturnUrl { get; set; }
+
+        public string Code { get; set; }
     }
 }
