@@ -17,7 +17,7 @@
                     <button class="layui-btn layui-btn-small layui-btn-warm listOrderBtn hidden-xs" data-url="/admin/category/listorderall.html"><i class="iconfont">&#xe656;</i></button>
                 </div>
                 <div class="layui-inline">
-                    <input type="text" name="title" placeholder="请输入用户名称" autocomplete="off" class="layui-input">
+                    <input type="text" name="username" id="username" placeholder="请输入用户名称" autocomplete="off" value="@ViewBag.UserName" class="layui-input">
                 </div>
                 <button class="layui-btn layui-btn-normal" lay-submit="search">搜索</button>
             </div>
@@ -95,12 +95,15 @@
             laypage({
                 cont: 'pageDiv'
                 , curr: parseInt('@ViewBag.PageIndex')
-                , pages: @Model.TotalItems/2 //得到总页数
-                , groups: 5
+                , pages: @Math.Ceiling((decimal)Model.TotalItems / (int)ViewBag.PageSize) // 得到总页数
                 , jump: function (obj, first) {
                     var curr = obj.curr;
                     if (!first) {
-                       location.href = "/TourUser/Index?pageIndex=" + curr;
+                        var username = document.getElementById("username").value;
+                        var url = "/TourUser/Index?pageIndex=" + curr+"&pageSize="+@ViewBag.PageSize ;
+                        if (username != null && username != undefined)
+                            url += "&username=" + username;
+                        location.href = url;
                     }
                 }
             });

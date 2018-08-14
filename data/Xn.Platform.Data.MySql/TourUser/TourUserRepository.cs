@@ -37,6 +37,8 @@ namespace Xn.Platform.Data.MySql.TourUser
         {
             var parameter = new List<Tuple<string, string, object>>();
             parameter.Add(new Tuple<string, string, object>("status", "=", 1));
+            if (request.username != null)
+                parameter.Add(new Tuple<string, string, object>("username", "like", string.Concat("%", request.username + "%")));
             if (request.ToSort)
                 request.OrderBy += " desc";
 

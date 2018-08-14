@@ -13,14 +13,19 @@ namespace Xn.Platform.Admin.Controllers
     {
         private static TourUserService tourUserService = new TourUserService();
         // GET: TourUsers
-        public ActionResult Index(int pageIndex = 1, int pageSize = 2)
+        public ActionResult Index(int pageIndex = 1, int pageSize = 10)
         {
+            var userName = Request.Params["username"];
             var result = tourUserService.PageList(new TourUserRequest.PageResult
             {
                 PageSize = pageSize,
-                PageIndex = pageIndex
+                PageIndex = pageIndex,
+                username = userName,
+                 OrderBy= "modify_time"
             });
             ViewBag.PageIndex = pageIndex;
+            ViewBag.PageSize = pageSize;
+            ViewBag.UserName = userName;
             return View(result.Data);
         }
 
