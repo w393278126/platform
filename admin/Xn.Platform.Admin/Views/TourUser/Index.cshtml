@@ -1,5 +1,5 @@
 ﻿
-@using Plu.Platform.Domain.TourUser;
+@using Xn.Platform.Domain.TourUser;
 @using Xn.Platform.Domain;
 @model PagedEntity<TourUserModel>
 @{
@@ -43,14 +43,13 @@
                         <th>性别</th>
                         <th>真实姓名</th>
                         <th>手机号码</th>
+                        <th>QQ</th>
                         <th>省</th>
                         <th>市</th>
-                        <th>区</th>
                         <th>地址</th>
                         <th>星力值</th>
                         <th>星牛币</th>
                         <th>注册时间</th>
-                        <th>状态</th>
                         <th>操作</th>
                     </tr>
                 </thead>
@@ -58,25 +57,24 @@
                     @foreach (var item in Model.Items)
                     {
                         <tr id='node-@item.id' class="parent collapsed">
-                            <td><img src="~/Img/head/timg.jpg" width="40" height="40" /></td>
+                            <td><img src="@item.picture_url" width="40" height="40" /></td>
                             <td class="hidden-xs">@item.id</td>
                             <td class="hidden-xs">@item.username</td>
                             <td>@item.nick_name</td>
                             <td>@item.sex</td>
                             <td class="hidden-xs">@item.real_name</td>
                             <td>@item.mobile</td>
+                            <td>@item.qq_number</td>
                             <td>@item.prvinice</td>
                             <td>@item.city</td>
-                            <td>浦东新区</td>
-                            <td>华夏中路星月金融湾21栋101</td>
+                            <td>@item.address</td>
                             <td>100</td>
                             <td>27.12</td>
                             <td>@item.create_time</td>
-                            <td><i class="layui-icon" style="font-size: 25px; color:green;">&#x1005;</i></td>
                             <td>
                                 <div class="layui-inline">
-                                    <button class="layui-btn layui-btn-mini layui-btn-normal  go-btn" data-id="1" data-url="/tourUsers/Edit?Id=1"><i class="layui-icon">&#xe642;</i></button>
-                                    <button class="layui-btn layui-btn-mini layui-btn-danger del-btn" data-id="1" data-url="menu-add.html"><i class="layui-icon">&#xe640;</i></button>
+                                    <button class="layui-btn layui-btn-mini layui-btn-normal  go-btn" data-id="@item.id" data-url="@Url.Action("Edit","TourUser")"><i class="layui-icon">&#xe642;</i></button>
+                                    <button class="layui-btn layui-btn-mini layui-btn-danger del_btn" data-id="@item.id" data-url="@Url.Action("Delete","TourUser")"><i class="layui-icon">&#xe640;</i></button>
                                 </div>
                             </td>
                         </tr>
@@ -89,8 +87,11 @@
 
     </div>
     <script>
-        layui.use(['laypage', 'jquery', 'layer'], function () {
-            var laypage = layui.laypage;
+        layui.use(['form', 'laypage', 'jquery', 'layer', 'element','dialog'], function () {
+            var laypage = layui.laypage,
+                layer = layui.layer,
+                $ = layui.jquery,
+                dialog = layui.dialog;
             //调用分页
             laypage({
                 cont: 'pageDiv'
@@ -107,7 +108,33 @@
                     }
                 }
             });
+            //列表删除
+            $('.del_btn').click(function () {
+                var url = $(this).attr('data-url');
+                var id = $(this).attr('data-id');
+              dialog.confirm({
+                    message: '您确定要进行删除吗？',
+                  success: function () {
+                      layer.closeAll('dialog');  //加入这个信息点击确定 会关闭这个消息框
+                        $.ajax({
+                            type: "post",
+                            url: url,
+                            data: { "Id": id },
+                            dataType: "json",
+                            success: function (obj) {
+                                if (obj.Code == 0) {
+                                    alert("删除成功");
+                                    location.reload();
+                                } else {
+                                    alert("删除失败，请重试");
+                                }
 
+                            }
+                        });
+                    }
+                })
+                return false;
+            });
 
 
         });
