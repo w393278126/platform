@@ -198,6 +198,7 @@
     <Compile Include="App_Start\Startup.Auth.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\AdminController.cs" />
+    <Compile Include="Controllers\OrderController.cs" />
     <Compile Include="Controllers\TourUserController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
@@ -715,6 +716,7 @@
     <Content Include="Views\TourUser\Index.cshtml" />
     <Content Include="Views\TourUser\Edit.cshtml" />
     <Content Include="Views\Shared\_Paging.cshtml" />
+    <Content Include="Views\Order\Index.cshtml" />
   </ItemGroup>
   <ItemGroup />
   <ItemGroup>
