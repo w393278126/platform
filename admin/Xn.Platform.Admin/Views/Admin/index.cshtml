@@ -47,10 +47,11 @@
         </div>
     </div>
     <script src="../../Plugins/layui/layui.js" type="text/javascript" charset="utf-8"></script>
+    @*<script src="../../Plugins/js/common.js" type="text/javascript" charset="utf-8"></script>*@
     <script>
         layui.use(['form', 'layedit', 'laydate', 'jquery'], function () {
             var form = layui.form(),
-                layer = layui.layer;
+                layer = layui.layer,
                 $ = layui.jquery;
 
 
@@ -62,7 +63,7 @@
                     }
                 },
                 password: [/(.+){6,12}$/, '密码必须6到12位'],
-                verity: [/(.+){4}$/, '验证码必须是4位'],
+                codeimg: [/(.+){4}$/, '验证码必须是4位'],
 
             });
 
@@ -72,7 +73,7 @@
                 if (post_adduser) return;
                 post_adduser = true;
                 var UserName = data.field.title;
-                var Password = data.field.password;
+                var Password =data.field.password;
                 var Code = data.field.code;
                 var loading = layer.load(1);
 

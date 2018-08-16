@@ -1,7 +1,8 @@
 layui.config({
 	base: '../../Plugins/js/module/'
 }).extend({
-	dialog: 'dialog',
+    dialog: 'dialog',
+    password: 'password',
 });
 
 layui.use(['form', 'jquery', 'laydate', 'layer', 'laypage', 'dialog',   'element'], function() {

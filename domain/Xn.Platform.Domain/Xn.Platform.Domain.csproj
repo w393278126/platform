@@ -51,6 +51,7 @@
   <ItemGroup>
     <Compile Include="Admin\AdminRoleResourceModel.cs" />
     <Compile Include="Admin\AdminUserModel.cs" />
+    <Compile Include="Admin\SystemModel.cs" />
     <Compile Include="Order\OrderHotelModel.cs" />
     <Compile Include="Order\OrderMainModel.cs" />
     <Compile Include="Order\OrderPlaneModel.cs" />

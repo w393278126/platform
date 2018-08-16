@@ -254,6 +254,7 @@
     <Content Include="Plugins\images\logo.png" />
     <Content Include="Plugins\js\common.js" />
     <Content Include="Plugins\js\main.js" />
+    <Content Include="Plugins\js\module\password.js" />
     <Content Include="Plugins\js\module\dialog.js" />
     <Content Include="Plugins\js\module\formate.js" />
     <Content Include="Plugins\js\module\tool.js" />
@@ -715,6 +716,7 @@
     <Content Include="Views\TourUser\Index.cshtml" />
     <Content Include="Views\TourUser\Edit.cshtml" />
     <Content Include="Views\Shared\_Paging.cshtml" />
+    <Content Include="Views\Admin\Role.cshtml" />
   </ItemGroup>
   <ItemGroup />
   <ItemGroup>

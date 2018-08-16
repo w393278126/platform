@@ -77,7 +77,7 @@ namespace Xn.Platform.Domain.Impl.Admin
             return LocalCache.Current.GetOrSet("Admin_GetAuthAllCache", () => GetAuthAll(), 5.Minutes());
         }
         /// <summary>
-        /// 模块访问权限
+        /// 是否具备功能访问权限
         /// </summary>
         /// <param name="userId"></param>
         /// <param name="controller"></param>
@@ -100,6 +100,16 @@ namespace Xn.Platform.Domain.Impl.Admin
             }
             return false;
         }
+
+        /// <summary>
+        /// 获取指定用户的访问权限
+        /// </summary>
+        /// <returns></returns>
+        public AdminRoleAuth GetAuthByUserId(int userId)
+        {
+            return GetAuthAllCache()?.First(o => o.UserId == userId);
+        }
+
     }
 
 }

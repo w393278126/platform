@@ -11,7 +11,7 @@ using Xn.Platform.Infrastructure.Auth;
 
 namespace Xn.Platform.Domain.Impl.Admin
 {
-    public class LoginService
+    public class AdminService
     {
         private static AdminRepository adminRepository = new AdminRepository();
         private static XnValidateCodeHandler xnValidateCodeHandler = new XnValidateCodeHandler();
@@ -39,6 +39,11 @@ namespace Xn.Platform.Domain.Impl.Admin
             }
             //将用户在token 写入cookie
             XnAuthentication.SetAuthCookie(admin.Id.ToString());
+            return Result.Success();
+        }
+
+        public ResultWithCodeEntity Add(AdminUserModel admin)
+        {
             return Result.Success();
         }
     }
