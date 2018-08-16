@@ -1,0 +1,55 @@
+﻿
+<body>
+    <div class="page-content-wrap">
+
+
+        <div class="demoTable">
+            搜索ID：
+            <div class="layui-inline">
+                <input class="layui-input" name="id" id="demoReload" autocomplete="off">
+            </div>
+            <button class="layui-btn" data-type="reload">搜索</button>
+        </div>
+        <div class="layui-form" id="table-list">
+            <table class="layui-hide" id="orderList" lay-filter="order"></table>
+        </div>
+
+    </div>
+    <script type="text/html" id="toolTpl">
+        <button class="layui-btn layui-btn-mini layui-btn-normal  go-btn" data-id="" data-url=""><i class="layui-icon">&#xe642;</i></button>
+        <button class="layui-btn layui-btn-mini layui-btn-danger del_btn" data-id="" data-url=""><i class="layui-icon">&#xe640;</i></button>
+    </script>
+    <script>
+        layui.use('table', function () {
+            var table = layui.table,
+                $ = layui.$;
+
+            //方法级渲染
+            table.render({
+                elem: '#orderList'
+                , url: @Url.Action("MainOrder","Order")
+                , cols: [[
+                    { checkbox: true, fixed: true }
+                    , { field: '', title: '订单ID', width: 80, sort: true, fixed: true }
+                    , { field: '', title: '交易订单号', width: 80 }
+                    , { field: '', title: '交易流水号', width: 80 }
+                    , { field: '', title: '订单类型', width: 80, sort: true }
+                    , { field: '', title: "单价" }
+                    , { field: '', title: '数量', width: 80 }
+                    , { field: '', title: '订单总价' }
+                    , { field: '', title: '支付金额' }
+                    , { field: '', title: '下单人' }
+                    , { field: '', title: '联系方式' }
+                    , { field: '', title: '下单时间' }
+                    , { field: '', title: '状态' }
+                    , { field: '', title: '操作', templet: '#toolTpl', unresize: true }
+
+                ]]
+                , id: 'testReload'
+                , page: true
+                , height: 315
+            });
+
+        });
+    </script>
+</body>

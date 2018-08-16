@@ -4,9 +4,8 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Xn.Platform.Core.Data;
-using Xn.Platform.Domain;
 
-namespace Plu.Platform.Domain.Order
+namespace Xn.Platform.Domain.Order
 {
     [Table("t_order_orderhotel")]
    public class OrderHotelModel

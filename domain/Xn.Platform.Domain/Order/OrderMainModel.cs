@@ -4,9 +4,8 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Xn.Platform.Core.Data;
-using Xn.Platform.Domain;
 
-namespace Plu.Platform.Domain.Order
+namespace Xn.Platform.Domain.Order
 {
     [Table("t_order_ordermain")]
     public class OrderMainModel
@@ -298,6 +297,21 @@ namespace Plu.Platform.Domain.Order
         public string mark20 { get; set; }
     }
 
+    public class OrderMainResponse
+    {
+        public class PageResponse:OrderMainModel
+        {
+            /// <summary>
+            /// 用户名
+            /// </summary>
+            public string userName { get; set; }
+            /// <summary>
+            /// 联系方式
+            /// </summary>
+            public string mobile { get; set; }
+        }
+    }
+
     /// <summary>
     /// 主订单查询条件
     /// </summary>
@@ -308,7 +322,33 @@ namespace Plu.Platform.Domain.Order
         /// </summary>
         public class PageRequest: BaseQueryModel
         {
-
+            /// <summary>
+            /// 用户名
+            /// </summary>
+            public string userName { get; set; }
+            /// <summary>
+            /// 联系方式
+            /// </summary>
+            public string mobile { get; set; }
+            /// <summary>
+            /// 订单ID
+            /// </summary>
+            public string orderId { get; set; }
+            /// <summary>
+            /// 订单类型
+            /// 1、机票 2、酒店 3、签证4、门票
+            /// </summary>
+            public int orderType { get; set; }
+            /// <summary>
+            /// 支付时间
+            /// </summary>
+            public string SpayDate { get; set; }
+            public string EpayDate { get; set; }
+            /// <summary>
+            /// 下单时间
+            /// </summary>
+            public string SaddDate { get; set; }
+            public string EaddDate { get; set; }
         }
     }
 }

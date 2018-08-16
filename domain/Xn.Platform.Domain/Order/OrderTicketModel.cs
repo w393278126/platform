@@ -5,7 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using Xn.Platform.Core.Data;
 
-namespace Plu.Platform.Domain.Order
+namespace Xn.Platform.Domain.Order
 {
     [Table("t_order_orderticket")]
     public class OrderTicketModel

@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 using Xn.Platform.Abstractions.Domain;
 using Xn.Platform.Data.MySql.TourUser;
 using Xn.Platform.Domain;
-using Xn.Platform.Domain.TourUser;
+using System.Reflection;
 
 namespace Plu.Platform.Domain.Impl.TourUser
 {
@@ -72,26 +72,80 @@ namespace Plu.Platform.Domain.Impl.TourUser
         /// </summary>
         /// <param name="entity"></param>
         /// <returns></returns>
-        public ResultWithCodeEntity<TourUserModel> AddMsg(TourUserModel entity)
+        public ResultWithCodeEntity AddOrEdit(TourUserModel entity)
         {
             try
             {
-                var item = tourUserRepository.AddOrUpdate(entity);
-                return new ResultWithCodeEntity<TourUserModel>
+                int result = 0;
+                if (!string.IsNullOrEmpty(entity.id))
                 {
-                    Code = ResultCode.Success,
-                    Data = item
-                };
+                    var detail = tourUserRepository.GetInfo(entity.id);
+
+                    ///赋值
+                    PropertyInfo[] propertys = entity.GetType().GetProperties();
+                    foreach (var item in propertys)
+                    {
+                        var val = item.GetValue(entity);
+                        //不为空的都赋值
+                        if (val != null)
+                        {
+                            foreach (var item1 in detail.GetType().GetProperties())
+                            {
+                                if (item1.Name == item.Name)
+                                {
+                                    item1.SetValue(detail, val);
+                                    break;
+                                }
+                            }
+                        }
+                    }
+                    result = tourUserRepository.Update(detail);
+                }
+                else
+                {
+                    entity.id = DateTime.Now.ToString("yyyyMMddHHmmss") + new Random(100).Next(100, 999);
+                    entity.status = "1";
+                    result = tourUserRepository.Add(entity);
+                }
+                if (result > 0)
+                    return new ResultWithCodeEntity { Code = ResultCode.Success };
+                else
+                    return new ResultWithCodeEntity { Code = ResultCode.DefaultError };
+
             }
-            catch (Exception)
+            catch (Exception ex)
             {
-                return new ResultWithCodeEntity<TourUserModel>
+                return new ResultWithCodeEntity
                 {
                     Code = ResultCode.ExceptionError,
-                    Data = new TourUserModel()
                 };
             }
 
+        }
+        /// <summary>
+        /// 通过ID删除
+        /// </summary>
+        /// <param name="Id"></param>
+        /// <returns></returns>
+        public ResultWithCodeEntity Delete(string Id)
+        {
+            try
+            {
+                var result = tourUserRepository.Delete(Id);
+                if (result > 0)
+                    return new ResultWithCodeEntity { Code = ResultCode.Success };
+                else
+                    return new ResultWithCodeEntity { Code = ResultCode.DefaultError };
+
+            }
+            catch (Exception ex)
+            {
+
+                return new ResultWithCodeEntity
+                {
+                    Code = ResultCode.ExceptionError,
+                };
+            }
         }
     }
 }
