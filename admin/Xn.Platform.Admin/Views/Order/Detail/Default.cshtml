@@ -1,0 +1,71 @@
+﻿@using Xn.Platform.Domain.Order;
+@model OrderMainResponse.PageResponse
+@{
+    ViewBag.Title = "订单详情";
+    Layout = "~/Views/Shared/_LayoutDialog.cshtml";
+}
+<body>
+    <table class="layui-table">
+        <colgroup>
+            <col width="150" />
+        </colgroup>
+        <thead><tr><td colspan="2">默认订单</td></tr></thead>
+        <tbody>
+            <tr>
+                <td style="text-align:right">订单号：</td>
+                <td>@Model.orderID</td>
+            </tr>
+            <tr>
+                <td style="text-align:right">交易流水号：</td>
+                <td>@Model.channelID</td>
+            </tr>
+            <tr>
+                <td style="text-align:right">数量：</td>
+                <td>@Model.num</td>
+            </tr>
+            <tr>
+                <td style="text-align:right">订单总金额：</td>
+                <td>@Model.orderAmount</td>
+            </tr>
+            <tr>
+                <td style="text-align:right">支付金额：</td>
+                <td>@Model.payAmount</td>
+            </tr>
+            <tr>
+                <td style="text-align:right">下单人：</td>
+                <td>@Model.userName</td>
+            </tr>
+            <tr>
+                <td style="text-align:right">联系方式：</td>
+                <td>@Model.mobile</td>
+            </tr>
+            <tr>
+                <td style="text-align:right">下单时间：</td>
+                <td>@Model.addDate</td>
+            </tr>
+            <tr>
+                <td style="text-align:right">订单状态：</td>
+                <td>@Model.states</td>
+            </tr>
+        </tbody>
+        <tfoot>
+            <tr>
+                <td colspan="2" style="text-align:center;">  <button id="btn_close" class="layui-btn layui-btn-radius "> 关闭 </button></td>
+            </tr>
+        </tfoot>
+    </table>
+
+</body>
+<script>
+    layui.use(['form', 'laypage', 'jquery', 'layer', 'element', 'dialog'], function () {
+
+        var layer = layui.layer;
+        var $ = layui.jquery;
+        $("#btn_close").click(function () {
+            var index = parent.layer.getFrameIndex(window.name);
+            parent.layer.close(index);
+            window.parent.location.reload();//刷新父页面
+        });
+
+    });
+</script>

@@ -25,7 +25,7 @@ layui.use(['form', 'jquery', 'laydate', 'layer', 'laypage', 'dialog',   'element
 	$('.addBtn').click(function() {
 		var url=$(this).attr('data-url');
 		//将iframeObj传递给父级窗口,执行操作完成刷新
-		parent.page("菜单添加", url, iframeObj, w = "700px", h = "620px");
+		parent.page("菜单添加", url, iframeObj, w = "720px", h = "620px");
 		return false;
 
 	}).mouseenter(function() {

@@ -191,6 +191,14 @@ namespace Xn.Platform.Domain.Order
 
         public string credit { get; set; }
     }
+    public class OrderHotelResponse
+    {
+        public class OrderHotel:OrderHotelModel
+        {
+            public string userName { get; set; }
+            public string model { get; set; }
+        }
+    }
 
    
 }

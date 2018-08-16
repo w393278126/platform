@@ -199,6 +199,7 @@
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\AdminController.cs" />
     <Compile Include="Controllers\OrderController.cs" />
+    <Compile Include="Controllers\OrderPlaneController.cs" />
     <Compile Include="Controllers\TourUserController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
@@ -207,6 +208,7 @@
     <Compile Include="Models\AdministratorActionFilterAttribute.cs" />
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\ManageViewModels.cs" />
+    <Compile Include="Models\OrderPlaneModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Startup.cs" />
   </ItemGroup>
@@ -715,8 +717,13 @@
     <Content Include="Views\Admin\index.cshtml" />
     <Content Include="Views\TourUser\Index.cshtml" />
     <Content Include="Views\TourUser\Edit.cshtml" />
-    <Content Include="Views\Shared\_Paging.cshtml" />
+    <Content Include="Views\Shared\_LayoutDialog.cshtml" />
     <Content Include="Views\Order\Index.cshtml" />
+    <Content Include="Views\Order\Detail\Hotel.cshtml" />
+    <Content Include="Views\Order\Detail\Default.cshtml" />
+    <Content Include="Views\Order\Detail\Plane.cshtml" />
+    <Content Include="Views\Order\Detail\Ticket.cshtml" />
+    <Content Include="Views\OrderPlane\RefundTicket.cshtml" />
   </ItemGroup>
   <ItemGroup />
   <ItemGroup>

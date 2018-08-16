@@ -1,0 +1,116 @@
+﻿@using Xn.Platform.Domain.Order;
+@model List<OrderPlaneResponse.OrderPlan>
+@{
+    /**/
+
+    ViewBag.Title = "订单详情";
+    Layout = "~/Views/Shared/_LayoutDialog.cshtml";
+}
+<body>
+    <table class="layui-table">
+        <thead>
+            <tr>
+                <td colspan="2">用户信息</td>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td style="text-align:right">用户名：</td>
+                <td>@Model.FirstOrDefault().userName</td>
+            </tr>
+            <tr>
+                <td style="text-align:right">联系方式：</td>
+                <td>@Model.FirstOrDefault().mobile</td>
+            </tr>
+        </tbody>
+
+    </table>
+    @foreach (var item in Model)
+    {
+        <table class="layui-table">
+            <colgroup>
+                <col width="150" />
+            </colgroup>
+            <thead>
+                <tr><td colspan="2" style="text-align:center">订单号:@item.orderID</td></tr>
+            </thead>
+            <tbody>
+
+
+                <tr>
+                    <td style="text-align:right">航空公司：</td>
+                    <td>@item.airways</td>
+                </tr>
+                <tr>
+                    <td style="text-align:right">航班号：</td>
+                    <td>@item.flightNumber</td>
+                </tr>
+                <tr>
+                    <td style="text-align:right">行程：</td>
+                    <td><b>@item.startAddr</b>(@item.startAirport) - <b>@item.destAddr</b>(@item.destAirport) </td>
+                </tr>
+                <tr>
+                    <td style="text-align:right">日期：</td>
+                    <td><span>@item.startDate</span> - <span>@item.destDate</span></td>
+                </tr>
+                <tr>
+                    <td style="text-align:right">价格：</td>
+                    <td>@item.price</td>
+                </tr>
+                <tr>
+                    <td style="text-align:right">乘客姓名：</td>
+                    <td>@item.custName</td>
+                </tr>
+                <tr>
+                    <td style="text-align:right">身份证号：</td>
+                    <td>@item.idCardNo</td>
+                </tr>
+                <tr>
+                    <td style="text-align:right">订单状态：</td>
+                    <td>
+                        @item.statusVal
+                    </td>
+                </tr>
+            </tbody>
+            <tfoot>
+                <tr>
+                    <td colspan="2" style="text-align:center;">
+                        @if (item.states == 1)
+                        {
+                            <button id="btn_out" class="layui-btn layui-btn-normal " style="width:150px">出票 </button>
+                        }
+                        else if (item.states == 2)
+                        {
+                            <button id="btn_return" class="layui-btn layui-btn-warm " style="width:150px" data-url="/orderplane/refundticket?id=@item.id">退票 </button>
+                        }
+
+
+                    </td>
+                </tr>
+            </tfoot>
+        </table>
+    }
+
+
+
+</body>
+<script>
+    layui.use(['form', 'laypage', 'jquery', 'layer', 'element', 'dialog'], function () {
+
+        var layer = layui.layer;
+        var $ = layui.jquery;
+        $("#btn_close").click(function () {
+            var index = parent.layer.getFrameIndex(window.name);
+            parent.layer.close(index);
+            window.parent.location.reload();//刷新父页面
+        });
+
+        $("#btn_return").click(function () {
+            var iframeObj = $(window.frameElement).attr('name');
+            var url = $(this).attr('data-url');
+            //将iframeObj传递给父级窗口,执行操作完成刷新
+            parent.page("退票详情", url, iframeObj, w = "700px", h = "620px");
+            return false;
+        });
+    });
+</script>

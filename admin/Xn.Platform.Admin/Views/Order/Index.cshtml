@@ -1,55 +1,147 @@
-﻿
+﻿@using Xn.Platform.Domain.Order;
+@using Xn.Platform.Domain;
+@model PagedEntity<OrderMainResponse.PageResponse>
+@{
+    ViewBag.Title = "主订单列表";
+    Layout = "~/Views/Shared/_LayoutPage.cshtml";
+}
 <body>
     <div class="page-content-wrap">
 
 
-        <div class="demoTable">
-            搜索ID：
-            <div class="layui-inline">
-                <input class="layui-input" name="id" id="demoReload" autocomplete="off">
+        <form class="layui-form" action="">
+            <div class="layui-form-item">
+                <div class="layui-inline tool-btn">
+                    <button class="layui-btn layui-btn-small layui-btn-normal go-btn hidden-xs" data-id="0" data-url="@Url.Action("Edit","TourUser")"><i class="layui-icon">&#xe654;</i></button>
+                    <button class="layui-btn layui-btn-small layui-btn-warm listOrderBtn hidden-xs" data-url="/admin/category/listorderall.html"><i class="iconfont">&#xe656;</i></button>
+                </div>
+                <div class="layui-inline">
+                    <input type="text" name="username" id="username" placeholder="请输入用户名称" autocomplete="off" value="@ViewBag.UserName" class="layui-input">
+                   
+                </div>
+                <button class="layui-btn layui-btn-normal" lay-submit="search">搜索</button>
             </div>
-            <button class="layui-btn" data-type="reload">搜索</button>
-        </div>
+        </form>
+
         <div class="layui-form" id="table-list">
-            <table class="layui-hide" id="orderList" lay-filter="order"></table>
+            <table class="layui-table" lay-skin="line">
+                <colgroup>
+                    <col width="50">
+                    <col>
+                    <col width="100">
+                    <col width="100">
+                    <col>
+                    <col width="100">
+                    <col width="130">
+                </colgroup>
+                <thead>
+                    <tr>
+                        <th>订单ID</th>
+                        <th class="hidden-xs">订单号</th>
+                        <th>交易流水号</th>
+                        <th>订单类型</th>
+                        <th>数量</th>
+                        <th>订单总金额</th>
+                        <th>支付金额</th>
+                        <th>下单人</th>
+                        <th>联系方式</th>
+                        <th>下单时间</th>
+                        <th>状态</th>
+                        <th>操作</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var item in Model.Items)
+                    {
+                        <tr id='node-@item.id' class="parent collapsed">
+                            <td>@item.id</td>
+                            <td>@item.orderID</td>
+                            <td class="hidden-xs">@item.channelID</td>
+                            <td class="hidden-xs">@item.orderTypeName</td>
+                            <td>@item.num</td>
+                            <td>@item.orderAmount</td>
+                            <td class="hidden-xs">@item.payAmount</td>
+                            <td>@item.userName</td>
+                            <td>@item.mobile</td>
+                            <td>@item.addDate</td>
+                            <td>@item.states</td>
+                            <td>
+                                <div class="layui-inline">
+                                    <button class="layui-btn layui-btn-mini layui-btn-normal detail_btn" data-url="/order/detail?orderId=@item.orderID&type=@item.orderType"><i class="layui-icon">&#xe63c;</i></button>
+                                    <button class="layui-btn layui-btn-mini layui-btn-normal  go-btn" data-id="@item.id" data-url="@Url.Action("Edit","Order")"><i class="layui-icon">&#xe642;</i></button>
+                                    <button class="layui-btn layui-btn-mini layui-btn-danger del_btn" data-id="@item.id" data-url="@Url.Action("Delete","Order")"><i class="layui-icon">&#xe640;</i></button>
+                                </div>
+                            </td>
+                        </tr>
+                    }
+
+                </tbody>
+            </table>
+            <div id="pageDiv" style="text-align:right"></div>
         </div>
 
     </div>
-    <script type="text/html" id="toolTpl">
-        <button class="layui-btn layui-btn-mini layui-btn-normal  go-btn" data-id="" data-url=""><i class="layui-icon">&#xe642;</i></button>
-        <button class="layui-btn layui-btn-mini layui-btn-danger del_btn" data-id="" data-url=""><i class="layui-icon">&#xe640;</i></button>
-    </script>
     <script>
-        layui.use('table', function () {
-            var table = layui.table,
-                $ = layui.$;
+        layui.use(['form', 'laypage', 'jquery', 'layer', 'element','dialog'], function () {
+            var laypage = layui.laypage,
+                layer = layui.layer,
+                $ = layui.jquery,
+                dialog = layui.dialog;
+            //获取当前iframe的name值
+            var iframeObj = $(window.frameElement).attr('name');
+            //调用分页
+            laypage({
+                cont: 'pageDiv'
+                , curr: parseInt('@ViewBag.PageIndex')
+                , pages: @Math.Ceiling((decimal)Model.TotalItems / (int)ViewBag.PageSize) // 得到总页数
+                , jump: function (obj, first) {
+                    var curr = obj.curr;
+                    if (!first) {
+                        var username = document.getElementById("username").value;
+                        var url = "/Order/Index?pageIndex=" + curr+"&pageSize="+@ViewBag.PageSize ;
+                        if (username != null && username != undefined)
+                            url += "&username=" + username;
+                        location.href = url;
+                    }
+                }
+            });
+            //列表删除
+            $('.del_btn').click(function () {
+                var url = $(this).attr('data-url');
+                var id = $(this).attr('data-id');
+              dialog.confirm({
+                    message: '您确定要进行删除吗？',
+                  success: function () {
+                      layer.closeAll('dialog');  //加入这个信息点击确定 会关闭这个消息框
+                        $.ajax({
+                            type: "post",
+                            url: url,
+                            data: { "Id": id },
+                            dataType: "json",
+                            success: function (obj) {
+                                if (obj.Code == 0) {
+                                    alert("删除成功");
+                                    location.reload();
+                                } else {
+                                    alert("删除失败，请重试");
+                                }
 
-            //方法级渲染
-            table.render({
-                elem: '#orderList'
-                , url: @Url.Action("MainOrder","Order")
-                , cols: [[
-                    { checkbox: true, fixed: true }
-                    , { field: '', title: '订单ID', width: 80, sort: true, fixed: true }
-                    , { field: '', title: '交易订单号', width: 80 }
-                    , { field: '', title: '交易流水号', width: 80 }
-                    , { field: '', title: '订单类型', width: 80, sort: true }
-                    , { field: '', title: "单价" }
-                    , { field: '', title: '数量', width: 80 }
-                    , { field: '', title: '订单总价' }
-                    , { field: '', title: '支付金额' }
-                    , { field: '', title: '下单人' }
-                    , { field: '', title: '联系方式' }
-                    , { field: '', title: '下单时间' }
-                    , { field: '', title: '状态' }
-                    , { field: '', title: '操作', templet: '#toolTpl', unresize: true }
-
-                ]]
-                , id: 'testReload'
-                , page: true
-                , height: 315
+                            }
+                        });
+                    }
+                })
+                return false;
+            });
+            ///详情按钮弹出
+            $(".detail_btn").click(function () {
+                var url = $(this).attr('data-url');
+                //将iframeObj传递给父级窗口,执行操作完成刷新
+                parent.page("订单详情", url, iframeObj, w = "960px", h = "620px");
+                return false;
             });
 
         });
+
     </script>
+
 </body>

@@ -101,4 +101,19 @@ namespace Xn.Platform.Domain.Order
 
         public DateTime createTime { get; set; }
     }
+
+    public class OrderTicketResponse
+    {
+        public class OrderTicket:OrderTicketModel
+        {
+            /// <summary>
+            /// 用户名
+            /// </summary>
+            public string userName { get; set; }
+            /// <summary>
+            /// 联系方式
+            /// </summary>
+            public string mobile { get; set; }
+        }
+    }
 }
