@@ -6,21 +6,77 @@
     Layout = "~/Views/Shared/_LayoutPage.cshtml";
 }
 <body>
-    <div class="page-content-wrap">
+    <div class="page-content-wrap" style="text-align:left">
 
 
         <form class="layui-form" action="">
-            <div class="layui-form-item">
-                <div class="layui-inline tool-btn">
-                    <button class="layui-btn layui-btn-small layui-btn-normal go-btn hidden-xs" data-id="0" data-url="@Url.Action("Edit","TourUser")"><i class="layui-icon">&#xe654;</i></button>
-                    <button class="layui-btn layui-btn-small layui-btn-warm listOrderBtn hidden-xs" data-url="/admin/category/listorderall.html"><i class="iconfont">&#xe656;</i></button>
+            <blockquote class="layui-elem-quote layui-quote-nm">
+                <div>
+                    <div class="layui-inline">
+                        <label class="layui-form-label">订单号：</label>
+                        <div class="layui-input-inline">
+                            <input name="orderId" id="orderId" autocomplete="off" class="layui-input" type="text" />
+                        </div>
+                    </div>
+                    <div class="layui-inline">
+                        <label class="layui-form-label">订单类型：</label>
+                        <div class="layui-input-inline">
+                            <select name="orderType" id="orderType" lay-filter="aihao">
+                                <option value="0" selected="">未选择</option>
+                                <option value="1">机票</option>
+                                <option value="2">酒店</option>
+                                <option value="3">签证</option>
+                                <option value="4">门票</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="layui-inline">
+                        <label class="layui-form-label">下单人：</label>
+                        <div class="layui-input-inline">
+                            <input name="userName" id="userName" autocomplete="off" class="layui-input" type="text" />
+                        </div>
+                    </div>
+                    <div class="layui-inline">
+                        <label class="layui-form-label">手机号：</label>
+                        <div class="layui-input-inline">
+                            <input name="mobile" id="mobile" lay-verify="required|phone" autocomplete="off" class="layui-input" type="tel" />
+                        </div>
+                    </div>
                 </div>
-                <div class="layui-inline">
-                    <input type="text" name="username" id="username" placeholder="请输入用户名称" autocomplete="off" value="@ViewBag.UserName" class="layui-input">
-                   
+                <div style="margin-top:10px">
+                    <div class="layui-input-inline">
+
+
+                        <label class="layui-form-label">下单时间：</label>
+                        <div class="layui-input-inline">
+                            <input class="layui-input" id="s_addDate" name="s_addDate" placeholder="yyyy-MM-dd HH:mm:ss" type="datetime">
+                        </div>
+                        -
+                        <div class="layui-input-inline">
+                            <input class="layui-input" id="e_addDate" name="e_addDate" placeholder="yyyy-MM-dd HH:mm:ss" type="datetime">
+                        </div>
+                    </div>
+                    <div class="layui-input-inline" style="margin-left:132px;">
+
+
+                        <label class="layui-form-label">付款时间：</label>
+                        <div class="layui-input-inline">
+                            <input class="layui-input" id="s_payDate" name="s_payDate" placeholder="yyyy-MM-dd HH:mm:ss" type="datetime">
+                        </div>
+                        -
+                        <div class="layui-input-inline">
+                            <input class="layui-input" id="e_payDate" name="e_payDate" placeholder="yyyy-MM-dd HH:mm:ss" type="datetime">
+                        </div>
+                    </div>
+
                 </div>
-                <button class="layui-btn layui-btn-normal" lay-submit="search">搜索</button>
-            </div>
+                <div class="layui-input-block" style="margin:10px 0 0 470px">
+                    <div class="layui-input-inline">
+                        <button class="layui-btn btn-search">搜索</button>
+                        <button type="reset" class="layui-btn layui-btn-primary">重置</button>
+                    </div>
+                </div>
+            </blockquote>
         </form>
 
         <div class="layui-form" id="table-list">
@@ -68,8 +124,8 @@
                             <td>
                                 <div class="layui-inline">
                                     <button class="layui-btn layui-btn-mini layui-btn-normal detail_btn" data-url="/order/detail?orderId=@item.orderID&type=@item.orderType"><i class="layui-icon">&#xe63c;</i></button>
-                                    <button class="layui-btn layui-btn-mini layui-btn-normal  go-btn" data-id="@item.id" data-url="@Url.Action("Edit","Order")"><i class="layui-icon">&#xe642;</i></button>
-                                    <button class="layui-btn layui-btn-mini layui-btn-danger del_btn" data-id="@item.id" data-url="@Url.Action("Delete","Order")"><i class="layui-icon">&#xe640;</i></button>
+                                    @*<button class="layui-btn layui-btn-mini layui-btn-normal  go-btn" data-id="@item.id" data-url="@Url.Action("Edit","Order")"><i class="layui-icon">&#xe642;</i></button>
+                                        <button class="layui-btn layui-btn-mini layui-btn-danger del_btn" data-id="@item.id" data-url="@Url.Action("Delete","Order")"><i class="layui-icon">&#xe640;</i></button>*@
                                 </div>
                             </td>
                         </tr>
@@ -82,25 +138,62 @@
 
     </div>
     <script>
-        layui.use(['form', 'laypage', 'jquery', 'layer', 'element','dialog'], function () {
+        layui.use(['form', 'laypage', 'jquery', 'laydate', 'layer', 'element','dialog'], function () {
             var laypage = layui.laypage,
                 layer = layui.layer,
                 $ = layui.jquery,
+                laydate = layui.laydate,
+                form = layui.form(),
                 dialog = layui.dialog;
+
+
+
+            $("#orderId").val('@ViewBag.SearchModel.orderId');
+            $("#orderType").val('@ViewBag.SearchModel.orderType');
+            $("#userName").val('@ViewBag.SearchModel.userName');
+            $("#mobile").val('@ViewBag.SearchModel.mobile');
+            $("#s_addDate").val('@ViewBag.SearchModel.SaddDate');
+            $("#e_addDate").val('@ViewBag.SearchModel.EaddDate');
+            $("#s_payDate").val('@ViewBag.SearchModel.SpayDate');
+            $("#e_payDate").val('@ViewBag.SearchModel.EpayDate');
+            form.render();
+
+
             //获取当前iframe的name值
             var iframeObj = $(window.frameElement).attr('name');
             //调用分页
             laypage({
                 cont: 'pageDiv'
-                , curr: parseInt('@ViewBag.PageIndex')
-                , pages: @Math.Ceiling((decimal)Model.TotalItems / (int)ViewBag.PageSize) // 得到总页数
+                , curr: parseInt('@ViewBag.SearchModel.PageIndex')
+                , pages: @Math.Ceiling((decimal)Model.TotalItems / (int)ViewBag.SearchModel.PageSize) // 得到总页数
                 , jump: function (obj, first) {
                     var curr = obj.curr;
                     if (!first) {
-                        var username = document.getElementById("username").value;
-                        var url = "/Order/Index?pageIndex=" + curr+"&pageSize="+@ViewBag.PageSize ;
-                        if (username != null && username != undefined)
-                            url += "&username=" + username;
+                        var url = "/Order/Index?pageIndex=" + curr + "&pageSize=" +@ViewBag.SearchModel.PageSize ;
+                        var userName = $("#userName").val();
+                        var orderType = $("#orderType").val();
+                        var orderId = $("#orderId").val();
+                        var mobile = $("#mobile").val();
+                        var s_addDate = $("#s_addDate").val();
+                        var e_addDate = $("#e_addDate").val();
+                        var s_payDate = $("#s_payDate").val();
+                        var e_payDate = $("#e_payDate").val();
+                        if (userName != undefined)
+                            url += "&userName=" + userName;
+                        if (orderType != 0)
+                            url += "&orderType=" + orderType;
+                        if (orderId != undefined)
+                            url += "&orderId=" + orderId;
+                        if (mobile != undefined)
+                            url += "&mobile=" + mobile;
+                        if (s_addDate != undefined)
+                            url += "&s_addDate=" + s_addDate;
+                        if (e_addDate != undefined)
+                            url += "&e_addDate" + e_addDate;
+                        if (s_payDate != undefined)
+                            url += "&s_payDate=" + s_payDate;
+                        if (e_payDate != undefined)
+                            url += "&e_payDate=" + e_payDate;
                         location.href = url;
                     }
                 }
@@ -139,6 +232,8 @@
                 parent.page("订单详情", url, iframeObj, w = "960px", h = "620px");
                 return false;
             });
+
+
 
         });
 

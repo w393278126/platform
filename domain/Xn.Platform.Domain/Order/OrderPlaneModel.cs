@@ -26,7 +26,7 @@ namespace Xn.Platform.Domain.Order
 
         public string orderID { get; set; }
         /// <summary>
-        /// states
+        /// states 0：未付款 1：已付款 2：已出票 3:已退票 
         /// </summary>		
 
         public int states { get; set; }
@@ -181,10 +181,10 @@ namespace Xn.Platform.Domain.Order
                     switch (states)
                     {
                         case 1:
-                            value = "未付款";
+                            value = "已付款";
                             break;
                         case 2:
-                            value = "已付款";
+                            value = "已出票";
                             break;
                         case 3:
                             value = "已退票";

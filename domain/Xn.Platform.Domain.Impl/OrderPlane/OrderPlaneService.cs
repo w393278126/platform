@@ -61,7 +61,7 @@ namespace Xn.Platform.Domain.Impl.OrderPlane
                             }
                         }
                     }
-                    detail.states = 3; //暂定退票状态为2
+                    detail.states = 3; //暂定退票状态为3
                     var editResult = orderPlaneRepository.Update(detail);
                     if (editResult)
                     {
@@ -73,11 +73,50 @@ namespace Xn.Platform.Domain.Impl.OrderPlane
                 else
                     result.Code = ResultCode.ParameterError;
 
-                
+
             }
             catch (Exception ex)
             {
                 result.Code = ResultCode.ExceptionError;
+            }
+            return result;
+        }
+
+        /// <summary>
+        /// 出票
+        /// </summary>
+        /// <param name="Id"></param>
+        /// <returns></returns>
+        public ResultWithCodeEntity OutOfPlane(string Id)
+        {
+            var result = new ResultWithCodeEntity();
+            try
+            {
+                //1.获取退款订单的信息（request.Id）
+                var detail = orderPlaneRepository.GetInfoById(Id);
+                if (detail != null)
+                {
+                    detail.states = 2;
+                    var editResult = orderPlaneRepository.Update(detail);
+                    if (editResult)
+                    {
+                        result.Code = ResultCode.Success;
+                    }
+                    else
+                    {
+                        result.Code = ResultCode.DefaultError;
+                    }
+                }
+                else
+                {
+                    result.Code = ResultCode.ParameterError;
+                }
+
+            }
+            catch (Exception ex)
+            {
+                result.Code = ResultCode.ExceptionError;
+
             }
             return result;
         }

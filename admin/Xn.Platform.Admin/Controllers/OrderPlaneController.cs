@@ -31,5 +31,14 @@ namespace Xn.Platform.Admin.Controllers
             var result = orderPlaneService.RefundPlane(request);
             return Json(result, JsonRequestBehavior.AllowGet);
         }
+        /// <summary>
+        /// 出票操作
+        /// </summary>
+        /// <param name="Id"></param>
+        public JsonResult OutOfPlane(string Id)
+        {
+            var result = orderPlaneService.OutOfPlane(Id);
+            return Json(result, JsonRequestBehavior.AllowGet);
+        }
     }
 }

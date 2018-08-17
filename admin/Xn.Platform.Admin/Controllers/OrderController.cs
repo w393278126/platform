@@ -19,17 +19,25 @@ namespace Xn.Platform.Admin.Controllers
             var orderId = Request.Params["orderId"];
             var userName = Request.Params["userName"];
             var mobile = Request.Params["mobile"];
-            var result = orderMainService.PageList(new OrderMainRequest.PageRequest
+            var s_addDate = Request.Params["s_addDate"];
+            var e_addDate = Request.Params["e_addDate"];
+            var s_payDate = Request.Params["s_payDate"];
+            var e_payDate = Request.Params["e_payDate"];
+            var searchModel = new OrderMainRequest.PageRequest
             {
                 PageIndex = pageIndex,
                 PageSize = pageSize,
                 orderType = type,
                 orderId = orderId,
                 userName = userName,
-                mobile = mobile
-            });
-            ViewBag.PageIndex = pageIndex;
-            ViewBag.PageSize = pageSize;
+                mobile = mobile,
+                SaddDate = s_addDate,
+                EaddDate = e_addDate,
+                SpayDate = s_payDate,
+                EpayDate = e_payDate
+            };
+            var result = orderMainService.PageList(searchModel);
+            ViewBag.SearchModel = searchModel;
             if (result.Code == 0 && result.Data != null)
             {
                 return View(result.Data);

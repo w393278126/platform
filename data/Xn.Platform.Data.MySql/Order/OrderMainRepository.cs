@@ -25,8 +25,7 @@ namespace Xn.Platform.Data.MySql.Order
         public PagedEntity<OrderMainResponse.PageResponse> PageInfo(OrderMainRequest.PageRequest request)
         {
             StringBuilder strSql = new StringBuilder();
-            int pageIndex = request.PageIndex;
-            request.PageIndex = (request.PageIndex - 1) * request.PageSize;
+            int PageIndex = (request.PageIndex - 1) * request.PageSize;
             strSql.Append(" SELECT SQL_CALC_FOUND_ROWS o.*,u.userName,u.mobile");
             strSql.Append(" FROM t_order_ordermain o ");
             strSql.Append(" LEFT JOIN t_tour_user u ON o.userID=u.id ");
@@ -61,7 +60,7 @@ namespace Xn.Platform.Data.MySql.Order
                 request.EpayDate,
                 request.SaddDate,
                 request.EaddDate,
-                request.PageIndex,
+                PageIndex,
                 request.PageSize
             };
             var list = new List<OrderMainResponse.PageResponse>();

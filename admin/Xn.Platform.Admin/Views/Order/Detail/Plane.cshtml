@@ -77,11 +77,11 @@
                     <td colspan="2" style="text-align:center;">
                         @if (item.states == 1)
                         {
-                            <button id="btn_out" class="layui-btn layui-btn-normal " style="width:150px">出票 </button>
+                            <button class="layui-btn layui-btn-normal btn_out" data-url="/orderplane/outofplane" data-id="@item.id" style="width:150px">出票 </button>
                         }
                         else if (item.states == 2)
                         {
-                            <button id="btn_return" class="layui-btn layui-btn-warm " style="width:150px" data-url="/orderplane/refundticket?id=@item.id">退票 </button>
+                            <button class="layui-btn layui-btn-warm btn_return" style="width:150px" data-url="/orderplane/refundticket?id=@item.id">退票 </button>
                         }
 
 
@@ -97,19 +97,47 @@
 <script>
     layui.use(['form', 'laypage', 'jquery', 'layer', 'element', 'dialog'], function () {
 
-        var layer = layui.layer;
-        var $ = layui.jquery;
+        var layer = layui.layer,
+            dialog = layui.dialog,
+            $ = layui.jquery;
         $("#btn_close").click(function () {
             var index = parent.layer.getFrameIndex(window.name);
             parent.layer.close(index);
             window.parent.location.reload();//刷新父页面
         });
 
-        $("#btn_return").click(function () {
+        $(".btn_return").click(function () {
             var iframeObj = $(window.frameElement).attr('name');
             var url = $(this).attr('data-url');
             //将iframeObj传递给父级窗口,执行操作完成刷新
             parent.page("退票详情", url, iframeObj, w = "700px", h = "620px");
+            return false;
+        });
+        ///出票按钮
+        $(".btn_out").click(function () {
+            var url = $(this).attr('data-url');
+            var id = $(this).attr('data-id');
+            dialog.confirm({
+                message: '您确定已经再第三方平台上出账了吗？',
+                success: function () {
+                    layer.closeAll('dialog');  //加入这个信息点击确定 会关闭这个消息框
+                    $.ajax({
+                        type: "post",
+                        url: url,
+                        data: { "Id": id },
+                        dataType: "json",
+                        success: function (obj) {
+                            if (obj.Code == 0) {
+                                alert("出票成功");
+                                location.reload();
+                            } else {
+                                alert("出票失败，请重试");
+                            }
+
+                        }
+                    });
+                }
+            })
             return false;
         });
     });
