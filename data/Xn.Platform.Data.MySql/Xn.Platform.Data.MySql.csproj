@@ -62,7 +62,10 @@
     <Compile Include="Admin\AdminRoleResourceRepository.cs" />
     <Compile Include="Admin\AdminResourceRepository.cs" />
     <Compile Include="Admin\AdminRoleRepository.cs" />
+    <Compile Include="Order\OrderHotelRepository.cs" />
     <Compile Include="Order\OrderMainRepository.cs" />
+    <Compile Include="Order\OrderPlaneRepository.cs" />
+    <Compile Include="Order\OrderTicketRepository.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="TourUser\TourUserRepository.cs" />
   </ItemGroup>

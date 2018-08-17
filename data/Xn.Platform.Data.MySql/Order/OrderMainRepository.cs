@@ -25,9 +25,8 @@ namespace Xn.Platform.Data.MySql.Order
         public PagedEntity<OrderMainResponse.PageResponse> PageInfo(OrderMainRequest.PageRequest request)
         {
             StringBuilder strSql = new StringBuilder();
-            int pageIndex = request.PageIndex;
-            request.PageIndex = (request.PageIndex - 1) * request.PageSize;
-            strSql.Append(" SELECT SQL_CALC_FOUND_ROWS o.id,o.userID,u.username,addDate,sendDate,states,receiverName,receiverTelphone,payName,payTelephone,payType,payTSN,payDate,orderAmount,payAmount,refundID,orderID,refundDate,refundAmout,expressAmount,postType,expressCode,expressName,expressOdd,provinceID,provinceName,cityID,channelID,cityName,areaID,o.address,areaName,platform,o.deviceID,longitude,latitude");
+            int PageIndex = (request.PageIndex - 1) * request.PageSize;
+            strSql.Append(" SELECT SQL_CALC_FOUND_ROWS o.*,u.userName,u.mobile");
             strSql.Append(" FROM t_order_ordermain o ");
             strSql.Append(" LEFT JOIN t_tour_user u ON o.userID=u.id ");
             strSql.Append(" WHERE 1=1 ");
@@ -48,7 +47,8 @@ namespace Xn.Platform.Data.MySql.Order
             if (!string.IsNullOrEmpty(request.EaddDate))
                 strSql.Append(" AND payDate>EaddDate ");
             strSql.Append(" ORDER BY payDate DESC ");
-            strSql.Append(" LIMIT @PageIndex,@PageSize;select found_rows()");
+            strSql.Append(" LIMIT @PageIndex,@PageSize;");
+            strSql.Append(" select found_rows() as TotalCount ;");
 
             var parameters = new
             {
@@ -60,20 +60,22 @@ namespace Xn.Platform.Data.MySql.Order
                 request.EpayDate,
                 request.SaddDate,
                 request.EaddDate,
-                request.PageIndex,
+                PageIndex,
                 request.PageSize
             };
             var list = new List<OrderMainResponse.PageResponse>();
-            int totalCount = 0;
+            var pageCount = new OrderMainResponse.PageCount();
 
             OpenSlaveConnection(conn =>
             {
+                using (var multiReader = conn.QueryMultiple(strSql.ToString(), parameters))
+                {
+                    list = multiReader.Read<OrderMainResponse.PageResponse>().ToList();
+                    pageCount = multiReader.Read<OrderMainResponse.PageCount>().FirstOrDefault();
+                }
 
-                var result = conn.QueryMultiple(strSql.ToString(), parameters);
-                list = result.Read<OrderMainResponse.PageResponse>().ToList();
-                totalCount = result.Read<int>().FirstOrDefault();
             });
-            return new PagedEntity<OrderMainResponse.PageResponse>(totalCount, list);
+            return new PagedEntity<OrderMainResponse.PageResponse>(pageCount.TotalCount, list);
 
         }
         /// <summary>
@@ -84,6 +86,25 @@ namespace Xn.Platform.Data.MySql.Order
         public OrderMainModel GetInfo(string Id)
         {
             return GetInfo(Id);
+        }
+        /// <summary>
+        /// 通过OrderId拉取详情
+        /// </summary>
+        /// <param name="orderId"></param>
+        /// <returns></returns>
+        public OrderMainResponse.PageResponse GetDetail(string orderId)
+        {
+            StringBuilder strSql = new StringBuilder();
+            strSql.Append(" SELECT u.username,u.mobile,o.* ");
+            strSql.Append(" FROM t_order_ordermain o ");
+            strSql.Append(" LEFT JOIN t_tour_user u on o.userID=u.id ");
+            strSql.Append(" WHERE o.orderId=@orderId ");
+            var list = new List<OrderMainResponse.PageResponse>();
+            OpenSlaveConnection(conn =>
+            {
+                list = conn.Query<OrderMainResponse.PageResponse>(strSql.ToString(), new { orderId }).ToList();
+            });
+            return list.FirstOrDefault();
         }
         /// <summary>
         /// 增加订单

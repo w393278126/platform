@@ -26,7 +26,7 @@ namespace Xn.Platform.Domain.Order
 
         public string orderID { get; set; }
         /// <summary>
-        /// states
+        /// states 0：未付款 1：已付款 2：已出票 3:已退票 
         /// </summary>		
 
         public int states { get; set; }
@@ -165,5 +165,56 @@ namespace Xn.Platform.Domain.Order
         /// </summary>		
 
         public decimal sellsPrice { get; set; }
+    }
+
+    public class OrderPlaneResponse
+    {
+        public class OrderPlan : OrderPlaneModel
+        {
+            public string userName { get; set; }
+            public string mobile { get; set; }
+            public string statusVal
+            {
+                get
+                {
+                    string value = "";
+                    switch (states)
+                    {
+                        case 1:
+                            value = "已付款";
+                            break;
+                        case 2:
+                            value = "已出票";
+                            break;
+                        case 3:
+                            value = "已退票";
+                            break;
+                        default:
+                            value = "未付款";
+                            break;
+                    }
+                    return value;
+                }
+            }
+        }
+    }
+    public class OrderPlaneRequest
+    {
+        public class RefundRequest
+        {
+            public string Id { get; set; }
+            /// <summary>
+            /// 退款金额
+            /// </summary>
+            public decimal returnTotal { get; set; }
+            /// <summary>
+            /// 手续费
+            /// </summary>
+            public decimal returnFee { get; set; }
+            /// <summary>
+            /// 退款原因
+            /// </summary>
+            public string cancelReason { get; set; }
+        }
     }
 }

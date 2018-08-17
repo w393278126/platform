@@ -8,7 +8,7 @@ using Xn.Platform.Core.Data;
 namespace Xn.Platform.Domain.Order
 {
     [Table("t_order_orderhotel")]
-   public class OrderHotelModel
+    public class OrderHotelModel
     {
         /// <summary>
         /// id
@@ -191,6 +191,57 @@ namespace Xn.Platform.Domain.Order
 
         public string credit { get; set; }
     }
+    public class OrderHotelResponse
+    {
+        public class OrderHotel : OrderHotelModel
+        {
+            public string userName { get; set; }
+            public string mobile { get; set; }
+            public string statesVal
+            {
+                get
+                {
+                    var value = "";
+                    switch (states)
+                    {
+                        case 1:
+                            value = "已付款";
+                            break;
+                        case 2:
+                            value = "已预定";
+                            break;
+                        case 3:
+                            value = "已退款";
+                            break;
+                        default:
+                            value = "未付款";
+                            break;
+                    }
+                    return value;
+                }
+            }
+        }
+    }
 
-   
+    public class OrderHotelRequest
+    {
+        public class RefundRequest
+        {
+            public string Id { get; set; }
+            /// <summary>
+            /// 退款金额
+            /// </summary>
+            public decimal cancelAmount { get; set; }
+            /// <summary>
+            /// 退款原因
+            /// </summary>
+            public string cancelReason { get; set; }
+            /// <summary>
+            /// 取消确认码
+            /// </summary>
+            public string confirmCode { get; set; }
+        }
+    }
+
+
 }

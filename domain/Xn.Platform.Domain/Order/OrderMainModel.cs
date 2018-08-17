@@ -299,7 +299,7 @@ namespace Xn.Platform.Domain.Order
 
     public class OrderMainResponse
     {
-        public class PageResponse:OrderMainModel
+        public class PageResponse : OrderMainModel
         {
             /// <summary>
             /// 用户名
@@ -309,6 +309,35 @@ namespace Xn.Platform.Domain.Order
             /// 联系方式
             /// </summary>
             public string mobile { get; set; }
+            public string orderTypeName
+            {
+                get
+                {
+                    string value = "未知";
+                    switch (orderType)
+                    {
+                        case 1:
+                            value = "机票";
+                            break;
+                        case 2:
+                            value = "酒店";
+                            break;
+                        case 3:
+                            value = "签证";
+                            break;
+                        case 4:
+                            value = "门票";
+                            break;
+                        default:
+                            break;
+                    }
+                    return value;
+                }
+            }
+        }
+        public class PageCount
+        {
+            public int TotalCount { get; set; }
         }
     }
 
@@ -320,7 +349,7 @@ namespace Xn.Platform.Domain.Order
         /// <summary>
         /// 分页查询条件
         /// </summary>
-        public class PageRequest: BaseQueryModel
+        public class PageRequest : BaseQueryModel
         {
             /// <summary>
             /// 用户名

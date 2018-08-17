@@ -1,0 +1,167 @@
+﻿@using Xn.Platform.Domain.Order;
+@model List<OrderHotelResponse.OrderHotel>
+@{
+    /**/
+
+    ViewBag.Title = "订单详情";
+    Layout = "~/Views/Shared/_LayoutDialog.cshtml";
+}
+<body>
+    @if (Model.Count > 0)
+    {
+    <blockquote class="layui-elem-quote layui-quote-nm">
+        <div class="layui-inline">
+            下单用户： @Model.FirstOrDefault().userName
+        </div>
+        <div class="layui-inline" style="margin-left:100px">
+            联系方式：@Model.FirstOrDefault().mobile
+        </div>
+    </blockquote>
+        foreach (var item in Model)
+        {
+            <table class="layui-table">
+                <colgroup>
+                    <col width="150" />
+                </colgroup>
+                <thead>
+                    <tr><td colspan="2" style="text-align:center">订单号:@item.orderID</td></tr>
+                </thead>
+                <tbody>
+
+
+                    <tr>
+                        <td style="text-align:right">城市名称：</td>
+                        <td>@item.cityName</td>
+                    </tr>
+                    <tr>
+                        <td style="text-align:right">酒店名称：</td>
+                        <td>@item.hotelName</td>
+                    </tr>
+                    <tr>
+                        <td style="text-align:right">酒店电话：</td>
+                        <td>@item.hotelPhone </td>
+                    </tr>
+                    <tr>
+                        <td style="text-align:right">入住时间：</td>
+                        <td><span>@item.checkInDate</span> - <span>@item.checkOutDate</span>(@item.nights 晚)</td>
+                    </tr>
+
+                    <tr>
+                        <td style="text-align:right">房间名称：</td>
+                        <td>@item.roomName</td>
+                    </tr>
+                    <tr>
+                        <td style="text-align:right">房间数量：</td>
+                        <td>@item.roomCount</td>
+                    </tr>
+                    <tr>
+                        <td style="text-align:right">住客姓名：</td>
+                        <td>@item.name</td>
+                    </tr>
+                    <tr>
+                        <td style="text-align:right">住客电话：</td>
+                        <td>@item.phone</td>
+                    </tr>
+                    <tr>
+                        <td style="text-align:right">住客情况：</td>
+                        <td>
+                            <i>成人：@item.adult &nbsp;&nbsp;</i>
+
+                            @if (item.children != null)
+                            {
+                                <i>儿童：@item.children</i>
+                            }
+
+                        </td>
+                    </tr>
+                    <tr>
+                        <td style="text-align:right">特殊要求：</td>
+                        <td>@item.guestRemarks</td>
+                    </tr>
+                    <tr>
+                        <td style="text-align:right">订单总价：</td>
+                        <td>
+                            @item.totalAmount
+                        </td>
+                    </tr>
+                    <tr>
+                        <td style="text-align:right">状态：</td>
+                        <td>
+                            @item.statesVal
+                        </td>
+                    </tr>
+                </tbody>
+                <tfoot>
+                    <tr>
+                        <td colspan="2" style="text-align:center;">
+                            @if (item.states == 1)
+                            {
+                                <button class="layui-btn layui-btn-normal btn_out" data-url="/orderhotel/reserve" data-id="@item.id" style="width:150px">预定 </button>
+                            }
+                            else if (item.states == 2)
+                            {
+                                <button class="layui-btn layui-btn-warm btn_return" style="width:150px" data-url="/orderhotel/refundhotel?id=@item.id">退款 </button>
+                            }
+
+
+                        </td>
+                    </tr>
+                </tfoot>
+            </table>
+        }
+    }
+    else
+    {
+        <div>
+            该订单尚未有酒店信息
+        </div>
+    }
+</body>
+<script>
+    layui.use(['form', 'laypage', 'jquery', 'layer', 'element', 'dialog'], function () {
+
+        var layer = layui.layer,
+            dialog = layui.dialog,
+            $ = layui.jquery;
+        $("#btn_close").click(function () {
+            var index = parent.layer.getFrameIndex(window.name);
+            parent.layer.close(index);
+            window.parent.location.reload();//刷新父页面
+        });
+
+        $(".btn_return").click(function () {
+            var iframeObj = $(window.frameElement).attr('name');
+            var url = $(this).attr('data-url');
+            //将iframeObj传递给父级窗口,执行操作完成刷新
+            parent.page("退款详情", url, iframeObj, w = "700px", h = "520px");
+            return false;
+        });
+        ///出票按钮
+        $(".btn_out").click(function () {
+            var url = $(this).attr('data-url');
+            var id = $(this).attr('data-id');
+            dialog.confirm({
+                message: '您确定已经再第三方平台上预定酒店了吗？',
+                success: function () {
+                    layer.closeAll('dialog');  //加入这个信息点击确定 会关闭这个消息框
+                    $.ajax({
+                        type: "post",
+                        url: url,
+                        data: { "Id": id },
+                        dataType: "json",
+                        success: function (obj) {
+                            if (obj.Code == 0) {
+                                alert("预定成功");
+                                location.reload();
+                            } else {
+                                alert("预定失败，请重试");
+                            }
+
+                        }
+                    });
+                }
+            })
+            return false;
+        });
+    });
+</script>

@@ -1,0 +1,93 @@
+﻿
+@using Xn.Platform.Domain.Order;
+@model OrderHotelModel
+@{
+    /**/
+
+    ViewBag.Title = "退款表单";
+    Layout = "~/Views/Shared/_LayoutDialog.cshtml";
+}
+<body>
+    <div class="layui-form">
+        <form class="layui-form" action="">
+            <table class="layui-table">
+                <colgroup>
+                    <col width="150" />
+                </colgroup>
+                <thead>
+                    <tr>
+                        <td colspan="2">酒店退款</td>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td style="text-align:right">订单ID：</td>
+                        <td>
+                            @Model.orderID
+                        </td>
+
+                    </tr>
+                    <tr>
+                        <td style="text-align:right">销售金额：</td>
+                        <td>
+                            @Model.totalAmount
+                        </td>
+
+                    </tr>
+                    <tr>
+                        <td style="text-align:right">退款金额：</td>
+                        <td>
+                            <input type="text" value="@Model.cancelAmount" name="returnTotal" lay-verify="title" autocomplete="off" placeholder="金额" class="layui-input">
+                        </td>
+
+                    </tr>
+                    <tr>
+                        <td style="text-align:right">退票原因：</td>
+                        <td>
+                            <textarea name="cancelReason" placeholder="请输入内容" class="layui-textarea">@Model.cancelReason</textarea>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td style="text-align:right">确认码：</td>
+                        <td>
+                            <input type="text" value="@Model.confirmCode" name="confirmCode" lay-verify="title" autocomplete="off" placeholder="退款码" class="layui-input">
+                        </td>
+                    </tr>
+
+                </tbody>
+                <tfoot>
+                    <tr>
+                        <td colspan="2" style="text-align:center">
+                            <button class="layui-btn" lay-submit="" lay-filter="formEdit">立即提交</button>
+                            <input type="hidden" name="Id" value="@Model.id" />
+                            <button type="reset" class="layui-btn layui-btn-primary">重置</button>
+                        </td>
+                    </tr>
+                </tfoot>
+            </table>
+        </form>
+    </div>
+    <script>
+        layui.use(['form', 'layedit','jquery', 'laydate'], function () {
+            var form = layui.form()
+                , layer = layui.layer
+                , layedit = layui.layedit
+                , $ = layui.jquery
+                , laydate = layui.laydate;
+
+            form.on('submit(formEdit)', function (data) {
+                  $.post("@Url.Action("Refund", "OrderHotel")", data.field, function (res) {
+                    if (res.Code == 0) {
+                        alert("退款成功");
+                        var index = parent.layer.getFrameIndex(window.name);
+                        parent.layer.close(index);
+                        parent.location.reload(index);//刷新父页面
+                    } else {
+                        alert("退款失败，请确认确认码");
+                    }
+                }, 'json');
+                return false;
+            });
+        });
+    </script>
+</body>
