@@ -8,7 +8,7 @@ using Xn.Platform.Abstractions.Domain;
 using Xn.Platform.Data.MySql.Order;
 using Xn.Platform.Domain.Order;
 
-namespace Xn.Platform.Domain.Impl.OrderPlane
+namespace Xn.Platform.Domain.Impl
 {
     public class OrderPlaneService
     {

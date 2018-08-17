@@ -7,89 +7,88 @@
     Layout = "~/Views/Shared/_LayoutDialog.cshtml";
 }
 <body>
-    <table class="layui-table">
-        <thead>
-            <tr>
-                <td colspan="2">用户信息</td>
-            </tr>
-        </thead>
-        <tbody>
-            <tr>
-                <td style="text-align:right">用户名：</td>
-                <td>@Model.FirstOrDefault().userName</td>
-            </tr>
-            <tr>
-                <td style="text-align:right">联系方式：</td>
-                <td>@Model.FirstOrDefault().mobile</td>
-            </tr>
-        </tbody>
 
-    </table>
-    @foreach (var item in Model)
+    @if (Model.Count > 0)
     {
-        <table class="layui-table">
-            <colgroup>
-                <col width="150" />
-            </colgroup>
-            <thead>
-                <tr><td colspan="2" style="text-align:center">订单号:@item.orderID</td></tr>
-            </thead>
-            <tbody>
+        <blockquote class="layui-elem-quote layui-quote-nm">
+            <div class="layui-inline">
+                下单用户： @Model.FirstOrDefault().userName
+            </div>
+            <div class="layui-inline" style="margin-left:100px">
+                联系方式：@Model.FirstOrDefault().mobile
+            </div>
+        </blockquote>
+        foreach (var item in Model)
+        {
+            <table class="layui-table">
+                <colgroup>
+                    <col width="150" />
+                </colgroup>
+                <thead>
+                    <tr><td colspan="2" style="text-align:center">订单号:@item.orderID</td></tr>
+                </thead>
+                <tbody>
 
 
-                <tr>
-                    <td style="text-align:right">航空公司：</td>
-                    <td>@item.airways</td>
-                </tr>
-                <tr>
-                    <td style="text-align:right">航班号：</td>
-                    <td>@item.flightNumber</td>
-                </tr>
-                <tr>
-                    <td style="text-align:right">行程：</td>
-                    <td><b>@item.startAddr</b>(@item.startAirport) - <b>@item.destAddr</b>(@item.destAirport) </td>
-                </tr>
-                <tr>
-                    <td style="text-align:right">日期：</td>
-                    <td><span>@item.startDate</span> - <span>@item.destDate</span></td>
-                </tr>
-                <tr>
-                    <td style="text-align:right">价格：</td>
-                    <td>@item.price</td>
-                </tr>
-                <tr>
-                    <td style="text-align:right">乘客姓名：</td>
-                    <td>@item.custName</td>
-                </tr>
-                <tr>
-                    <td style="text-align:right">身份证号：</td>
-                    <td>@item.idCardNo</td>
-                </tr>
-                <tr>
-                    <td style="text-align:right">订单状态：</td>
-                    <td>
-                        @item.statusVal
-                    </td>
-                </tr>
-            </tbody>
-            <tfoot>
-                <tr>
-                    <td colspan="2" style="text-align:center;">
-                        @if (item.states == 1)
-                        {
-                            <button class="layui-btn layui-btn-normal btn_out" data-url="/orderplane/outofplane" data-id="@item.id" style="width:150px">出票 </button>
-                        }
-                        else if (item.states == 2)
-                        {
-                            <button class="layui-btn layui-btn-warm btn_return" style="width:150px" data-url="/orderplane/refundticket?id=@item.id">退票 </button>
-                        }
+                    <tr>
+                        <td style="text-align:right">航空公司：</td>
+                        <td>@item.airways</td>
+                    </tr>
+                    <tr>
+                        <td style="text-align:right">航班号：</td>
+                        <td>@item.flightNumber</td>
+                    </tr>
+                    <tr>
+                        <td style="text-align:right">行程：</td>
+                        <td><b>@item.startAddr</b>(@item.startAirport) - <b>@item.destAddr</b>(@item.destAirport) </td>
+                    </tr>
+                    <tr>
+                        <td style="text-align:right">日期：</td>
+                        <td><span>@item.startDate</span> - <span>@item.destDate</span></td>
+                    </tr>
+                    <tr>
+                        <td style="text-align:right">价格：</td>
+                        <td>@item.price</td>
+                    </tr>
+                    <tr>
+                        <td style="text-align:right">乘客姓名：</td>
+                        <td>@item.custName</td>
+                    </tr>
+                    <tr>
+                        <td style="text-align:right">身份证号：</td>
+                        <td>@item.idCardNo</td>
+                    </tr>
+                    <tr>
+                        <td style="text-align:right">订单状态：</td>
+                        <td>
+                            @item.statusVal
+                        </td>
+                    </tr>
+                </tbody>
+                <tfoot>
+                    <tr>
+                        <td colspan="2" style="text-align:center;">
+                            @if (item.states == 1)
+                            {
+                                <button class="layui-btn layui-btn-normal btn_out" data-url="/orderplane/outofplane" data-id="@item.id" style="width:150px">出票 </button>
+                            }
+                            else if (item.states == 2)
+                            {
+                                <button class="layui-btn layui-btn-warm btn_return" style="width:150px" data-url="/orderplane/refundticket?id=@item.id">退票 </button>
+                            }
 
 
-                    </td>
-                </tr>
-            </tfoot>
-        </table>
+                        </td>
+                    </tr>
+                </tfoot>
+            </table>
+        }
     }
+    else
+    {
+        <div>该订单没有机票信息</div>
+    }
+
 
 
 

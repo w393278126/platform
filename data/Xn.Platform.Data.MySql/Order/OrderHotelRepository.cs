@@ -29,7 +29,17 @@ namespace Xn.Platform.Data.MySql.Order
                 list = conn.Query<OrderHotelResponse.OrderHotel>(strSql.ToString(), new { orderId }).ToList();
             });
             return list;
-
+        }
+        /// <summary>
+        /// 获取详情
+        /// </summary>
+        /// <param name="Id"></param>
+        /// <returns></returns>
+        public OrderHotelModel GetInfo(string Id)
+        {
+            var parameter = new List<Tuple<string, string, object>>();
+            parameter.Add(new Tuple<string, string, object>("Id", "=", Id));
+            return GetList<OrderHotelModel>(parameter).FirstOrDefault();
         }
 
     }
