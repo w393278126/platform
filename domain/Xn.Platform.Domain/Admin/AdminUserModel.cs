@@ -35,6 +35,22 @@ namespace Xn.Platform.Domain.Admin
         public string ICon { get; set; }
     }
 
+
+
+    public class TestAdminSunDTO
+    {
+        public string A { get; set; }
+        public string B { get; set; }
+
+        public string C { get; set; }
+        public string D { get; set; }
+
+        public string Password { get; set; }
+
+        public int Role { get; set; }
+
+    }
+
     /// <summary>
     /// 登录实体对象
     /// </summary>

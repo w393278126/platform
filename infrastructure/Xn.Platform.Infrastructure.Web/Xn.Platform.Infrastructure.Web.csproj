@@ -166,9 +166,6 @@
       <HintPath>..\..\build\packages\Common.Logging.Core.3.3.1\lib\net40\Common.Logging.Core.dll</HintPath>
       <Private>True</Private>
     </Reference>
-    <Reference Include="GeetestSDK">
-      <HintPath>..\..\build\packages\GeetestSDK.dll</HintPath>
-    </Reference>
     <Reference Include="KafkaNET.Library, Version=0.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\build\packages\KafkaNet.0.1.22\lib\net45\KafkaNET.Library.dll</HintPath>

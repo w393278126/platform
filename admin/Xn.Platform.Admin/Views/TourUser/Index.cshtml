@@ -1,7 +1,7 @@
 ﻿
 @using Xn.Platform.Domain.TourUser;
 @using Xn.Platform.Domain;
-@model PagedEntity<TourUserModel>
+@model PagedEntity<TourUserListDTO>
 @{
     ViewBag.Title = "用户列表";
     Layout = "~/Views/Shared/_LayoutPage.cshtml";
@@ -56,25 +56,25 @@
                 <tbody>
                     @foreach (var item in Model.Items)
                     {
-                        <tr id='node-@item.id' class="parent collapsed">
-                            <td><img src="@item.picture_url" width="40" height="40" /></td>
-                            <td class="hidden-xs">@item.id</td>
-                            <td class="hidden-xs">@item.username</td>
-                            <td>@item.nick_name</td>
-                            <td>@item.sex</td>
-                            <td class="hidden-xs">@item.real_name</td>
-                            <td>@item.mobile</td>
-                            <td>@item.qq_number</td>
-                            <td>@item.prvinice</td>
-                            <td>@item.city</td>
-                            <td>@item.address</td>
+                        <tr id='node-@item.Id' class="parent collapsed">
+                            <td><img src="@item.PictureUrl" width="40" height="40" /></td>
+                            <td class="hidden-xs">@item.Id</td>
+                            <td class="hidden-xs">@item.UserName</td>
+                            <td>@item.NickName</td>
+                            <td>@item.Sex</td>
+                            <td class="hidden-xs">@item.RealName</td>
+                            <td>@item.Mobile</td>
+                            <td>@item.QqNumber</td>
+                            <td>@item.Prvinice</td>
+                            <td>@item.City</td>
+                            <td>@item.Address</td>
                             <td>100</td>
                             <td>27.12</td>
-                            <td>@item.create_time</td>
+                            <td>@item.CreateTime</td>
                             <td>
                                 <div class="layui-inline">
-                                    <button class="layui-btn layui-btn-mini layui-btn-normal  go-btn" data-id="@item.id" data-url="@Url.Action("Edit","TourUser")"><i class="layui-icon">&#xe642;</i></button>
-                                    <button class="layui-btn layui-btn-mini layui-btn-danger del_btn" data-id="@item.id" data-url="@Url.Action("Delete","TourUser")"><i class="layui-icon">&#xe640;</i></button>
+                                    <button class="layui-btn layui-btn-mini layui-btn-normal  go-btn" data-id="@item.Id" data-url="@Url.Action("Edit","TourUser")"><i class="layui-icon">&#xe642;</i></button>
+                                    <button class="layui-btn layui-btn-mini layui-btn-danger del_btn" data-id="@item.Id" data-url="@Url.Action("Delete","TourUser")"><i class="layui-icon">&#xe640;</i></button>
                                 </div>
                             </td>
                         </tr>

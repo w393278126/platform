@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Newtonsoft.Json;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -157,13 +158,86 @@ namespace Xn.Platform.Domain.TourUser
         public string prvinice { get; set; }
     }
 
-    public class TourUserRequest
-    {
-        public class PageResult: BaseQueryModel
-        {
-           public string username { get; set; }
-        }
-        
 
+    public class TourUserDTO
+    {
+        /// <summary>
+        /// id
+        /// </summary>		
+        public string Id { get; set; }
+        /// <summary>
+        /// username
+        /// </summary>		
+        public string UserName { get; set; }
+        /// <summary>
+        /// password
+        /// </summary>		
+        public string PassWord { get; set; }
+        /// <summary>
+        /// nick_name
+        /// </summary>		
+        public string NickName { get; set; }
+        /// <summary>
+        /// sex
+        /// </summary>		
+        public string Sex { get; set; }
+        /// <summary>
+        /// real_name
+        /// </summary>		
+        public string RealName { get; set; }
+        /// <summary>
+        /// mobile
+        /// </summary>		
+        public string Mobile { get; set; }
+        /// <summary>
+        /// address
+        /// </summary>		
+        public string Address { get; set; }
+        /// <summary>
+        /// nationality
+        /// </summary>		
+        public string Wechat { get; set; }
+        /// <summary>
+        /// passport
+        /// </summary>		
+        public string QqNumber { get; set; }
+        /// <summary>
+        /// birthday
+        /// </summary>		
+        public string BirthDay { get; set; }
+        /// <summary>
+        /// source
+        /// </summary>		
+        public string Nationality { get; set; }
+        /// <summary>
+        /// picture_url
+        /// </summary>		
+        public string Passport { get; set; }
+        /// <summary>
+        /// city
+        /// </summary>		
+        public string City { get; set; }
+        /// <summary>
+        /// prvinice
+        /// </summary>		
+        public string Prvinice { get; set; }
     }
+
+    public class TourUserListDTO: TourUserDTO
+    {
+        /// <summary>
+        /// 保存
+        /// </summary>
+        public string PictureUrl { get; set; }
+        public DateTime CreateTime { get; set; }
+    }
+
+
+    public class TourUserRequest : BaseQueryModel
+    {
+        public string username { get; set; }
+    }
+
+
+
 }

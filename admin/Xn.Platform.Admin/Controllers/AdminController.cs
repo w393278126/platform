@@ -10,14 +10,19 @@ using Xn.Platform.Infrastructure.Web;
 using Xn.Platform.Domain.Admin;
 using Xn.Platform.Abstractions.Domain;
 using Xn.Platform.Domain.Impl.Admin;
-using Xn.Platform.Presentation.Admin.Models;
+using Xn.Platform.Interface.Admin;
 
 namespace Xn.Platform.Admin.Controllers
 {
     public class AdminController : XnBaseController
     {
-        private static AdminService adminService = new AdminService();
+        private static AdminService loginService = new AdminService();
         private static ValidateCodeService validateCodeService = new ValidateCodeService();
+        private static IAdminInterface adminService;
+        public AdminController()
+        {
+            adminService = GetService<IAdminInterface>();
+        }
         // GET: Login
         public ActionResult Index()
         {
@@ -29,11 +34,11 @@ namespace Xn.Platform.Admin.Controllers
         {
             try
             {
-                if (string.IsNullOrEmpty(admin.UserName) || string.IsNullOrEmpty(admin.Password)|| string.IsNullOrEmpty(admin.Code))
+                if (string.IsNullOrEmpty(admin.UserName) || string.IsNullOrEmpty(admin.Password) || string.IsNullOrEmpty(admin.Code))
                 {
                     return Json(Result.Error(ResultCode.ParameterError));
                 }
-                return Json(adminService.Loging(admin));
+                return Json(loginService.Loging(admin));
             }
             catch (Exception ex)
             {
@@ -41,29 +46,17 @@ namespace Xn.Platform.Admin.Controllers
             }
         }
 
-        [AllowAnonymous]
+        //[AllowAnonymous]
         public ActionResult GetValidateCode()
         {
             var bytes = validateCodeService.GetValidateCode();
             return File(bytes, @"image/jpeg");
         }
 
-
-        [AdministratorActionFilterAttribute]
-        public ActionResult Add(AdminUserModel admin)
+        public ActionResult TestAdmin()
         {
-            try
-            {
-                if (string.IsNullOrEmpty(admin.UserName) || string.IsNullOrEmpty(admin.PassWord)|| admin.Role<=0)
-                {
-                    return Json(Result.Error(ResultCode.ParameterError));
-                }
-                return Json(adminService.Add(admin));
-            }
-            catch (Exception ex)
-            {
-                return Json(Result.Error(ResultCode.DefaultError));
-            }
+            adminService.TestAdmin();
+            return Json(Result.Success());
         }
     }
 

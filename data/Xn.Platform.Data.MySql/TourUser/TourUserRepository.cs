@@ -14,8 +14,8 @@ namespace Xn.Platform.Data.MySql.TourUser
     {
         public TourUsersRepository()
         {
-            ConnectionString = ConfigSetting.ConnectionMySqlSportsEntities;
-            SlaveConnectionString = ConfigSetting.ConnectionMySqlSportsEntitiesReadOnly;
+            ConnectionString = ConfigSetting.ConnectionLongzhuSportsEntities;
+            SlaveConnectionString = ConfigSetting.ConnectionLongzhuSportsEntitiesReadOnly;
         }
         /// <summary>
         /// 获取详情
@@ -34,7 +34,7 @@ namespace Xn.Platform.Data.MySql.TourUser
         /// </summary>
         /// <param name="request"></param>
         /// <returns></returns>
-        public PagedEntity<TourUserModel> PageList(TourUserRequest.PageResult request)
+        public PagedEntity<TourUserModel> PageList(TourUserRequest request)
         {
             var parameter = new List<Tuple<string, string, object>>();
             parameter.Add(new Tuple<string, string, object>("status", "=", 1));
@@ -51,8 +51,12 @@ namespace Xn.Platform.Data.MySql.TourUser
         /// </summary>
         /// <param name="entity"></param>
         /// <returns></returns>
-        public int Add(TourUserModel entity)
+        public bool Add(TourUserModel entity)
         {
+            InsertNoDefaultId(entity);
+            return !string.IsNullOrEmpty(entity.id);
+            
+            /*
             // var parameter = new List<Tuple<string, string, object>>();
             StringBuilder strSql = new StringBuilder();
             strSql.Append("insert into t_tour_user(");
@@ -97,9 +101,9 @@ namespace Xn.Platform.Data.MySql.TourUser
             };
             var result = 0;
             OpenConnection(conn => result = conn.Execute(strSql.ToString(), parameters));
-            return result;
+            return result;*/
         }
-        public int Update(TourUserModel entity)
+        public int Updates(TourUserModel entity)
         {
             StringBuilder strSql = new StringBuilder();
             strSql.Append("update t_tour_user set ");

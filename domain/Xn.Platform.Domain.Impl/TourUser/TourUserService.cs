@@ -8,6 +8,7 @@ using Xn.Platform.Abstractions.Domain;
 using Xn.Platform.Data.MySql.TourUser;
 using Xn.Platform.Domain;
 using System.Reflection;
+using AutoMapper;
 
 namespace Plu.Platform.Domain.Impl.TourUser
 {
@@ -19,24 +20,28 @@ namespace Plu.Platform.Domain.Impl.TourUser
         /// </summary>
         /// <param name="request"></param>
         /// <returns></returns>
-        public ResultWithCodeEntity<PagedEntity<TourUserModel>> PageList(TourUserRequest.PageResult request)
+        public ResultWithCodeEntity<PagedEntity<TourUserListDTO>> PageList(TourUserRequest request)
         {
+            var result = new PagedEntity<TourUserListDTO>() { Items = new List<TourUserListDTO>() };
             try
             {
-                var item = tourUserRepository.PageList(request);
-                return new ResultWithCodeEntity<PagedEntity<TourUserModel>>
+                var pageResult = tourUserRepository.PageList(request);
+                if (pageResult != null)
                 {
-                    Code = ResultCode.Success,
-                    Data = item
-                };
+                    result.TotalItems = pageResult.TotalItems;
+                    result.Items = Mapper.Map<List<TourUserListDTO>>(pageResult.Items);
+                    //foreach (var item in pageResult.Items)
+                    //{
+                    //    var val = Mapper.Map<List<TourUserListDTO>>(item);
+                    //    result.Items.Add(val);
+                    //}
+                }
+
+                return Result.Success<PagedEntity<TourUserListDTO>>(result);
             }
             catch (Exception ex)
             {
-                return new ResultWithCodeEntity<PagedEntity<TourUserModel>>
-                {
-                    Code = ResultCode.ExceptionError,
-                    Data = new PagedEntity<TourUserModel>()
-                };
+                return Result.Error<PagedEntity<TourUserListDTO>>(ResultCode.ExceptionError);
             }
 
         }
@@ -45,82 +50,57 @@ namespace Plu.Platform.Domain.Impl.TourUser
         /// </summary>
         /// <param name="Id"></param>
         /// <returns></returns>
-        public ResultWithCodeEntity<TourUserModel> GetInfo(string Id)
+        public ResultWithCodeEntity<TourUserDTO> GetInfo(string Id)
         {
             try
             {
-                var item = tourUserRepository.GetInfo(Id);
-                return new ResultWithCodeEntity<TourUserModel>
-                {
-                    Code = ResultCode.Success,
-                    Data = item
-                };
+                var info = tourUserRepository.GetInfo(Id);
+                var res = Mapper.Map<TourUserDTO>(info);
+                return Result.Success<TourUserDTO>(res);
             }
             catch (Exception)
             {
-
-                return new ResultWithCodeEntity<TourUserModel>
-                {
-                    Code = ResultCode.ExceptionError,
-                    Data = new TourUserModel()
-                };
+                return Result.Error<TourUserDTO>(ResultCode.ExceptionError);
             }
-
         }
         /// <summary>
         /// 新增
         /// </summary>
         /// <param name="entity"></param>
         /// <returns></returns>
-        public ResultWithCodeEntity AddOrEdit(TourUserModel entity)
+        public ResultWithCodeEntity AddOrEdit(TourUserDTO entity)
         {
             try
             {
-                int result = 0;
-                if (!string.IsNullOrEmpty(entity.id))
+                var res = new TourUserModel();
+                var result = false;
+                if (!string.IsNullOrEmpty(entity.Id))
                 {
-                    var detail = tourUserRepository.GetInfo(entity.id);
-
-                    ///赋值
-                    PropertyInfo[] propertys = entity.GetType().GetProperties();
-                    foreach (var item in propertys)
-                    {
-                        var val = item.GetValue(entity);
-                        //不为空的都赋值
-                        if (val != null)
-                        {
-                            foreach (var item1 in detail.GetType().GetProperties())
-                            {
-                                if (item1.Name == item.Name)
-                                {
-                                    item1.SetValue(detail, val);
-                                    break;
-                                }
-                            }
-                        }
-                    }
-                    result = tourUserRepository.Update(detail);
+                    var detail = tourUserRepository.GetInfo(entity.Id);
+                    res = (TourUserModel)Mapper.Map(entity, detail, entity.GetType(), detail.GetType());
+                    res.modify_time = DateTime.Now;
+                    result = tourUserRepository.Update(res);
                 }
                 else
                 {
-                    entity.id = DateTime.Now.ToString("yyyyMMddHHmmss") + new Random(100).Next(100, 999);
-                    entity.status = "1";
-                    result = tourUserRepository.Add(entity);
+                    entity.Id = DateTime.Now.ToString("yyyyMMddHHmmss") + new Random(100).Next(100, 999);
+                    //记录一下 数据库设置默认1
+                    //entity.status = "1";
+                    res = Mapper.Map<TourUserModel>(entity);
+                    res.status = "1";
+                    res.create_time = DateTime.Now;
+                    result = tourUserRepository.Add(res);
                 }
-                if (result > 0)
-                    return new ResultWithCodeEntity { Code = ResultCode.Success };
-                else
-                    return new ResultWithCodeEntity { Code = ResultCode.DefaultError };
 
+                if (result)
+                    return Result.Success();
+                else
+                    return Result.Error(ResultCode.DefaultError);
             }
             catch (Exception ex)
             {
-                return new ResultWithCodeEntity
-                {
-                    Code = ResultCode.ExceptionError,
-                };
+                return Result.Error(ResultCode.ExceptionError);
             }
-
         }
         /// <summary>
         /// 通过ID删除
@@ -133,18 +113,14 @@ namespace Plu.Platform.Domain.Impl.TourUser
             {
                 var result = tourUserRepository.Delete(Id);
                 if (result > 0)
-                    return new ResultWithCodeEntity { Code = ResultCode.Success };
+                    return Result.Success();
                 else
-                    return new ResultWithCodeEntity { Code = ResultCode.DefaultError };
+                    return Result.Error(ResultCode.ExceptionError);
 
             }
             catch (Exception ex)
             {
-
-                return new ResultWithCodeEntity
-                {
-                    Code = ResultCode.ExceptionError,
-                };
+                return Result.Error(ResultCode.ExceptionError);
             }
         }
     }

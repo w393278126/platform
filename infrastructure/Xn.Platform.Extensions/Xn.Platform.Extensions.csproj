@@ -99,7 +99,6 @@
     <Compile Include="Sms\DHSTChannel.cs" />
     <Compile Include="ThreadedTimerActionBlock.cs" />
     <Compile Include="UrlHelper.cs" />
-    <Compile Include="WCSCloudCode.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="packages.config" />

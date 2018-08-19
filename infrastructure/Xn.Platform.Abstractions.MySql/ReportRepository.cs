@@ -17,8 +17,8 @@ namespace Xn.Platform.Data.MySql.Report
 
         protected ReportRepository()
         {
-            ConnectionString = ConfigSetting.ConnectionReport;
-            SlaveConnectionString = ConfigSetting.ConnectionReportReadOnly;
+            ConnectionString = ConfigSetting.ConnectionLongzhuSportsEntities;
+            SlaveConnectionString = ConfigSetting.ConnectionLongzhuSportsEntitiesReadOnly;
             CurrentTableName = SqlMapperExtensions.GetTableName(Type);
         }
 
@@ -129,7 +129,7 @@ namespace Xn.Platform.Data.MySql.Report
 
         public void Truncate(IDictionary<string, string> parameters)
         {
-            using (var connection = new MySqlConnection(ConfigSetting.ConnectionReportDDL))
+            using (var connection = new MySqlConnection(ConfigSetting.ConnectionLongzhuSportsEntities))
             {
                 connection.Open();
                 connection.Execute(string.Format("truncate table {0}", CurrentTableName));

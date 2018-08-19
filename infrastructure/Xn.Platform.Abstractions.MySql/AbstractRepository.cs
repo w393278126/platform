@@ -19,8 +19,8 @@ namespace Xn.Platform.Data.MySql
 
         protected AbstractRepository()
         {
-            ConnectionString = ConfigSetting.ConnectionHome;
-            SlaveConnectionString = ConfigSetting.ConnectionHomeReadOnly;
+            ConnectionString = ConfigSetting.ConnectionLongzhuSportsEntities;
+            SlaveConnectionString = ConfigSetting.ConnectionLongzhuSportsEntitiesReadOnly;
             Type = typeof(T);
         }
 
@@ -212,6 +212,47 @@ namespace Xn.Platform.Data.MySql
                 Update(entity);
             }
             return entity;
+        }
+
+        protected void InsertNoDefaultId(T entity)
+        {
+            var tableName = SqlMapperExtensions.GetTableName(Type);
+            var allProperties = SqlMapperExtensions.TypePropertiesCache(Type);
+            var keyProperties = SqlMapperExtensions.KeyPropertiesCache(Type);
+            var computedProperties = SqlMapperExtensions.ComputedPropertiesCache(Type);
+            var allPropertiesExceptKeyAndComputed = allProperties.ToList();
+
+            if (keyProperties.Count != 1)
+                throw new DataException("Get<T> only supports an entity with a single [Key] property");
+            var idProperty = keyProperties.First();
+
+            var sbColumnList = new StringBuilder(null);
+            for (var i = 0; i < allPropertiesExceptKeyAndComputed.Count(); i++)
+            {
+                var property = allPropertiesExceptKeyAndComputed.ElementAt(i);
+                sbColumnList.AppendFormat("`{0}`", property.Name);
+                if (i < allPropertiesExceptKeyAndComputed.Count() - 1)
+                    sbColumnList.Append(", ");
+            }
+
+            var sbParameterList = new StringBuilder(null);
+            for (var i = 0; i < allPropertiesExceptKeyAndComputed.Count(); i++)
+            {
+                var property = allPropertiesExceptKeyAndComputed.ElementAt(i);
+                sbParameterList.AppendFormat("@{0}", property.Name);
+                if (i < allPropertiesExceptKeyAndComputed.Count() - 1)
+                    sbParameterList.Append(", ");
+            }
+            //string sql = String.Format("insert into {0} ({1},Status,LastChanged) values ({2},1,ADDTIME(now(),'00:00:10'))", tableName, sbColumnList.ToString(), sbParameterList.ToString());
+
+            string sql = String.Format("insert into {0} ({1}) values ({2});select LAST_INSERT_ID()", tableName, sbColumnList.ToString(), sbParameterList.ToString());
+
+            OpenConnection(conn =>
+            {
+                var inserted = conn.Execute(sql, entity);
+                if (inserted <= 0)
+                    idProperty.SetValue(entity, null, null);
+            });
         }
 
         public virtual T MakePersistentNoException(T entity)

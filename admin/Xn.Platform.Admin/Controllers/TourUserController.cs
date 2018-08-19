@@ -18,7 +18,7 @@ namespace Xn.Platform.Admin.Controllers
         public ActionResult Index(int pageIndex = 1, int pageSize = 10)
         {
             var userName = Request.Params["username"];
-            var result = tourUserService.PageList(new TourUserRequest.PageResult
+            var result = tourUserService.PageList(new TourUserRequest
             {
                 PageSize = pageSize,
                 PageIndex = pageIndex,
@@ -35,7 +35,7 @@ namespace Xn.Platform.Admin.Controllers
         public ActionResult Edit()
         {
             var Id = Request.Params["Id"];
-            TourUserModel model = new TourUserModel();
+            TourUserDTO model = new TourUserDTO();
             ///编辑
             if (!string.IsNullOrEmpty(Id) && Id != "0")
             {
@@ -54,10 +54,8 @@ namespace Xn.Platform.Admin.Controllers
             var result = tourUserService.Delete(Id);
             return Json(result, JsonRequestBehavior.AllowGet);
         }
-        public JsonResult AddOrEdit(TourUserModel entity)
+        public JsonResult AddOrEdit(TourUserDTO entity)
         {
-            entity.create_time = DateTime.Now;
-            entity.modify_time = DateTime.Now;
             var result = tourUserService.AddOrEdit(entity);
             return Json(result, JsonRequestBehavior.AllowGet);
         }

@@ -688,7 +688,6 @@
     <Content Include="Plugins\layui\font\iconfont.ttf" />
     <Content Include="Plugins\layui\font\iconfont.woff" />
     <Content Include="appSettings.dev.config" />
-    <Content Include="connectionStrings.dev.config" />
     <Content Include="mongoSettings.dev.config" />
     <Content Include="redisSettings.dev.config" />
     <Content Include="connectionStrings.dev.config" />
@@ -747,6 +746,10 @@
     <ProjectReference Include="..\..\domain\Xn.Platform.Domain\Xn.Platform.Domain.csproj">
       <Project>{30cada35-527b-4754-943f-84834d65ed27}</Project>
       <Name>Xn.Platform.Domain</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\domain\Xn.Platform.Interface\Xn.Platform.Interface.csproj">
+      <Project>{D11D9BDD-FF43-4668-BCC2-3F1C66FD56CB}</Project>
+      <Name>Xn.Platform.Interface</Name>
     </ProjectReference>
     <ProjectReference Include="..\..\infrastructure\Xn.Platform.Abstractions.Domain\Xn.Platform.Abstractions.Domain.csproj">
       <Project>{3F2E7890-97E1-4680-B0D9-3766CE846CA0}</Project>
