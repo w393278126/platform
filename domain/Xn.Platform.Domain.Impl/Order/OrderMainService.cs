@@ -25,20 +25,15 @@ namespace Xn.Platform.Domain.Impl.Order
         {
             try
             {
-                return new ResultWithCodeEntity<PagedEntity<OrderMainResponse.PageResponse>>
-                {
-                    Code = ResultCode.Success,
-                    Data = orderMainRepository.PageInfo(request)
-                };
+
+                var data = orderMainRepository.PageInfo(request);
+                return Result.Success(data);
+
             }
             catch (Exception ex)
             {
+                return Result.Error<PagedEntity<OrderMainResponse.PageResponse>>(ResultCode.ExceptionError);
 
-                return new ResultWithCodeEntity<PagedEntity<OrderMainResponse.PageResponse>>
-                {
-                    Code = ResultCode.ExceptionError,
-                    Data = new PagedEntity<OrderMainResponse.PageResponse>()
-                };
             }
 
         }
@@ -81,8 +76,7 @@ namespace Xn.Platform.Domain.Impl.Order
             }
             catch (Exception ex)
             {
-                result.Code = ResultCode.ExceptionError;
-                return result;
+                return Result.Error<object>(ResultCode.ExceptionError, ex.Message);
             }
 
         }
