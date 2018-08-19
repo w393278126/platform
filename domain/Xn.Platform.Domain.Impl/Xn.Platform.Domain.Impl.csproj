@@ -36,9 +36,12 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Compile Include="Admin\AdminUserService.cs" />
     <Compile Include="Admin\LoginService.cs" />
     <Compile Include="Admin\RoleResourceService.cs" />
     <Compile Include="Admin\ValidateCodeService.cs" />
+    <Compile Include="AutoMappers\Admin\AdminProfile.cs" />
+    <Compile Include="AutoMappers\Configuration.cs" />
     <Compile Include="BaseService.cs" />
     <Compile Include="Order\OrderHotelService.cs" />
     <Compile Include="Order\OrderPlaneService.cs" />
@@ -74,9 +77,6 @@
     <Reference Include="Consul, Version=0.7.2.3, Culture=neutral, PublicKeyToken=20a6ad9a81df1d95, processorArchitecture=MSIL">
       <HintPath>..\..\build\packages\Consul.0.7.2.3\lib\net45\Consul.dll</HintPath>
       <Private>True</Private>
-    </Reference>
-    <Reference Include="Danmaku">
-      <HintPath>..\..\build\packages\Danmaku.dll</HintPath>
     </Reference>
     <Reference Include="Dapper, Version=1.40.0.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\..\build\packages\Dapper.1.42\lib\net45\Dapper.dll</HintPath>
@@ -204,6 +204,10 @@
     <ProjectReference Include="..\Xn.Platform.Domain\Xn.Platform.Domain.csproj">
       <Project>{30CADA35-527B-4754-943F-84834D65ED27}</Project>
       <Name>Plu.Platform.Domain</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Xn.Platform.Interface\Xn.Platform.Interface.csproj">
+      <Project>{d11d9bdd-ff43-4668-bcc2-3f1c66fd56cb}</Project>
+      <Name>Xn.Platform.Interface</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>

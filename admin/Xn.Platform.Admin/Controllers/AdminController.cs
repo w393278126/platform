@@ -10,6 +10,7 @@ using Xn.Platform.Infrastructure.Web;
 using Xn.Platform.Domain.Admin;
 using Xn.Platform.Abstractions.Domain;
 using Xn.Platform.Domain.Impl.Admin;
+using Xn.Platform.Interface.Admin;
 
 namespace Xn.Platform.Admin.Controllers
 {
@@ -17,6 +18,11 @@ namespace Xn.Platform.Admin.Controllers
     {
         private static LoginService loginService = new LoginService();
         private static ValidateCodeService validateCodeService = new ValidateCodeService();
+        private static IAdminInterface adminService;
+        public AdminController()
+        {
+            adminService = GetService<IAdminInterface>();
+        }
         // GET: Login
         public ActionResult Index()
         {
@@ -28,7 +34,7 @@ namespace Xn.Platform.Admin.Controllers
         {
             try
             {
-                if (string.IsNullOrEmpty(admin.UserName) || string.IsNullOrEmpty(admin.Password)|| string.IsNullOrEmpty(admin.Code))
+                if (string.IsNullOrEmpty(admin.UserName) || string.IsNullOrEmpty(admin.Password) || string.IsNullOrEmpty(admin.Code))
                 {
                     return Json(Result.Error(ResultCode.ParameterError));
                 }
@@ -45,6 +51,12 @@ namespace Xn.Platform.Admin.Controllers
         {
             var bytes = validateCodeService.GetValidateCode();
             return File(bytes, @"image/jpeg");
+        }
+
+        public ActionResult TestAdmin()
+        {
+            adminService.TestAdmin();
+            return Json(Result.Success());
         }
     }
 

@@ -18,8 +18,13 @@ namespace Xn.Platform.Admin
             FilterConfig.RegisterGlobalFilters(GlobalFilters.Filters);
             RouteConfig.RegisterRoutes(RouteTable.Routes);
             BundleConfig.RegisterBundles(BundleTable.Bundles);
+            CustomInitialize();
+        }
 
-            //DependencyInjectionConfig.Register(Assembly.GetExecutingAssembly());
+        private void CustomInitialize()
+        {
+            Domain.Impl.AutoMappers.Configuration.Configure();
+            DependencyInjectionConfig.Register(Assembly.GetExecutingAssembly());
         }
     }
 }
