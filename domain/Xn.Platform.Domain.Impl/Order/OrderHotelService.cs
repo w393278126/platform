@@ -20,17 +20,15 @@ namespace Xn.Platform.Domain.Impl.Order
         /// <returns></returns>
         public ResultWithCodeEntity<OrderHotelModel> GetInfo(string Id)
         {
-            var result = new ResultWithCodeEntity<OrderHotelModel>();
             try
             {
-                result.Code = ResultCode.Success;
-                result.Data = orderHotelRepository.GetInfo(Id);
+               var data = orderHotelRepository.GetInfo(Id);
+                return Result.Success(data);
             }
             catch (Exception ex)
             {
-                result.Code = ResultCode.ExceptionError;
+                return Result.Error<OrderHotelModel>(ResultCode.ExceptionError);
             }
-            return result;
         }
         /// <summary>
         /// 预定
