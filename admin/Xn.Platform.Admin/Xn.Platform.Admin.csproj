@@ -687,7 +687,6 @@
     <Content Include="Plugins\layui\font\iconfont.ttf" />
     <Content Include="Plugins\layui\font\iconfont.woff" />
     <Content Include="appSettings.dev.config" />
-    <Content Include="connectionStrings.dev.config" />
     <Content Include="mongoSettings.dev.config" />
     <Content Include="redisSettings.dev.config" />
     <Content Include="connectionStrings.dev.config" />

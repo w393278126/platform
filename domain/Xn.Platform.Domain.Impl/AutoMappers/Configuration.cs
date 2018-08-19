@@ -12,6 +12,7 @@ namespace Xn.Platform.Domain.Impl.AutoMappers
             Mapper.Initialize(cfg =>
             {
                 cfg.AddProfile<AdminProfile>();
+                cfg.AddProfile<UserProfile>();
             });
         }
     }

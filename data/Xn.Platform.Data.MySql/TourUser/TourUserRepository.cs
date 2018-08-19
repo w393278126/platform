@@ -34,7 +34,7 @@ namespace Xn.Platform.Data.MySql.TourUser
         /// </summary>
         /// <param name="request"></param>
         /// <returns></returns>
-        public PagedEntity<TourUserModel> PageList(TourUserRequest.PageResult request)
+        public PagedEntity<TourUserModel> PageList(TourUserRequest request)
         {
             var parameter = new List<Tuple<string, string, object>>();
             parameter.Add(new Tuple<string, string, object>("status", "=", 1));
