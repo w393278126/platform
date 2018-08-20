@@ -75,5 +75,14 @@ namespace Xn.Platform.Admin.Controllers
             var model = orderMainService.GetInfo(orderId, type);
             return View(url, model.Data);
         }
+        /// <summary>
+        /// 跳转到编辑页面
+        /// </summary>
+        /// <param name="Id"></param>
+        /// <returns></returns>
+        public ActionResult Edit(string Id)
+        {
+            return View();
+        }
     }
 }

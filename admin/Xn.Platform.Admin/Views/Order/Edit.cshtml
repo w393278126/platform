@@ -1,0 +1,197 @@
+﻿@{
+    ViewBag.Title = "订单编辑";
+    Layout = "~/Views/Shared/_LayoutPage.cshtml";
+}
+<body>
+    <div>
+        <fieldset class="layui-elem-field">
+            <legend>基本信息</legend>
+            <div class="layui-field-box">
+                <table class="layui-table">
+                    <colgroup>
+                        <col width="150" />
+                    </colgroup>
+                    <tbody>
+                        <tr>
+                            <td style="text-align:right">订单编号：</td>
+                            <td> 49845628584</td>
+                        </tr>
+
+                        <tr>
+                            <td style="text-align:right">订单状态：</td>
+                            <td>
+                                待付款
+                            </td>
+                        </tr>
+                        <tr>
+                            <td style="text-align:right">创建时间：</td>
+                            <td>2015.11.23 14：24：49</td>
+                        </tr>
+                        <tr>
+                            <td style="text-align:right">付款时间：</td>
+                            <td>  2015.11.23 14：54：49 </td>
+                        </tr>
+                        <tr>
+                            <td style="text-align:right">订单总额：</td>
+                            <td>￥ 123.55</td>
+                        </tr>
+
+                        <tr>
+                            <td style="text-align:right">供应商：</td>
+                            <td>携程</td>
+                        </tr>
+
+                </table>
+            </div>
+        </fieldset>
+        <fieldset class="layui-elem-field">
+            <legend>商品信息</legend>
+            <div class="layui-field-box">
+                <table class="layui-table">
+                    <colgroup>
+                        <col width="150" />
+                    </colgroup>
+                    <tbody>
+                        <tr>
+                            <td style="text-align:right">商品名称：</td>
+                            <td> 日本五日跟团特价</td>
+                        </tr>
+
+                        <tr>
+                            <td style="text-align:right">商品单价：</td>
+                            <td>
+                                ￥1888.88
+                            </td>
+                        </tr>
+                        <tr>
+                            <td style="text-align:right">商品数量 ：</td>
+                            <td>2</td>
+                        </tr>
+                        <tr>
+                            <td style="text-align:right">订单总价：</td>
+                            <td id="td_totalAmount">
+                                <div id="showdiv">
+                                    <span id="span_totalAmount">￥<i>4000.00</i></span>
+                                </div> 
+                                <div id="formdiv">
+
+                                </div>
+                            </td>
+
+                        </tr>
+                        
+                </table>
+            </div>
+        </fieldset>
+        <fieldset class="layui-elem-field">
+            <legend>联系人</legend>
+            <div class="layui-field-box">
+                <table class="layui-table">
+                    <colgroup>
+                        <col width="150" />
+                    </colgroup>
+                    <tbody>
+                        <tr>
+                            <td style="text-align:right">联系人：</td>
+                            <td>王菲</td>
+                        </tr>
+
+                        <tr>
+                            <td style="text-align:right">电话：</td>
+                            <td>
+                                15844440000
+                            </td>
+                        </tr>
+                </table>
+            </div>
+        </fieldset>
+        <fieldset class="layui-elem-field">
+            <legend>出行人信息</legend>
+            <div class="layui-field-box">
+                <div class="layui-form-item">
+                    <div class="layui-inline tool-btn">
+                        <button class="layui-btn layui-btn-small layui-btn-normal addBtn hidden-xs" data-url="menu-add.html"><i class="layui-icon">&#xe654;</i></button>
+                    </div>
+                </div>
+                <table class="layui-table">
+                    <colgroup>
+                        <col />
+                    </colgroup>
+                    <thead>
+                        <tr>
+                            <th>姓</th>
+                            <th>名</th>
+                            <th>旅客类型</th>
+                            <th>性别</th>
+                            <th>国籍</th>
+                            <th>出生日期</th>
+                            <th>手机</th>
+                            <th>身份证号码</th>
+                            <th>护照号</th>
+                            <th>操作</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>张(ZHANG)</td>
+                            <td>三(SAN)</td>
+                            <td> 成人</td>
+                            <td>男</td>
+                            <td>中国</td>
+                            <td>19990808</td>
+                            <td>15844440000</td>
+                            <td>123456199908084444</td>
+                            <td>E1055084454</td>
+                            <td>  <button class="layui-btn layui-btn-small layui-btn-warm addBtn hidden-xs" data-url="menu-add.html"><i class="layui-icon">&#xe640;</i></button></td>
+                        </tr>
+                        <tr>
+                            <td>李(LI)</td>
+                            <td>四(SI)</td>
+                            <td>成人</td>
+                            <td>男</td>
+                            <td>中国</td>
+                            <td>19990808</td>
+                            <td>15144440000</td>
+                            <td>123456199908084444</td>
+                            <td>E1055084454</td>
+                            <td>  <button class="layui-btn layui-btn-small layui-btn-warm addBtn hidden-xs" data-url="menu-add.html"><i class="layui-icon">&#xe640;</i></button></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </fieldset>
+    </div>
+    <script>
+        layui.use(['form', 'laypage', 'jquery', 'laydate', 'layer', 'element', 'dialog'], function () {
+            var laypage = layui.laypage,
+                layer = layui.layer,
+                $ = layui.jquery,
+                laydate = layui.laydate,
+                form = layui.form(),
+                dialog = layui.dialog;
+            var totalAmount_val = "";
+            $("#td_totalAmount span").click(function () {
+                totalAmount_val = $("#td_totalAmount span i").html();
+                $("#showdiv").addClass("layui-hide");
+                $("#formdiv").removeClass("layui-hide");
+                var htmlVal = "<div class=\"layui-input-inline\"><input name=\"totalAmount\"  id=\"totalAmount\" placeholder=\"￥\"  autocomplete=\"off\" class=\"layui-input\" type=\"text\"></div>";
+                htmlVal += " <div class=\"layui-input-inline\"><button class=\"layui-btn\" id=\"btn_save\">保存</button></div>";
+                htmlVal += " <div class=\"layui-input-inline\"><button class=\"layui-btn layui-btn-normal\" id=\"btn_cancel\">取消</button></div>";
+                $("#formdiv").html(htmlVal);
+                $("#totalAmount").val(totalAmount_val);
+                $("#totalAmount").focus();
+                $("#btn_cancel").click(function () {
+                    var htmlVal = "<span>￥<i>" + totalAmount_val + "</i></span>";
+                    $("#formdiv").addClass("layui-hide");
+                    $("#showdiv").removeClass("layui-hide");
+                 
+                });
+                $("#btn_save").click(function () {
+                    location.reload();
+                })
+                return false;
+            });
+           
+        });
+    </script>
+</body>

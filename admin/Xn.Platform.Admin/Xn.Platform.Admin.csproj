@@ -729,6 +729,7 @@
     <Content Include="Views\Order\Detail\Ticket.cshtml" />
     <Content Include="Views\OrderPlane\RefundTicket.cshtml" />
     <Content Include="Views\OrderHotel\RefundHotel.cshtml" />
+    <Content Include="Views\Order\Edit.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Views\OrderTicket\" />
