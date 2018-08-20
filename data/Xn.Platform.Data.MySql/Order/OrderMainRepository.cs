@@ -22,7 +22,7 @@ namespace Xn.Platform.Data.MySql.Order
         /// </summary>
         /// <param name="request"></param>
         /// <returns></returns>
-        public PagedEntity<OrderMainResponse.PageResponse> PageInfo(OrderMainRequest.PageRequest request)
+        public PagedEntity<OrderMainListDTO> PageInfo(OrderMainRequest.PageRequest request)
         {
             StringBuilder strSql = new StringBuilder();
             int PageIndex = (request.PageIndex - 1) * request.PageSize;
@@ -30,14 +30,14 @@ namespace Xn.Platform.Data.MySql.Order
             strSql.Append(" FROM t_order_ordermain o ");
             strSql.Append(" LEFT JOIN t_tour_user u ON o.userID=u.id ");
             strSql.Append(" WHERE 1=1 ");
-            if (!string.IsNullOrEmpty(request.userName))
-                strSql.Append(" AND username like CONCAT('%',@userName,'%') ");
-            if (request.orderType > 0)
-                strSql.Append(" AND orderType=@orderType ");
-            if (!string.IsNullOrEmpty(request.mobile))
-                strSql.Append(" AND mobile like CONCAT('%',@mobile,'%') ");
-            if (!string.IsNullOrEmpty(request.orderId))
-                strSql.Append(" AND orderId like CONCAT('%',@orderId,'%') ");
+            if (!string.IsNullOrEmpty(request.UserName))
+                strSql.Append(" AND username like CONCAT('%',@UserName,'%') ");
+            if (request.OrderType > 0)
+                strSql.Append(" AND orderType=@OrderType ");
+            if (!string.IsNullOrEmpty(request.Mobile))
+                strSql.Append(" AND mobile like CONCAT('%',@Mobile,'%') ");
+            if (!string.IsNullOrEmpty(request.OrderId))
+                strSql.Append(" AND orderId like CONCAT('%',@OrderId,'%') ");
             if (!string.IsNullOrEmpty(request.SpayDate))
                 strSql.Append(" AND payDate>@SpayDate ");
             if (!string.IsNullOrEmpty(request.EpayDate))
@@ -52,10 +52,10 @@ namespace Xn.Platform.Data.MySql.Order
 
             var parameters = new
             {
-                request.userName,
-                request.orderType,
-                request.mobile,
-                request.orderId,
+                request.UserName,
+                request.OrderType,
+                request.Mobile,
+                request.OrderId,
                 request.SpayDate,
                 request.EpayDate,
                 request.SaddDate,
@@ -63,19 +63,19 @@ namespace Xn.Platform.Data.MySql.Order
                 PageIndex,
                 request.PageSize
             };
-            var list = new List<OrderMainResponse.PageResponse>();
-            var pageCount = new OrderMainResponse.PageCount();
+            var list = new List<OrderMainListDTO>();
+            var pageCount = new PageCount();
 
             OpenSlaveConnection(conn =>
             {
                 using (var multiReader = conn.QueryMultiple(strSql.ToString(), parameters))
                 {
-                    list = multiReader.Read<OrderMainResponse.PageResponse>().ToList();
-                    pageCount = multiReader.Read<OrderMainResponse.PageCount>().FirstOrDefault();
+                    list = multiReader.Read<OrderMainListDTO>().ToList();
+                    pageCount = multiReader.Read<PageCount>().FirstOrDefault();
                 }
 
             });
-            return new PagedEntity<OrderMainResponse.PageResponse>(pageCount.TotalCount, list);
+            return new PagedEntity<OrderMainListDTO>(pageCount.TotalCount, list);
 
         }
         /// <summary>
@@ -92,17 +92,17 @@ namespace Xn.Platform.Data.MySql.Order
         /// </summary>
         /// <param name="orderId"></param>
         /// <returns></returns>
-        public OrderMainResponse.PageResponse GetDetail(string orderId)
+        public OrderMainListDTO GetDetail(string orderId)
         {
             StringBuilder strSql = new StringBuilder();
             strSql.Append(" SELECT u.username,u.mobile,o.* ");
             strSql.Append(" FROM t_order_ordermain o ");
             strSql.Append(" LEFT JOIN t_tour_user u on o.userID=u.id ");
             strSql.Append(" WHERE o.orderId=@orderId ");
-            var list = new List<OrderMainResponse.PageResponse>();
+            var list = new List<OrderMainListDTO>();
             OpenSlaveConnection(conn =>
             {
-                list = conn.Query<OrderMainResponse.PageResponse>(strSql.ToString(), new { orderId }).ToList();
+                list = conn.Query<OrderMainListDTO>(strSql.ToString(), new { orderId }).ToList();
             });
             return list.FirstOrDefault();
         }

@@ -297,48 +297,233 @@ namespace Xn.Platform.Domain.Order
         public string mark20 { get; set; }
     }
 
-    public class OrderMainResponse
+    public class OrderMainDTO
     {
-        public class PageResponse : OrderMainModel
+        /// <summary>
+        /// id
+        /// </summary>		
+
+        public string Id { get; set; }
+        /// <summary>
+        /// orderID
+        /// </summary>		
+
+        public string OrderID { get; set; }
+        /// <summary>
+        /// channelID
+        /// </summary>		
+
+        public string ChannelID { get; set; }
+        /// <summary>
+        /// orderType
+        /// </summary>		
+
+        public int OrderType { get; set; }
+        /// <summary>
+        /// num
+        /// </summary>		
+
+        public int Num { get; set; }
+        /// <summary>
+        /// userID
+        /// </summary>		
+
+        public string UserID { get; set; }
+        /// <summary>
+        /// on update CURRENT_TIMESTAMP
+        /// </summary>		
+
+        public DateTime AddDate { get; set; }
+        /// <summary>
+        /// on update CURRENT_TIMESTAMP
+        /// </summary>		
+
+        public DateTime SendDate { get; set; }
+        /// <summary>
+        /// states
+        /// </summary>		
+
+        public int States { get; set; }
+        /// <summary>
+        /// receiverName
+        /// </summary>		
+
+        public string ReceiverName { get; set; }
+        /// <summary>
+        /// receiverTelphone
+        /// </summary>		
+
+        public string ReceiverTelphone { get; set; }
+        /// <summary>
+        /// payName
+        /// </summary>		
+
+        public string PayName { get; set; }
+        /// <summary>
+        /// payTelephone
+        /// </summary>		
+
+        public string PayTelephone { get; set; }
+        /// <summary>
+        /// payType
+        /// </summary>		
+
+        public int PayType { get; set; }
+        /// <summary>
+        /// payTSN
+        /// </summary>		
+
+        public string PayTSN { get; set; }
+        /// <summary>
+        /// on update CURRENT_TIMESTAMP
+        /// </summary>		
+
+        public DateTime PayDate { get; set; }
+        /// <summary>
+        /// orderAmount
+        /// </summary>		
+
+        public decimal OrderAmount { get; set; }
+        /// <summary>
+        /// payAmount
+        /// </summary>		
+
+        public decimal PayAmount { get; set; }
+        /// <summary>
+        /// refundID
+        /// </summary>		
+
+        public string RefundID { get; set; }
+        /// <summary>
+        /// on update CURRENT_TIMESTAMP
+        /// </summary>		
+
+        public DateTime RefundDate { get; set; }
+        /// <summary>
+        /// refundAmout
+        /// </summary>		
+
+        public decimal RefundAmout { get; set; }
+        /// <summary>
+        /// expressAmount
+        /// </summary>		
+
+        public decimal ExpressAmount { get; set; }
+        /// <summary>
+        /// postType
+        /// </summary>		
+
+        public int PostType { get; set; }
+        /// <summary>
+        /// expressCode
+        /// </summary>		
+
+        public string ExpressCode { get; set; }
+        /// <summary>
+        /// expressName
+        /// </summary>		
+
+        public string ExpressName { get; set; }
+        /// <summary>
+        /// expressOdd
+        /// </summary>		
+
+        public string ExpressOdd { get; set; }
+        /// <summary>
+        /// provinceID
+        /// </summary>		
+
+        public string ProvinceID { get; set; }
+        /// <summary>
+        /// provinceName
+        /// </summary>		
+
+        public string ProvinceName { get; set; }
+        /// <summary>
+        /// cityID
+        /// </summary>		
+
+        public string CityID { get; set; }
+        /// <summary>
+        /// cityName
+        /// </summary>		
+
+        public string CityName { get; set; }
+        /// <summary>
+        /// areaID
+        /// </summary>		
+
+        public string AreaID { get; set; }
+        /// <summary>
+        /// address
+        /// </summary>		
+
+        public string Address { get; set; }
+        /// <summary>
+        /// areaName
+        /// </summary>		
+
+        public string AreaName { get; set; }
+        /// <summary>
+        /// platform
+        /// </summary>		
+
+        public string Platform { get; set; }
+        /// <summary>
+        /// deviceID
+        /// </summary>		
+
+        public string DeviceID { get; set; }
+        /// <summary>
+        /// longitude
+        /// </summary>		
+
+        public string Longitude { get; set; }
+        /// <summary>
+        /// latitude
+        /// </summary>		
+
+        public string Latitude { get; set; }
+    }
+    public class OrderMainListDTO : OrderMainDTO
+    {
+        /// <summary>
+        /// 用户名
+        /// </summary>
+        public string UserName { get; set; }
+        /// <summary>
+        /// 联系方式
+        /// </summary>
+        public string Mobile { get; set; }
+        public string OrderTypeName
         {
-            /// <summary>
-            /// 用户名
-            /// </summary>
-            public string userName { get; set; }
-            /// <summary>
-            /// 联系方式
-            /// </summary>
-            public string mobile { get; set; }
-            public string orderTypeName
+            get
             {
-                get
+                string value = "未知";
+                switch (OrderType)
                 {
-                    string value = "未知";
-                    switch (orderType)
-                    {
-                        case 1:
-                            value = "机票";
-                            break;
-                        case 2:
-                            value = "酒店";
-                            break;
-                        case 3:
-                            value = "签证";
-                            break;
-                        case 4:
-                            value = "门票";
-                            break;
-                        default:
-                            break;
-                    }
-                    return value;
+                    case 1:
+                        value = "机票";
+                        break;
+                    case 2:
+                        value = "酒店";
+                        break;
+                    case 3:
+                        value = "签证";
+                        break;
+                    case 4:
+                        value = "门票";
+                        break;
+                    default:
+                        break;
                 }
+                return value;
             }
         }
-        public class PageCount
-        {
-            public int TotalCount { get; set; }
-        }
+    }
+    public class PageCount
+    {
+        public int TotalCount { get; set; }
     }
 
     /// <summary>
@@ -354,20 +539,20 @@ namespace Xn.Platform.Domain.Order
             /// <summary>
             /// 用户名
             /// </summary>
-            public string userName { get; set; }
+            public string UserName { get; set; }
             /// <summary>
             /// 联系方式
             /// </summary>
-            public string mobile { get; set; }
+            public string Mobile { get; set; }
             /// <summary>
             /// 订单ID
             /// </summary>
-            public string orderId { get; set; }
+            public string OrderId { get; set; }
             /// <summary>
             /// 订单类型
             /// 1、机票 2、酒店 3、签证4、门票
             /// </summary>
-            public int orderType { get; set; }
+            public int OrderType { get; set; }
             /// <summary>
             /// 支付时间
             /// </summary>

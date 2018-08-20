@@ -1,5 +1,5 @@
 ﻿@using Xn.Platform.Domain.Order;
-@model List<OrderPlaneResponse.OrderPlan>
+@model List<OrderPlaneDTO>
 @{
     /**/
 
@@ -12,10 +12,10 @@
     {
         <blockquote class="layui-elem-quote layui-quote-nm">
             <div class="layui-inline">
-                下单用户： @Model.FirstOrDefault().userName
+                下单用户： @Model.FirstOrDefault().UserName
             </div>
             <div class="layui-inline" style="margin-left:100px">
-                联系方式：@Model.FirstOrDefault().mobile
+                联系方式：@Model.FirstOrDefault().Mobile
             </div>
         </blockquote>
         foreach (var item in Model)
@@ -25,56 +25,56 @@
                     <col width="150" />
                 </colgroup>
                 <thead>
-                    <tr><td colspan="2" style="text-align:center">订单号:@item.orderID</td></tr>
+                    <tr><td colspan="2" style="text-align:center">订单号:@item.OrderId</td></tr>
                 </thead>
                 <tbody>
 
 
                     <tr>
                         <td style="text-align:right">航空公司：</td>
-                        <td>@item.airways</td>
+                        <td>@item.Airways</td>
                     </tr>
                     <tr>
                         <td style="text-align:right">航班号：</td>
-                        <td>@item.flightNumber</td>
+                        <td>@item.FlightNumber</td>
                     </tr>
                     <tr>
                         <td style="text-align:right">行程：</td>
-                        <td><b>@item.startAddr</b>(@item.startAirport) - <b>@item.destAddr</b>(@item.destAirport) </td>
+                        <td><b>@item.StartAddr</b>(@item.StartAirport) - <b>@item.DestAddr</b>(@item.DestAirport) </td>
                     </tr>
                     <tr>
                         <td style="text-align:right">日期：</td>
-                        <td><span>@item.startDate</span> - <span>@item.destDate</span></td>
+                        <td><span>@item.StartDate</span> - <span>@item.DestDate</span></td>
                     </tr>
                     <tr>
                         <td style="text-align:right">价格：</td>
-                        <td>@item.price</td>
+                        <td>@item.Price</td>
                     </tr>
                     <tr>
                         <td style="text-align:right">乘客姓名：</td>
-                        <td>@item.custName</td>
+                        <td>@item.CustName</td>
                     </tr>
                     <tr>
                         <td style="text-align:right">身份证号：</td>
-                        <td>@item.idCardNo</td>
+                        <td>@item.IdCardNo</td>
                     </tr>
                     <tr>
                         <td style="text-align:right">订单状态：</td>
                         <td>
-                            @item.statusVal
+                            @item.StatusVal
                         </td>
                     </tr>
                 </tbody>
                 <tfoot>
                     <tr>
                         <td colspan="2" style="text-align:center;">
-                            @if (item.states == 1)
+                            @if (item.States == 1)
                             {
-                                <button class="layui-btn layui-btn-normal btn_out" data-url="/orderplane/outofplane" data-id="@item.id" style="width:150px">出票 </button>
+                                <button class="layui-btn layui-btn-normal btn_out" data-url="/orderplane/outofplane" data-id="@item.Id" style="width:150px">出票 </button>
                             }
-                            else if (item.states == 2)
+                            else if (item.States == 2)
                             {
-                                <button class="layui-btn layui-btn-warm btn_return" style="width:150px" data-url="/orderplane/refundticket?id=@item.id">退票 </button>
+                                <button class="layui-btn layui-btn-warm btn_return" style="width:150px" data-url="/orderplane/refundticket?id=@item.Id">退票 </button>
                             }
 
 

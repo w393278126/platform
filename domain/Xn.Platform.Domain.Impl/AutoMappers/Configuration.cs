@@ -13,6 +13,8 @@ namespace Xn.Platform.Domain.Impl.AutoMappers
             {
                 cfg.AddProfile<AdminProfile>();
                 cfg.AddProfile<UserProfile>();
+                cfg.AddProfile<OrderHotelProfile>();
+                cfg.AddProfile<OrderPlaneProfile>();
             });
         }
     }

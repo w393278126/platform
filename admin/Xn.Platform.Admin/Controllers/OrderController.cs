@@ -27,10 +27,10 @@ namespace Xn.Platform.Admin.Controllers
             {
                 PageIndex = pageIndex,
                 PageSize = pageSize,
-                orderType = type,
-                orderId = orderId,
-                userName = userName,
-                mobile = mobile,
+                OrderType = type,
+                OrderId = orderId,
+                UserName = userName,
+                Mobile = mobile,
                 SaddDate = s_addDate,
                 EaddDate = e_addDate,
                 SpayDate = s_payDate,
@@ -44,7 +44,7 @@ namespace Xn.Platform.Admin.Controllers
 
             }
             else
-                return View(new PagedEntity<OrderMainResponse.PageResponse>());
+                return View(new PagedEntity<OrderMainListDTO>());
 
         }
         /// <summary>

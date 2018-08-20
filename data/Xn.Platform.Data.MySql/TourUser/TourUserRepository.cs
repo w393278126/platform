@@ -14,8 +14,8 @@ namespace Xn.Platform.Data.MySql.TourUser
     {
         public TourUsersRepository()
         {
-            ConnectionString = ConfigSetting.ConnectionLongzhuSportsEntities;
-            SlaveConnectionString = ConfigSetting.ConnectionLongzhuSportsEntitiesReadOnly;
+            ConnectionString = ConfigSetting.ConnectionMySqlSportsEntities;
+            SlaveConnectionString = ConfigSetting.ConnectionMySqlSportsEntitiesReadOnly;
         }
         /// <summary>
         /// 获取详情

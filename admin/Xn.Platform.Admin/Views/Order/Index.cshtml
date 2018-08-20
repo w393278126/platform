@@ -1,6 +1,6 @@
 ﻿@using Xn.Platform.Domain.Order;
 @using Xn.Platform.Domain;
-@model PagedEntity<OrderMainResponse.PageResponse>
+@model PagedEntity<OrderMainListDTO>
 @{
     ViewBag.Title = "主订单列表";
     Layout = "~/Views/Shared/_LayoutPage.cshtml";
@@ -109,21 +109,21 @@
                 <tbody>
                     @foreach (var item in Model.Items)
                     {
-                        <tr id='node-@item.id' class="parent collapsed">
-                            <td>@item.id</td>
-                            <td>@item.orderID</td>
-                            <td class="hidden-xs">@item.channelID</td>
-                            <td class="hidden-xs">@item.orderTypeName</td>
-                            <td>@item.num</td>
-                            <td>@item.orderAmount</td>
-                            <td class="hidden-xs">@item.payAmount</td>
-                            <td>@item.userName</td>
-                            <td>@item.mobile</td>
-                            <td>@item.addDate</td>
-                            <td>@item.states</td>
+                        <tr id='node-@item.Id' class="parent collapsed">
+                            <td>@item.Id</td>
+                            <td>@item.OrderID</td>
+                            <td class="hidden-xs">@item.ChannelID</td>
+                            <td class="hidden-xs">@item.OrderTypeName</td>
+                            <td>@item.Num</td>
+                            <td>@item.OrderAmount</td>
+                            <td class="hidden-xs">@item.PayAmount</td>
+                            <td>@item.UserName</td>
+                            <td>@item.Mobile</td>
+                            <td>@item.AddDate</td>
+                            <td>@item.States</td>
                             <td>
                                 <div class="layui-inline">
-                                    <button class="layui-btn layui-btn-mini layui-btn-normal detail_btn" data-url="/order/detail?orderId=@item.orderID&type=@item.orderType"><i class="layui-icon">&#xe63c;</i></button>
+                                    <button class="layui-btn layui-btn-mini layui-btn-normal detail_btn" data-url="/order/detail?orderId=@item.OrderID&type=@item.OrderType"><i class="layui-icon">&#xe63c;</i></button>
                                     @*<button class="layui-btn layui-btn-mini layui-btn-normal  go-btn" data-id="@item.id" data-url="@Url.Action("Edit","Order")"><i class="layui-icon">&#xe642;</i></button>
                                         <button class="layui-btn layui-btn-mini layui-btn-danger del_btn" data-id="@item.id" data-url="@Url.Action("Delete","Order")"><i class="layui-icon">&#xe640;</i></button>*@
                                 </div>
@@ -148,10 +148,10 @@
 
 
 
-            $("#orderId").val('@ViewBag.SearchModel.orderId');
-            $("#orderType").val('@ViewBag.SearchModel.orderType');
-            $("#userName").val('@ViewBag.SearchModel.userName');
-            $("#mobile").val('@ViewBag.SearchModel.mobile');
+            $("#orderId").val('@ViewBag.SearchModel.OrderId');
+            $("#orderType").val('@ViewBag.SearchModel.OrderType');
+            $("#userName").val('@ViewBag.SearchModel.UserName');
+            $("#mobile").val('@ViewBag.SearchModel.Mobile');
             $("#s_addDate").val('@ViewBag.SearchModel.SaddDate');
             $("#e_addDate").val('@ViewBag.SearchModel.EaddDate');
             $("#s_payDate").val('@ViewBag.SearchModel.SpayDate');

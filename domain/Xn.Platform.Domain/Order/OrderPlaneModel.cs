@@ -166,38 +166,185 @@ namespace Xn.Platform.Domain.Order
 
         public decimal sellsPrice { get; set; }
     }
-
-    public class OrderPlaneResponse
+    public class OrderPlaneDTO
     {
-        public class OrderPlan : OrderPlaneModel
+        /// <summary>
+        /// id
+        /// </summary>		
+
+        public string Id { get; set; }
+        /// <summary>
+        /// orderID
+        /// </summary>		
+
+        public string OrderId { get; set; }
+        /// <summary>
+        /// states 0：未付款 1：已付款 2：已出票 3:已退票 
+        /// </summary>		
+
+        public int States { get; set; }
+        /// <summary>
+        /// startAddr
+        /// </summary>		
+
+        public string StartAddr { get; set; }
+        /// <summary>
+        /// startAirport
+        /// </summary>		
+
+        public string StartAirport { get; set; }
+        /// <summary>
+        /// on update CURRENT_TIMESTAMP
+        /// </summary>		
+
+        public DateTime StartDate { get; set; }
+        /// <summary>
+        /// destAddr
+        /// </summary>		
+
+        public string DestAddr { get; set; }
+        /// <summary>
+        /// destAirport
+        /// </summary>		
+
+        public string DestAirport { get; set; }
+        /// <summary>
+        /// on update CURRENT_TIMESTAMP
+        /// </summary>		
+
+        public DateTime DestDate { get; set; }
+        /// <summary>
+        /// custName
+        /// </summary>		
+
+        public string CustName { get; set; }
+        /// <summary>
+        /// idCardNo
+        /// </summary>		
+
+        public string IdCardNo { get; set; }
+        /// <summary>
+        /// personType
+        /// </summary>		
+
+        public int PersonType { get; set; }
+        /// <summary>
+        /// airways
+        /// </summary>		
+
+        public string Airways { get; set; }
+        /// <summary>
+        /// airwaysIcon
+        /// </summary>		
+
+        public string AirwaysIcon { get; set; }
+        /// <summary>
+        /// flightNumber
+        /// </summary>		
+
+        public string FlightNumber { get; set; }
+        /// <summary>
+        /// roomType
+        /// </summary>		
+
+        public int RoomType { get; set; }
+        /// <summary>
+        /// price
+        /// </summary>		
+
+        public decimal Price { get; set; }
+        /// <summary>
+        /// salePrice
+        /// </summary>		
+
+        public decimal SalePrice { get; set; }
+        /// <summary>
+        /// cancelReason
+        /// </summary>		
+
+        public string CancelReason { get; set; }
+        /// <summary>
+        /// returnFee
+        /// </summary>		
+
+        public decimal ReturnFee { get; set; }
+        /// <summary>
+        /// returnTotal
+        /// </summary>		
+
+        public decimal ReturnTotal { get; set; }
+        /// <summary>
+        /// channelID
+        /// </summary>		
+
+        public string ChannelID { get; set; }
+        /// <summary>
+        /// noticeId
+        /// </summary>		
+
+        public string NoticeId { get; set; }
+        /// <summary>
+        /// on update CURRENT_TIMESTAMP
+        /// </summary>		
+
+        public DateTime AddDate { get; set; }
+        /// <summary>
+        /// costPrice
+        /// </summary>		
+
+        public decimal CostPrice { get; set; }
+        /// <summary>
+        /// desAirCode
+        /// </summary>		
+
+        public string DesAirCode { get; set; }
+        /// <summary>
+        /// tripNo
+        /// </summary>		
+
+        public string TripNo { get; set; }
+        /// <summary>
+        /// depAirCode
+        /// </summary>		
+
+        public string DepAirCode { get; set; }
+        /// <summary>
+        /// psgInfo
+        /// </summary>		
+
+        public string PsgInfo { get; set; }
+        /// <summary>
+        /// sellsPrice
+        /// </summary>		
+
+        public decimal SellsPrice { get; set; }
+        public string UserName { get; set; }
+        public string Mobile { get; set; }
+        public string StatusVal
         {
-            public string userName { get; set; }
-            public string mobile { get; set; }
-            public string statusVal
+            get
             {
-                get
+                string value = "";
+                switch (States)
                 {
-                    string value = "";
-                    switch (states)
-                    {
-                        case 1:
-                            value = "已付款";
-                            break;
-                        case 2:
-                            value = "已出票";
-                            break;
-                        case 3:
-                            value = "已退票";
-                            break;
-                        default:
-                            value = "未付款";
-                            break;
-                    }
-                    return value;
+                    case 1:
+                        value = "已付款";
+                        break;
+                    case 2:
+                        value = "已出票";
+                        break;
+                    case 3:
+                        value = "已退票";
+                        break;
+                    default:
+                        value = "未付款";
+                        break;
                 }
+                return value;
             }
         }
     }
+
     public class OrderPlaneRequest
     {
         public class RefundRequest
@@ -206,15 +353,15 @@ namespace Xn.Platform.Domain.Order
             /// <summary>
             /// 退款金额
             /// </summary>
-            public decimal returnTotal { get; set; }
+            public decimal ReturnTotal { get; set; }
             /// <summary>
             /// 手续费
             /// </summary>
-            public decimal returnFee { get; set; }
+            public decimal ReturnFee { get; set; }
             /// <summary>
             /// 退款原因
             /// </summary>
-            public string cancelReason { get; set; }
+            public string CancelReason { get; set; }
         }
     }
 }

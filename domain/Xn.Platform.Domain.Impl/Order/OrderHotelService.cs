@@ -1,4 +1,5 @@
-﻿using System;
+﻿using AutoMapper;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
@@ -18,16 +19,17 @@ namespace Xn.Platform.Domain.Impl.Order
         /// </summary>
         /// <param name="Id"></param>
         /// <returns></returns>
-        public ResultWithCodeEntity<OrderHotelModel> GetInfo(string Id)
+        public ResultWithCodeEntity<OrderHotelDTO> GetInfo(string Id)
         {
             try
             {
-               var data = orderHotelRepository.GetInfo(Id);
-                return Result.Success(data);
+                var data = orderHotelRepository.GetInfo(Id);
+                var res = Mapper.Map<OrderHotelDTO>(data);
+                return Result.Success(res);
             }
             catch (Exception ex)
             {
-                return Result.Error<OrderHotelModel>(ResultCode.ExceptionError);
+                return Result.Error<OrderHotelDTO>(ResultCode.ExceptionError);
             }
         }
         /// <summary>
@@ -36,33 +38,26 @@ namespace Xn.Platform.Domain.Impl.Order
         /// <returns></returns>
         public ResultWithCodeEntity Reserve(string Id)
         {
-            var result = new ResultWithCodeEntity();
             try
             {
                 var detail = orderHotelRepository.GetInfo(Id);
                 if (detail == null)
                 {
-                    result.Code = ResultCode.ParameterError;
+                    return Result.Error(ResultCode.ParameterError);
                 }
-                else
+                detail.states = 2;
+                var editResult = orderHotelRepository.Update(detail);
+                if (editResult)
                 {
-                    detail.states = 2;
-                    var editResult = orderHotelRepository.Update(detail);
-                    if (editResult)
-                    {
-                        result.Code = ResultCode.Success;
-                    }
-                    else
-                    {
-                        result.Code = ResultCode.DefaultError;
-                    }
+                    return Result.Success();
                 }
+                return Result.Error(ResultCode.DefaultError);
+
             }
             catch (Exception ex)
             {
-                result.Code = ResultCode.ExceptionError;
+                return Result.Error(ResultCode.ExceptionError);
             }
-            return result;
         }
         /// <summary>
         /// 退款
@@ -86,43 +81,21 @@ namespace Xn.Platform.Domain.Impl.Order
                     //    result.Code = ResultCode.ParameterError;
                     //    return result;
                     //}
-                    ///赋值
-                    PropertyInfo[] propertys = request.GetType().GetProperties();
-                    foreach (var item in propertys)
-                    {
-                        var val = item.GetValue(request);
-                        //不为空的都赋值
-                        if (val != null)
-                        {
-                            foreach (var item1 in detail.GetType().GetProperties())
-                            {
-                                if (item1.Name == item.Name)
-                                {
-                                    item1.SetValue(detail, val);
-                                    break;
-                                }
-                            }
-                        }
-                    }
-                    detail.states = 3; //暂定退票状态为3
-                    var editResult = orderHotelRepository.Update(detail);
+
+                    var res = (OrderHotelModel)Mapper.Map(request, detail, request.GetType(), detail.GetType());
+                    res.states = 3; //暂定退票状态为3
+                    var editResult = orderHotelRepository.Update(res);
                     if (editResult)
                     {
-                        result.Code = ResultCode.Success;
+                        return Result.Success(ResultCode.Success);
                     }
-                    else
-                        result.Code = ResultCode.DefaultError;
                 }
-                else
-                {
-                    result.Code = ResultCode.ParameterError;
-                }
+                return Result.Error(ResultCode.ParameterError);
             }
             catch (Exception ex)
             {
-                result.Code = ResultCode.ExceptionError;
+                return Result.Error(ResultCode.ExceptionError);
             }
-            return result;
         }
     }
 }

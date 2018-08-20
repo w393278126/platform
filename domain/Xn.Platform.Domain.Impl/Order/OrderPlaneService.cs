@@ -7,26 +7,26 @@ using System.Threading.Tasks;
 using Xn.Platform.Abstractions.Domain;
 using Xn.Platform.Data.MySql.Order;
 using Xn.Platform.Domain.Order;
+using AutoMapper;
 
 namespace Xn.Platform.Domain.Impl
 {
     public class OrderPlaneService
     {
         private OrderPlaneRepository orderPlaneRepository = new OrderPlaneRepository();
-        public ResultWithCodeEntity<OrderPlaneModel> GetInfo(string Id)
+        public ResultWithCodeEntity<OrderPlaneDTO> GetInfo(string Id)
         {
-            var result = new ResultWithCodeEntity<OrderPlaneModel>();
+
             try
             {
-                result.Code = ResultCode.Success;
-                result.Data = orderPlaneRepository.GetInfoById(Id);
+                var result = orderPlaneRepository.GetInfoById(Id);
+                var res = Mapper.Map<OrderPlaneDTO>(result);
+                return Result.Success(res);
             }
             catch (Exception ex)
             {
-                result.Code = ResultCode.ExceptionError;
-                result.Data = new OrderPlaneModel();
+                return Result.Error<OrderPlaneDTO>(ResultCode.ExceptionError);
             }
-            return result;
         }
         /// <summary>
         /// 退票方法
@@ -35,7 +35,6 @@ namespace Xn.Platform.Domain.Impl
         /// <returns></returns>
         public ResultWithCodeEntity RefundPlane(OrderPlaneRequest.RefundRequest request)
         {
-            var result = new ResultWithCodeEntity();
             try
             {
                 //1.获取退款订单的信息（request.Id）
@@ -43,43 +42,21 @@ namespace Xn.Platform.Domain.Impl
                 //2.更新退款订单信息（包括状态）
                 if (detail != null)
                 {
-                    ///赋值
-                    PropertyInfo[] propertys = request.GetType().GetProperties();
-                    foreach (var item in propertys)
-                    {
-                        var val = item.GetValue(request);
-                        //不为空的都赋值
-                        if (val != null)
-                        {
-                            foreach (var item1 in detail.GetType().GetProperties())
-                            {
-                                if (item1.Name == item.Name)
-                                {
-                                    item1.SetValue(detail, val);
-                                    break;
-                                }
-                            }
-                        }
-                    }
-                    detail.states = 3; //暂定退票状态为3
-                    var editResult = orderPlaneRepository.Update(detail);
+                    var res = (OrderPlaneModel)Mapper.Map(request, detail, request.GetType(), detail.GetType());
+                    res.states = 3; //暂定退票状态为3
+                    var editResult = orderPlaneRepository.Update(res);
                     if (editResult)
                     {
-                        result.Code = ResultCode.Success;
+                        return Result.Success();
                     }
-                    else
-                        result.Code = ResultCode.DefaultError;
+                    return Result.Error(ResultCode.DefaultError);
                 }
-                else
-                    result.Code = ResultCode.ParameterError;
-
-
+                return Result.Error(ResultCode.ParameterError);
             }
             catch (Exception ex)
             {
-                result.Code = ResultCode.ExceptionError;
+                return Result.Error(ResultCode.ExceptionError);
             }
-            return result;
         }
 
         /// <summary>

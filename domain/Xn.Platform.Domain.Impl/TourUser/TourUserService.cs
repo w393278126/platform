@@ -30,11 +30,6 @@ namespace Plu.Platform.Domain.Impl.TourUser
                 {
                     result.TotalItems = pageResult.TotalItems;
                     result.Items = Mapper.Map<List<TourUserListDTO>>(pageResult.Items);
-                    //foreach (var item in pageResult.Items)
-                    //{
-                    //    var val = Mapper.Map<List<TourUserListDTO>>(item);
-                    //    result.Items.Add(val);
-                    //}
                 }
 
                 return Result.Success<PagedEntity<TourUserListDTO>>(result);

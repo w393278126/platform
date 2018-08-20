@@ -21,7 +21,7 @@ namespace Xn.Platform.Domain.Impl.Order
         /// </summary>
         /// <param name="request"></param>
         /// <returns></returns>
-        public ResultWithCodeEntity<PagedEntity<OrderMainResponse.PageResponse>> PageList(OrderMainRequest.PageRequest request)
+        public ResultWithCodeEntity<PagedEntity<OrderMainListDTO>> PageList(OrderMainRequest.PageRequest request)
         {
             try
             {
@@ -32,7 +32,7 @@ namespace Xn.Platform.Domain.Impl.Order
             }
             catch (Exception ex)
             {
-                return Result.Error<PagedEntity<OrderMainResponse.PageResponse>>(ResultCode.ExceptionError);
+                return Result.Error<PagedEntity<OrderMainListDTO>>(ResultCode.ExceptionError);
 
             }
 

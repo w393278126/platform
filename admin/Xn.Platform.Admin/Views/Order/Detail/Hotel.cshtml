@@ -1,5 +1,5 @@
 ﻿@using Xn.Platform.Domain.Order;
-@model List<OrderHotelResponse.OrderHotel>
+@model List<OrderHotelDTO>
 @{
     /**/
 
@@ -11,10 +11,10 @@
     {
     <blockquote class="layui-elem-quote layui-quote-nm">
         <div class="layui-inline">
-            下单用户： @Model.FirstOrDefault().userName
+            下单用户： @Model.FirstOrDefault().UserName
         </div>
         <div class="layui-inline" style="margin-left:100px">
-            联系方式：@Model.FirstOrDefault().mobile
+            联系方式：@Model.FirstOrDefault().Mobile
         </div>
     </blockquote>
         foreach (var item in Model)
@@ -24,83 +24,83 @@
                     <col width="150" />
                 </colgroup>
                 <thead>
-                    <tr><td colspan="2" style="text-align:center">订单号:@item.orderID</td></tr>
+                    <tr><td colspan="2" style="text-align:center">订单号:@item.OrderID</td></tr>
                 </thead>
                 <tbody>
 
 
                     <tr>
                         <td style="text-align:right">城市名称：</td>
-                        <td>@item.cityName</td>
+                        <td>@item.CityName</td>
                     </tr>
                     <tr>
                         <td style="text-align:right">酒店名称：</td>
-                        <td>@item.hotelName</td>
+                        <td>@item.HotelName</td>
                     </tr>
                     <tr>
                         <td style="text-align:right">酒店电话：</td>
-                        <td>@item.hotelPhone </td>
+                        <td>@item.HotelPhone </td>
                     </tr>
                     <tr>
                         <td style="text-align:right">入住时间：</td>
-                        <td><span>@item.checkInDate</span> - <span>@item.checkOutDate</span>(@item.nights 晚)</td>
+                        <td><span>@item.CheckInDate</span> - <span>@item.CheckOutDate</span>(@item.Nights 晚)</td>
                     </tr>
 
                     <tr>
                         <td style="text-align:right">房间名称：</td>
-                        <td>@item.roomName</td>
+                        <td>@item.RoomName</td>
                     </tr>
                     <tr>
                         <td style="text-align:right">房间数量：</td>
-                        <td>@item.roomCount</td>
+                        <td>@item.RoomCount</td>
                     </tr>
                     <tr>
                         <td style="text-align:right">住客姓名：</td>
-                        <td>@item.name</td>
+                        <td>@item.Name</td>
                     </tr>
                     <tr>
                         <td style="text-align:right">住客电话：</td>
-                        <td>@item.phone</td>
+                        <td>@item.Phone</td>
                     </tr>
                     <tr>
                         <td style="text-align:right">住客情况：</td>
                         <td>
-                            <i>成人：@item.adult &nbsp;&nbsp;</i>
+                            <i>成人：@item.Adult &nbsp;&nbsp;</i>
 
-                            @if (item.children != null)
+                            @if (item.Children != null)
                             {
-                                <i>儿童：@item.children</i>
+                                <i>儿童：@item.Children</i>
                             }
 
                         </td>
                     </tr>
                     <tr>
                         <td style="text-align:right">特殊要求：</td>
-                        <td>@item.guestRemarks</td>
+                        <td>@item.GuestRemarks</td>
                     </tr>
                     <tr>
                         <td style="text-align:right">订单总价：</td>
                         <td>
-                            @item.totalAmount
+                            @item.TotalAmount
                         </td>
                     </tr>
                     <tr>
                         <td style="text-align:right">状态：</td>
                         <td>
-                            @item.statesVal
+                            @item.StatesVal
                         </td>
                     </tr>
                 </tbody>
                 <tfoot>
                     <tr>
                         <td colspan="2" style="text-align:center;">
-                            @if (item.states == 1)
+                            @if (item.States == 1)
                             {
-                                <button class="layui-btn layui-btn-normal btn_out" data-url="/orderhotel/reserve" data-id="@item.id" style="width:150px">预定 </button>
+                                <button class="layui-btn layui-btn-normal btn_out" data-url="/orderhotel/reserve" data-id="@item.Id" style="width:150px">预定 </button>
                             }
-                            else if (item.states == 2)
+                            else if (item.States == 2)
                             {
-                                <button class="layui-btn layui-btn-warm btn_return" style="width:150px" data-url="/orderhotel/refundhotel?id=@item.id">退款 </button>
+                                <button class="layui-btn layui-btn-warm btn_return" style="width:150px" data-url="/orderhotel/refundhotel?id=@item.Id">退款 </button>
                             }
 
 

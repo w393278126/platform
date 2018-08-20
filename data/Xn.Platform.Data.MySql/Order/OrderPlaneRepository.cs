@@ -21,17 +21,17 @@ namespace Xn.Platform.Data.MySql.Order
         /// </summary>
         /// <param name="orderId"></param>
         /// <returns></returns>
-        public List<OrderPlaneResponse.OrderPlan> GetList(string orderId)
+        public List<OrderPlaneDTO> GetList(string orderId)
         {
             StringBuilder strSql = new StringBuilder();
             strSql.Append(" SELECT u.username,u.mobile,o.* ");
             strSql.Append(" FROM t_order_orderplane o ");
             strSql.Append(" LEFT JOIN t_tour_user u on o.userID=u.id ");
             strSql.Append(" WHERE o.orderID=@orderId ");
-            var list = new List<OrderPlaneResponse.OrderPlan>();
+            var list = new List<OrderPlaneDTO>();
             OpenSlaveConnection(conn =>
             {
-                list = conn.Query<OrderPlaneResponse.OrderPlan>(strSql.ToString(), new { orderId }).ToList();
+                list = conn.Query<OrderPlaneDTO>(strSql.ToString(), new { orderId }).ToList();
             });
             return list;
         }

@@ -42,6 +42,9 @@
     <Compile Include="Admin\ValidateCodeService.cs" />
     <Compile Include="AutoMappers\Admin\AdminProfile.cs" />
     <Compile Include="AutoMappers\Configuration.cs" />
+    <Compile Include="AutoMappers\Order\OrderHotelProfile.cs" />
+    <Compile Include="AutoMappers\Order\OrderMainProfile.cs" />
+    <Compile Include="AutoMappers\Order\OrderPlaneProfile.cs" />
     <Compile Include="AutoMappers\User\UserProfile.cs" />
     <Compile Include="BaseService.cs" />
     <Compile Include="Order\OrderHotelService.cs" />

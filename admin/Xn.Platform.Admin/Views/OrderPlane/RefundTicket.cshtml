@@ -1,5 +1,5 @@
 ﻿@using Xn.Platform.Domain.Order;
-@model OrderPlaneModel
+@model OrderPlaneDTO
 @{
     /**/
 
@@ -22,34 +22,34 @@
                     <tr>
                         <td style="text-align:right">订单ID：</td>
                         <td>
-                            @Model.orderID
+                            @Model.OrderId
                         </td>
 
                     </tr>
                     <tr>
                         <td style="text-align:right">销售金额：</td>
                         <td>
-                            @Model.salePrice
+                            @Model.SalePrice
                         </td>
 
                     </tr>
                     <tr>
                         <td style="text-align:right">退票金额：</td>
                         <td>
-                            <input type="text" value="@Model.returnTotal" name="returnTotal" lay-verify="title" autocomplete="off" placeholder="请输入标题" class="layui-input">
+                            <input type="text" value="@Model.ReturnTotal" name="returnTotal" lay-verify="title" autocomplete="off" placeholder="请输入标题" class="layui-input">
                         </td>
 
                     </tr>
                     <tr>
                         <td style="text-align:right">手续费：</td>
                         <td>
-                            <input type="text" value="@Model.returnFee" name="returnFee" lay-verify="title" autocomplete="off" placeholder="请输入标题" class="layui-input">
+                            <input type="text" value="@Model.ReturnFee" name="returnFee" lay-verify="title" autocomplete="off" placeholder="请输入标题" class="layui-input">
                         </td>
                     </tr>
                     <tr>
                         <td style="text-align:right">退票原因：</td>
                         <td>
-                            <textarea name="cancelReason" placeholder="请输入内容" class="layui-textarea">@Model.cancelReason</textarea>
+                            <textarea name="cancelReason" placeholder="请输入内容" class="layui-textarea">@Model.CancelReason</textarea>
                         </td>
                     </tr>
                 </tbody>
@@ -57,7 +57,7 @@
                     <tr>
                         <td colspan="2" style="text-align:center">
                             <button class="layui-btn" lay-submit="" lay-filter="formEdit">立即提交</button>
-                            <input type="hidden" name="Id" value="@Model.id" />
+                            <input type="hidden" name="Id" value="@Model.Id" />
                             <button type="reset" class="layui-btn layui-btn-primary">重置</button>
                         </td>
                     </tr>
