@@ -10,110 +10,213 @@ namespace Xn.Platform.Domain.Order
     [Table("t_order_orderticket")]
     public class OrderTicketModel
     {
-        /// <summary>
-        /// id
-        /// </summary>		
-
-        public string id { get; set; }
+        public string Id { get; set; }
         /// <summary>
         /// userId
         /// </summary>		
 
-        public string userId { get; set; }
+        public string UserId { get; set; }
         /// <summary>
         /// orderId
         /// </summary>		
 
-        public string orderId { get; set; }
+        public string OrderId { get; set; }
         /// <summary>
         /// thirdSerialId
         /// </summary>		
 
-        public string thirdSerialId { get; set; }
+        public string ThirdSerialId { get; set; }
         /// <summary>
         /// states
         /// </summary>		
 
-        public int states { get; set; }
+        public int States { get; set; }
         /// <summary>
         /// sceneryName
         /// </summary>		
 
-        public string sceneryName { get; set; }
+        public string SceneryName { get; set; }
         /// <summary>
         /// ticketName
         /// </summary>		
 
-        public string ticketName { get; set; }
+        public string TicketName { get; set; }
         /// <summary>
         /// ticketId
         /// </summary>		
 
-        public string ticketId { get; set; }
+        public string TicketId { get; set; }
         /// <summary>
         /// ticketsNum
         /// </summary>		
 
-        public int ticketsNum { get; set; }
+        public int TicketsNum { get; set; }
         /// <summary>
         /// on update CURRENT_TIMESTAMP
         /// </summary>		
 
-        public DateTime travelDate { get; set; }
+        public DateTime TravelDate { get; set; }
         /// <summary>
         /// consumersType
         /// </summary>		
 
-        public string consumersType { get; set; }
+        public string ConsumersType { get; set; }
         /// <summary>
         /// screeningId
         /// </summary>		
 
-        public string screeningId { get; set; }
+        public string ScreeningId { get; set; }
         /// <summary>
         /// on update CURRENT_TIMESTAMP
         /// </summary>		
 
-        public DateTime screeningBeginTime { get; set; }
+        public DateTime ScreeningBeginTime { get; set; }
         /// <summary>
         /// on update CURRENT_TIMESTAMP
         /// </summary>		
 
-        public DateTime screeningEndTime { get; set; }
+        public DateTime ScreeningEndTime { get; set; }
         /// <summary>
         /// tcAmount
         /// </summary>		
 
-        public decimal tcAmount { get; set; }
+        public decimal TcAmount { get; set; }
         /// <summary>
         /// totalPrice
         /// </summary>		
 
-        public decimal totalPrice { get; set; }
+        public decimal TotalPrice { get; set; }
         /// <summary>
         /// isRealName
         /// </summary>		
 
-        public long isRealName { get; set; }
+        public long IsRealName { get; set; }
         /// <summary>
         /// on update CURRENT_TIMESTAMP
         /// </summary>		
 
-        public DateTime createTime { get; set; }
+        public DateTime CreateTime { get; set; }
     }
 
-    public class OrderTicketResponse
+    public class OrderTicketDTO
     {
-        public class OrderTicket:OrderTicketModel
+        public string Id { get; set; }
+        /// <summary>
+        /// userId
+        /// </summary>		
+
+        public string UserId { get; set; }
+        /// <summary>
+        /// orderId
+        /// </summary>		
+
+        public string OrderId { get; set; }
+        /// <summary>
+        /// thirdSerialId
+        /// </summary>		
+
+        public string ThirdSerialId { get; set; }
+        /// <summary>
+        /// states
+        /// </summary>		
+
+        public int States { get; set; }
+        /// <summary>
+        /// sceneryName
+        /// </summary>		
+
+        public string SceneryName { get; set; }
+        /// <summary>
+        /// ticketName
+        /// </summary>		
+
+        public string TicketName { get; set; }
+        /// <summary>
+        /// ticketId
+        /// </summary>		
+
+        public string TicketId { get; set; }
+        /// <summary>
+        /// ticketsNum
+        /// </summary>		
+
+        public int TicketsNum { get; set; }
+        /// <summary>
+        /// on update CURRENT_TIMESTAMP
+        /// </summary>		
+
+        public DateTime TravelDate { get; set; }
+        /// <summary>
+        /// consumersType
+        /// </summary>		
+
+        public string ConsumersType { get; set; }
+        /// <summary>
+        /// screeningId
+        /// </summary>		
+
+        public string ScreeningId { get; set; }
+        /// <summary>
+        /// on update CURRENT_TIMESTAMP
+        /// </summary>		
+
+        public DateTime ScreeningBeginTime { get; set; }
+        /// <summary>
+        /// on update CURRENT_TIMESTAMP
+        /// </summary>		
+
+        public DateTime ScreeningEndTime { get; set; }
+        /// <summary>
+        /// tcAmount
+        /// </summary>		
+
+        public decimal TcAmount { get; set; }
+        /// <summary>
+        /// totalPrice
+        /// </summary>		
+
+        public decimal TotalPrice { get; set; }
+        /// <summary>
+        /// isRealName
+        /// </summary>		
+
+        public long IsRealName { get; set; }
+        /// <summary>
+        /// on update CURRENT_TIMESTAMP
+        /// </summary>		
+
+        public DateTime CreateTime { get; set; }
+        /// <summary>
+        /// 用户名
+        /// </summary>
+        public string UserName { get; set; }
+        /// <summary>
+        /// 联系方式
+        /// </summary>
+        public string Mobile { get; set; }
+        public string StatesVal
         {
-            /// <summary>
-            /// 用户名
-            /// </summary>
-            public string userName { get; set; }
-            /// <summary>
-            /// 联系方式
-            /// </summary>
-            public string mobile { get; set; }
+            get
+            {
+                string value = "";
+                switch (States)
+                {
+                    case 1:
+                        value = "已付款";
+                        break;
+                    case 2:
+                        value = "已出票";
+                        break;
+                    case 3:
+                        value = "已退票";
+                        break;
+                    default:
+                        value = "未付款";
+                        break;
+                }
+                return value;
+            }
         }
     }
+
 }

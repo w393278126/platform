@@ -1,1 +1,167 @@
 ﻿
+@using Xn.Platform.Domain.Order;
+@model List<OrderTicketDTO>
+@{
+    /**/
+
+    ViewBag.Title = "订单详情";
+    Layout = "~/Views/Shared/_LayoutDialog.cshtml";
+}
+<body>
+    @if (Model.Count > 0)
+    {
+        <blockquote class="layui-elem-quote layui-quote-nm">
+            <div class="layui-inline">
+                下单用户：@Model.FirstOrDefault().UserName
+            </div>
+            <div class="layui-inline" style="margin-left:100px">
+                联系方式：@Model.FirstOrDefault().Mobile
+            </div>
+        </blockquote>
+        foreach (var item in Model)
+        {
+            var IsReadVal = item.IsRealName == 1 ? "是" : "否";
+            <table class="layui-table">
+                <colgroup>
+                    <col width="150" />
+                </colgroup>
+
+
+
+                <thead>
+                    <tr><td colspan="2" style="text-align:center">订单号:@item.OrderId</td></tr>
+                </thead>
+                <tbody>
+
+
+                    <tr>
+                        <td style="text-align:right">景点名称：</td>
+                        <td>@item.SceneryName</td>
+                    </tr>
+                    <tr>
+                        <td style="text-align:right">票名：</td>
+                        <td>@item.TicketName</td>
+                    </tr>
+                    <tr>
+                        <td style="text-align:right">针对人型：</td>
+                        <td>@item.ConsumersType</td>
+                    </tr>
+                    <tr>
+                        <td style="text-align:right">场次：</td>
+                        <td>@item.ScreeningId</td>
+                    </tr>
+                    <tr>
+                        <td style="text-align:right">数量：</td>
+                        <td>@item.TicketsNum</td>
+                    </tr>
+                    <tr>
+                        <td style="text-align:right">时间：</td>
+                        <td>@item.ScreeningBeginTime.ToString("yyyy-MM-dd HH:mm:ss")  &nbsp;<b>至</b>  &nbsp;@item.ScreeningEndTime.ToString("yyyy-MM-dd HH:mm:ss")</td>
+                    </tr>
+
+                    <tr>
+                        <td style="text-align:right">价格：</td>
+                        <td>@item.TcAmount</td>
+                    </tr>
+                    <tr>
+                        <td style="text-align:right">是否实名制：</td>
+                        <td>@IsReadVal</td>
+                    </tr>
+
+                    <tr>
+                        <td style="text-align:right">状态：</td>
+                        <td>@item.StatesVal</td>
+                    </tr>
+                </tbody>
+                <tfoot>
+                    <tr>
+                        <td colspan="2" style="text-align:center;">
+                            @if (item.States == 1)
+                            {
+                                <button class="layui-btn layui-btn-normal btn_out" data-url="/orderticket/outofticket" data-id="@item.Id" style="width:150px">出票 </button>
+                            }
+                            else if (item.States == 2)
+                            {
+                                <button class="layui-btn layui-btn-warm btn_return" style="width:150px" data-url="/orderticket/refundticket" data-id="@item.Id">退票 </button>
+                            }
+
+
+                        </td>
+                    </tr>
+                </tfoot>
+
+            </table>
+        }
+    }
+    else
+    {
+        <div>该订单没有机票信息</div>
+    }
+</body>
+<script>
+    layui.use(['form', 'laypage', 'jquery', 'layer', 'element', 'dialog'], function () {
+
+        var layer = layui.layer,
+            dialog = layui.dialog,
+            $ = layui.jquery;
+        $("#btn_close").click(function () {
+            var index = parent.layer.getFrameIndex(window.name);
+            parent.layer.close(index);
+            window.parent.location.reload();//刷新父页面
+        });
+
+        $(".btn_return").click(function () {
+            var url = $(this).attr('data-url');
+            var id = $(this).attr('data-id');
+            dialog.confirm({
+                message: '您确定已经再第三方平台上退款了吗？',
+                success: function () {
+                    layer.closeAll('dialog');  //加入这个信息点击确定 会关闭这个消息框
+                    $.ajax({
+                        type: "post",
+                        url: url,
+                        data: { "Id": id },
+                        dataType: "json",
+                        success: function (obj) {
+                            if (obj.Code == 0) {
+                                alert("退款成功");
+                                location.reload();
+                            } else {
+                                alert("退款失败，请重试");
+                            }
+
+                        }
+                    });
+                }
+            });
+            return false;
+        });
+        ///出票按钮
+        $(".btn_out").click(function () {
+            var url = $(this).attr('data-url');
+            var id = $(this).attr('data-id');
+            dialog.confirm({
+                message: '您确定已经再第三方平台上出票了吗？',
+                success: function () {
+                    layer.closeAll('dialog');  //加入这个信息点击确定 会关闭这个消息框
+                    $.ajax({
+                        type: "post",
+                        url: url,
+                        data: { "Id": id },
+                        dataType: "json",
+                        success: function (obj) {
+                            if (obj.Code == 0) {
+                                alert("出票成功");
+                                location.reload();
+                            } else {
+                                alert("出票失败，请重试");
+                            }
+
+                        }
+                    });
+                }
+            })
+            return false;
+        });
+    });
+</script>

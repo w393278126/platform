@@ -22,19 +22,30 @@ namespace Xn.Platform.Data.MySql.Order
         /// </summary>
         /// <param name="orderId">主订单ID</param>
         /// <returns></returns>
-        public List<OrderTicketResponse.OrderTicket> GetList(string orderId)
+        public List<OrderTicketDTO> GetList(string orderId)
         {
             StringBuilder strSql = new StringBuilder();
             strSql.Append(" SELECT u.username,u.mobile,o.* ");
             strSql.Append(" FROM t_order_orderticket o ");
             strSql.Append(" LEFT JOIN t_tour_user u on o.userID=u.id ");
             strSql.Append(" WHERE o.orderID=@orderId ");
-            var list = new List<OrderTicketResponse.OrderTicket>();
+            var list = new List<OrderTicketDTO>();
             OpenSlaveConnection(conn =>
             {
-                list = conn.Query<OrderTicketResponse.OrderTicket>(strSql.ToString(), new { orderId }).ToList();
+                list = conn.Query<OrderTicketDTO>(strSql.ToString(), new { orderId }).ToList();
             });
             return list;
+        }
+        /// <summary>
+        /// 通过主键ID获取实体
+        /// </summary>
+        /// <param name="Id"></param>
+        /// <returns></returns>
+        public OrderTicketModel GetEntityById(string Id)
+        {
+            var parameter = new List<Tuple<string, string, object>>();
+            parameter.Add(new Tuple<string, string, object>("Id", "=", Id));
+            return GetList<OrderTicketModel>(parameter).FirstOrDefault();
         }
     }
 }

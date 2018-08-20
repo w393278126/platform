@@ -201,6 +201,7 @@
     <Compile Include="Controllers\OrderController.cs" />
     <Compile Include="Controllers\OrderHotelController.cs" />
     <Compile Include="Controllers\OrderPlaneController.cs" />
+    <Compile Include="Controllers\OrderTicketController.cs" />
     <Compile Include="Controllers\TourUserController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
@@ -729,7 +730,9 @@
     <Content Include="Views\OrderPlane\RefundTicket.cshtml" />
     <Content Include="Views\OrderHotel\RefundHotel.cshtml" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Folder Include="Views\OrderTicket\" />
+  </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff" />
     <Content Include="fonts\glyphicons-halflings-regular.ttf" />
