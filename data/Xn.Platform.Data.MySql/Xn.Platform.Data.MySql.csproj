@@ -66,6 +66,10 @@
     <Compile Include="Order\OrderMainRepository.cs" />
     <Compile Include="Order\OrderPlaneRepository.cs" />
     <Compile Include="Order\OrderTicketRepository.cs" />
+    <Compile Include="Order\XnOrderPassengerRepository..cs" />
+    <Compile Include="Order\XnOrderRepository.cs" />
+    <Compile Include="Order\XnPassengerCardRepository.cs" />
+    <Compile Include="Order\XnPassengerRepository.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="TourUser\TourUserRepository.cs" />
   </ItemGroup>

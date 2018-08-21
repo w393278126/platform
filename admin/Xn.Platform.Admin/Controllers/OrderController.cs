@@ -12,6 +12,9 @@ namespace Xn.Platform.Admin.Controllers
     public class OrderController : Controller
     {
         private OrderMainService orderMainService = new OrderMainService();
+        private XnOrderService xnOrderService = new XnOrderService();
+        private XnPassengerService xnPassengerService = new XnPassengerService();
+        private XnOrderPassengerService xnOrderPassengerService = new XnOrderPassengerService();
         // GET: Order
         public ActionResult Index(int pageIndex = 1, int pageSize = 10)
         {
@@ -80,9 +83,65 @@ namespace Xn.Platform.Admin.Controllers
         /// </summary>
         /// <param name="Id"></param>
         /// <returns></returns>
-        public ActionResult Edit(string Id)
+        public ActionResult Edit(int Id = 1)
         {
-            return View();
+            var result = xnOrderService.GetInfo(Id);
+            return View(result.Data);
+        }
+        /// <summary>
+        /// 改价
+        /// </summary>
+        /// <param name="Id"></param>
+        /// <param name="price"></param>
+        /// <returns></returns>
+        public JsonResult EditPrice()
+        {
+            int Id = Convert.ToInt32(Request.Params["Id"] ?? "0");
+            decimal price = Convert.ToDecimal(Request.Params["price"]);
+            var result = xnOrderService.EditPrice(Id, price);
+            return Json(result, JsonRequestBehavior.AllowGet);
+        }
+        /// <summary>
+        /// 出行人
+        /// </summary>
+        /// <returns></returns>
+        public ActionResult Passenger()
+        {
+            int Id = Convert.ToInt32(Request.Params["Id"]);
+            int orderId = Convert.ToInt32(Request.Params["orderId"]);
+            ViewBag.OrderId = orderId;
+            if (Id > 0)
+            {
+                var result = xnPassengerService.GetInfo(Id);
+                return View(result.Data);
+            }
+            else
+            {
+                return View(new XnPassengerDTO() { Birthday = DateTime.Now });
+            }
+
+
+        }
+        /// <summary>
+        /// 新增或者编辑人员
+        /// </summary>
+        /// <param name="request"></param>
+        /// <returns></returns>
+        public JsonResult AddOrEditPassenger(XnPassengerRequest request)
+        {
+            var result = xnPassengerService.AddOrEdit(request);
+            return Json(result, JsonRequestBehavior.AllowGet);
+        }
+        /// <summary>
+        /// 移除出行人
+        /// </summary>
+        /// <returns></returns>
+        public JsonResult DeletePassenger()
+        {
+            var orderId = Convert.ToInt32(Request.Params["orderId"]);
+            var passengerId = Convert.ToInt32(Request.Params["Id"]);
+            var result = xnOrderPassengerService.DeletePassenger(orderId, passengerId);
+            return Json(result, JsonRequestBehavior.AllowGet);
         }
     }
 }

@@ -46,12 +46,16 @@
     <Compile Include="AutoMappers\Order\OrderMainProfile.cs" />
     <Compile Include="AutoMappers\Order\OrderPlaneProfile.cs" />
     <Compile Include="AutoMappers\Order\OrderTicketProfile.cs" />
+    <Compile Include="AutoMappers\Order\XnOrderProfile.cs" />
     <Compile Include="AutoMappers\User\UserProfile.cs" />
     <Compile Include="BaseService.cs" />
     <Compile Include="Order\OrderHotelService.cs" />
     <Compile Include="Order\OrderPlaneService.cs" />
     <Compile Include="Order\OrderMainService.cs" />
     <Compile Include="Order\OrderTicketService.cs" />
+    <Compile Include="Order\XnOrderPassengerService.cs" />
+    <Compile Include="Order\XnOrderService.cs" />
+    <Compile Include="Order\XnPassengerService.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="TourUser\TourUserService.cs" />
   </ItemGroup>

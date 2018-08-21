@@ -1,4 +1,6 @@
-﻿@{
+﻿@using Xn.Platform.Domain.Order;
+@model XnOrderDTO
+@{
     ViewBag.Title = "订单编辑";
     Layout = "~/Views/Shared/_LayoutPage.cshtml";
 }
@@ -14,31 +16,31 @@
                     <tbody>
                         <tr>
                             <td style="text-align:right">订单编号：</td>
-                            <td> 49845628584</td>
+                            <td> @Model.OrderCode</td>
                         </tr>
 
                         <tr>
                             <td style="text-align:right">订单状态：</td>
                             <td>
-                                待付款
+                                @Model.StateVal
                             </td>
                         </tr>
                         <tr>
                             <td style="text-align:right">创建时间：</td>
-                            <td>2015.11.23 14：24：49</td>
+                            <td>@Model.CreateTime.ToString("yyyy.MM.dd HH:mm:ss")</td>
                         </tr>
                         <tr>
                             <td style="text-align:right">付款时间：</td>
-                            <td>  2015.11.23 14：54：49 </td>
+                            <td>@Model.PayTime.ToString("yyyy.MM.dd HH:mm:ss")</td>
                         </tr>
                         <tr>
                             <td style="text-align:right">订单总额：</td>
-                            <td>￥ 123.55</td>
+                            <td>￥@Model.OrderAmount</td>
                         </tr>
 
                         <tr>
                             <td style="text-align:right">供应商：</td>
-                            <td>携程</td>
+                            <td>@Model.SupplierName</td>
                         </tr>
 
                 </table>
@@ -54,32 +56,34 @@
                     <tbody>
                         <tr>
                             <td style="text-align:right">商品名称：</td>
-                            <td> 日本五日跟团特价</td>
+                            <td>@Model.ProductName</td>
                         </tr>
 
                         <tr>
                             <td style="text-align:right">商品单价：</td>
                             <td>
-                                ￥1888.88
+                                ￥@Model.ProductPrice
                             </td>
                         </tr>
                         <tr>
                             <td style="text-align:right">商品数量 ：</td>
-                            <td>2</td>
+                            <td>@Model.ProductSum</td>
                         </tr>
                         <tr>
                             <td style="text-align:right">订单总价：</td>
                             <td id="td_totalAmount">
                                 <div id="showdiv">
-                                    <span id="span_totalAmount">￥<i>4000.00</i></span>
-                                </div> 
+                                    <span id="span_totalAmount">￥<i>@Model.OrderAmount</i></span>
+                                    <span style="margin-left:20px;"><font color="red"> (点击价格可进行改价)</font></span>
+                                </div>
                                 <div id="formdiv">
 
                                 </div>
+
                             </td>
 
                         </tr>
-                        
+
                 </table>
             </div>
         </fieldset>
@@ -93,13 +97,13 @@
                     <tbody>
                         <tr>
                             <td style="text-align:right">联系人：</td>
-                            <td>王菲</td>
+                            <td>@Model.ContactPerson</td>
                         </tr>
 
                         <tr>
                             <td style="text-align:right">电话：</td>
                             <td>
-                                15844440000
+                                @Model.ContactPhone
                             </td>
                         </tr>
                 </table>
@@ -110,7 +114,9 @@
             <div class="layui-field-box">
                 <div class="layui-form-item">
                     <div class="layui-inline tool-btn">
-                        <button class="layui-btn layui-btn-small layui-btn-normal addBtn hidden-xs" data-url="menu-add.html"><i class="layui-icon">&#xe654;</i></button>
+                        <button class="layui-btn layui-btn-small layui-btn-normal open_btn hidden-xs" data-url="/order/passenger?orderId=@Model.Id" data-title="新增出行人">
+                            <i class="layui-icon">&#xe654;</i>
+                        </button>
                     </div>
                 </div>
                 <table class="layui-table">
@@ -132,31 +138,45 @@
                         </tr>
                     </thead>
                     <tbody>
-                        <tr>
-                            <td>张(ZHANG)</td>
-                            <td>三(SAN)</td>
-                            <td> 成人</td>
-                            <td>男</td>
-                            <td>中国</td>
-                            <td>19990808</td>
-                            <td>15844440000</td>
-                            <td>123456199908084444</td>
-                            <td>E1055084454</td>
-                            <td>  <button class="layui-btn layui-btn-small layui-btn-warm addBtn hidden-xs" data-url="menu-add.html"><i class="layui-icon">&#xe640;</i></button></td>
-                        </tr>
-                        <tr>
-                            <td>李(LI)</td>
-                            <td>四(SI)</td>
-                            <td>成人</td>
-                            <td>男</td>
-                            <td>中国</td>
-                            <td>19990808</td>
-                            <td>15144440000</td>
-                            <td>123456199908084444</td>
-                            <td>E1055084454</td>
-                            <td>  <button class="layui-btn layui-btn-small layui-btn-warm addBtn hidden-xs" data-url="menu-add.html"><i class="layui-icon">&#xe640;</i></button></td>
-                        </tr>
+                        @foreach (var item in Model.orderPassengerDTOs)
+                        {
+                            var type = item.Type == 1 ? "成人" : "儿童";
+                            var sex = item.Sex == 1 ? "男" : "女";
+                            <tr>
+                                <td>@item.Xing&nbsp;(@item.EXing)</td>
+                                <td>@item.Ming&nbsp; (@item.Eming)</td>
+                                <td>@type</td>
+                                <td>@sex</td>
+                                <td>@item.Nationality</td>
+                                <td>@item.Birthday</td>
+                                <td>@item.Phone</td>
+                                <td>@item.IDNumber</td>
+                                <td>@item.PassportNo</td>
+                                <td>
+                                    <button class="layui-btn layui-btn-small layui-btn-normal open_btn hidden-xs" data-url="/order/passenger?Id=@item.Id&orderId=@Model.Id" data-title="编辑出行人"><i class="layui-icon">&#xe63c;</i></button>
+                                    <button class="layui-btn layui-btn-small layui-btn-warm delete_btn hidden-xs" data-id="@item.Id" data-url="/order/deletepassenger"><i class="layui-icon">&#xe640;</i></button>
+                                </td>
+                            </tr>
+                        }
+
+
                     </tbody>
+                </table>
+            </div>
+        </fieldset>
+        <fieldset class="layui-elem-field">
+            <legend>其他</legend>
+            <div class="layui-field-box">
+                <table class="layui-table">
+                    <colgroup>
+                        <col width="150" />
+                    </colgroup>
+                    <tbody>
+                        <tr style="height:100px;">
+                            <td style="text-align:right">备注：</td>
+                            <td>@Model.Remark</td>
+                        </tr>
+
                 </table>
             </div>
         </fieldset>
@@ -169,6 +189,7 @@
                 laydate = layui.laydate,
                 form = layui.form(),
                 dialog = layui.dialog;
+
             var totalAmount_val = "";
             $("#td_totalAmount span").click(function () {
                 totalAmount_val = $("#td_totalAmount span i").html();
@@ -184,14 +205,65 @@
                     var htmlVal = "<span>￥<i>" + totalAmount_val + "</i></span>";
                     $("#formdiv").addClass("layui-hide");
                     $("#showdiv").removeClass("layui-hide");
-                 
+
                 });
                 $("#btn_save").click(function () {
-                    location.reload();
+                    var price = $("#totalAmount").val();
+                    $.ajax({
+                        type: "post",
+                        url: "/order/editprice",
+                        data: { "Id": @Model.Id, "price": price },
+                        dataType: "json",
+                        success: function (obj) {
+                            if (obj.Code == 0) {
+                                alert("改价成功");
+                                location.reload();
+                            } else {
+                                alert("改价失败，请重试");
+                            }
+
+                        }
+                    });
                 })
                 return false;
             });
-           
+            ///详情按钮弹出
+            $(".open_btn").click(function () {
+                //获取当前iframe的name值
+                var iframeObj = $(window.frameElement).attr('name');
+                var url = $(this).attr('data-url');
+                var title = $(this).attr('data-title');
+                //将iframeObj传递给父级窗口,执行操作完成刷新
+                parent.page(title, url, iframeObj, w = "800px", h = "620px");
+                return false;
+            });
+            $(".delete_btn").click(function () {
+                var url = $(this).attr('data-url');
+                var id = $(this).attr('data-id');
+                var orderId=@Model.Id;
+                dialog.confirm({
+                    message: '您确定要删除出行人吗？',
+                    success: function () {
+                        layer.closeAll('dialog');  //加入这个信息点击确定 会关闭这个消息框
+                        $.ajax({
+                            type: "post",
+                            url: url,
+                            data: { "Id": id, "orderId": orderId },
+                            dataType: "json",
+                            success: function (obj) {
+                                if (obj.Code == 0) {
+                                    alert("删除成功");
+                                    location.reload();
+                                } else {
+                                    alert("删除失败，请重试");
+                                }
+
+                            }
+                        });
+                    }
+                })
+                return false;
+            });
         });
     </script>
 </body>
